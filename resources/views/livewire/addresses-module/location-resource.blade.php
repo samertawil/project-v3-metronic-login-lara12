@@ -12,7 +12,7 @@
             <x-input name="location_name" wire:model="location_name" label="yes"></x-input>
 
             <x-select class=" js-select2-address setDataSelect" wireIgone jsSelect2 divId="regionDivId" :options="$cities->pluck('region_name', 'region_id')"
-                name="region_id" id="region_id" wire:model="region_id" label="yes" :dataUrl="route('address.api.create')"
+                name="region_id" id="region_id" wire:model="region_id" label="yes" 
                 wire:ignore></x-select>
 
 
@@ -28,7 +28,7 @@
         </div>
 
 
-        <x-saveClearbuttons></x-saveClearbuttons>
+        <x-button class="btn btn-success font-weight-bold text-uppercase py-3 px-9"></x-button>
 
     </form>
 
@@ -125,10 +125,7 @@
 
 
     @push('js')
-        <script src="{{ asset('assets/my-js/jquery.blockUI.js') }}"></script>
-        <script src="{{ asset('assets/my-js/blockui.js') }}"></script>
-
-        <script src="{{ asset('assets/my-js/apiAddress.js') }}"></script>
+ 
 
         <script>
             $('.setDataSelect').on('change', function(event) {

@@ -15,7 +15,7 @@
 
                 </div>
 
-                <x-saveClearbuttons></x-saveClearbuttons>
+                <x-button class="btn btn-success font-weight-bold text-uppercase py-3 px-9"></x-button>
 
             </form>
 

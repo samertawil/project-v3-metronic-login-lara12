@@ -11,7 +11,7 @@ class Contact extends Model
 {
     use HasFactory;
 
-    protected $fillable=['contact_type','identity_number','full_name','nick_name','fname','sname','tname','','lname','responsible','address_id','short_description','description','phone_primary','phone_secondary','work_phone_primary','work_phone_secondary','note','attchments','properties','isFavorite','profile_image','email','connect_ways'];
+    protected $fillable=['contact_type','identity_number','full_name','nick_name','fname','sname','tname','','lname','responsible','address_id','short_description','description','phone_primary','phone_secondary','work_phone_primary','work_phone_secondary','note','attchments','properties','isFavorite','profile_image','email','connect_ways','region','city', 'niberhood','location'];
 
     protected $casts =[
         'attchments' => 'json',
@@ -23,11 +23,11 @@ class Contact extends Model
         return $this->hasOne(Status::class,'id','contact_type');
     }
 
-    public static function rules($name) {
-        return [
-           $name=>['required'],
-        ];
-    }
+    // public static function rules($name) {
+    //     return [
+    //        $name=>['required'],
+    //     ];
+    // }
 
     public function scopeSearchName($query,$value) {
         if($value) {

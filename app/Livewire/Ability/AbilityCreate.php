@@ -9,8 +9,6 @@ use App\Models\ModuleName;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Gate;
-use App\Http\Requests\AbilityRequest;
-use App\Services\CacheStatusModelServices;
 
 
 class AbilityCreate extends Component
@@ -35,7 +33,7 @@ class AbilityCreate extends Component
  
        
 
-         $this->validate();
+        $this->validate();
 
         Ability::create([
             'ability_name' => $this->ability_name,

@@ -19,10 +19,10 @@ use App\Services\AddressNameServices;
 class AddressesIndex extends Component
 {
 
-    use SortTrait ;
+    use SortTrait;
 
     #[Url()]
-    public $sortBy='location_id';
+    public $sortBy = 'location_id';
 
     use WithPagination;
 
@@ -36,13 +36,13 @@ class AddressesIndex extends Component
 
     #[Url()]
     public $regionIdSearch;
-    
+
     #[Url()]
     public $cityIdSearch;
 
     #[Url()]
     public $neighbourhoodIdSearch;
-    
+
     public function  api_create_short_address($value = '', $model = '')
     {
 
@@ -58,8 +58,8 @@ class AddressesIndex extends Component
     }
 
 
-  public function destroy($id)
-  {
+    public function destroy($id)
+    {
 
         DB::beginTransaction();
 
@@ -67,44 +67,36 @@ class AddressesIndex extends Component
 
             Location::destroy($id);
             DB::commit();
- 
-
-
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             FlashMsgTraits::created($msgType = 'error', $msg = 'لا يمكن حذف قيمة مرتبطة ببيانات اخرى');
             DB::rollBack();
         }
+    }
 
-
-  }
-    
 
     #[Title('اجزاء العنوان')]
     public function render()
     {
+         
         $TitlePage = 'اجزاء العنوان';
 
         $regions =   CacheModelServices::getRegionVwData();
         $cities  =   CacheModelServices::getCityVwData();
 
         $locations = AddressNameVw::groupby('location_id')
-       ->orderBy($this->sortBy,$this->sortdir)
-           ->LocationNameSearch($this->search)
-             ->RegionListSearch($this->regionIdSearch)
-             ->CityListSearch($this->cityIdSearch)
-             ->NeighbourhoodListSearch($this->neighbourhoodIdSearch)
+            ->orderBy($this->sortBy, $this->sortdir)
+            ->LocationNameSearch($this->search)
+            ->RegionListSearch($this->regionIdSearch)
+            ->CityListSearch($this->cityIdSearch)
+            ->NeighbourhoodListSearch($this->neighbourhoodIdSearch)
 
-             ->paginate($this->perPage);
+            ->paginate($this->perPage);
 
-        $neighbourhoods= CacheModelServices::getNeighbourhoodVwData();
+        $neighbourhoods = CacheModelServices::getNeighbourhoodVwData();
 
-    
 
-       return view('livewire.addresses-module.address-index',compact('cities','locations','regions', 'neighbourhoods' ))
-       ->layoutData(['pageTitle'=> $TitlePage,]);
-      
-    
-   }
 
-  
+        return view('livewire.addresses-module.address-index', compact('cities', 'locations', 'regions', 'neighbourhoods'))
+            ->layoutData(['pageTitle' => $TitlePage,]);
+    }
 }

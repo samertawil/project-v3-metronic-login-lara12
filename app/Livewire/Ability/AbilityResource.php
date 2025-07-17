@@ -9,11 +9,10 @@ use App\Traits\SortTrait;
 use App\Models\ModuleName;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
-use Livewire\Attributes\Rule;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Gate;
-use App\Services\CacheStatusModelServices;
+
 
 class AbilityResource extends Component
 {
@@ -27,7 +26,7 @@ class AbilityResource extends Component
 
     protected $listeners = ['Refresh_Ability_Index' => '$refresh'];
 
-    // #[Url('history:true')]
+  #[Url('history:true')]
     public $search = '';
     public $searchModuleId;
     public $editAbilityId = '';
@@ -154,7 +153,7 @@ class AbilityResource extends Component
         $pageTitle = __('customTrans.create ability');
         $title = $pageTitle;
 
-        $abilities = Ability::with('moduleName')
+        $abilities = Ability::with('module_name')
             ->SearchName($this->search)
             ->searchModuleId($this->searchModuleId)
             ->withoutGlobalScope('not-active')->orderBy($this->sortBy, $this->sortdir)->paginate($this->perPage);

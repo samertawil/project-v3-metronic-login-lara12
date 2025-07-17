@@ -1,8 +1,5 @@
 <div>
-    {{-- @push('css')
-        <script src="https://cdn.tailwindcss.com"></script>
-    @endpush --}}
-
+ 
     <x-slot:crumb>
         <x-breadcrumb></x-breadcrumb>
     </x-slot:crumb>
@@ -14,16 +11,16 @@
             <div class="d-flex align-items-center justify-content-end">
                 
                 @can('region.index')
-                <x-button class="btn-light-info"  data-target="#regionModal" data-toggle="modal"   name="ادارة المحافظات"></x-button>
+                <x-button class="btn-light-info "  data-target="#regionModal" data-toggle="modal" label="regionModal"  ></x-button>
                 @endcan
                 @can('city.index')
-                <x-button class="btn-light-info" data-target="#cityModal" data-toggle="modal"  name="ادارة المدن"></x-button>
+                <x-button class="btn-light-info mx-2" data-target="#cityModal" data-toggle="modal"  label="cityModal" ></x-button>
                 @endcan
                 @can('neighbourhood.index')
-                <x-button class="btn-light-info" data-target="#neighbourhoodModal" data-toggle="modal" name="ادارة الاحياء"></x-button>
+                <x-button class="btn-light-info mx-2" data-target="#neighbourhoodModal" data-toggle="modal" label="neighbourhoodModal" ></x-button>
                 @endcan
                 @can('location.index')
-                <x-button class="btn-light-info" data-target="#locationModal" data-toggle="modal" name="ادارة المعالم"></x-button>
+                <x-button class="btn-light-info" data-target="#locationModal" data-toggle="modal" label="locationModal"></x-button>
                 @endcan
             </div>
  
@@ -72,7 +69,7 @@
 
                         <x-search-index-section>
 
-                            <x-select class="js-select2" jsSelect2 wireIgone :options="$regions->pluck('region_name', 'region_id')" name="regionIdSearch"
+                            <x-select class="js-select2"   :options="$regions->pluck('region_name', 'region_id')" name="regionIdSearch"
                                 wire:model.live="regionIdSearch" divWidth="2"></x-select>
 
                             <x-select name="cityIdSearch" class="js-select2" jsSelect2 wireIgone :options="$cities->pluck('city_name', 'city_id')"
@@ -149,13 +146,7 @@
             </div>
         </div>
     </div>
-
-    <script src="{{ asset('assets/my-js/jquery.min.js') }}"></script>
-    <script>
-        $('.reload').on('click', function() {
-            location.reload();
-        })
-    </script>
+ 
 
 
 </div>

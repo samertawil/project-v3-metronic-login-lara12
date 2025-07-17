@@ -486,4 +486,12 @@ return [
 'Please select at least 1 option'=>'يرجى اختيار وسيلة واحدة على الاقل',
 'location_name'=>'اسم المعلم',
 'Review your Details and Submit'=>'مراجعة البيانات قبل حفظها',
+'Personal Information'=>'البيانات الشخصية',
+'Address Details'=>'بيانات العنوان',
+'Avatar'=>'الصورة الشخصية',
+'regionModal'=>'ادارة المحافظات',
+'cityModal'=>'ادارة المدن',
+'neighbourhoodModal'=>'ادارة الاحياء',
+'locationModal'=>'ادارة المواقع',
+
 ];

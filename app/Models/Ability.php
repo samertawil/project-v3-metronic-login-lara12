@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\ModuleName;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Ability extends Model
 {
@@ -23,10 +24,14 @@ class Ability extends Model
        }
 
        
-
-       public function moduleName() {
-        return $this->hasOne(ModuleName::class,'id','module_id');
+       public function module_name()
+       {
+           return $this->belongsTo(ModuleName::class, 'module_id', 'id');
        }
+       
+    //    public function module_name() {
+    //     return $this->hasOne(ModuleName::class,'id','module_id');
+    //    }
 
        public function scopeSearchName($query,$value) {
         if($value) {

@@ -10,19 +10,20 @@ use Livewire\WithFileUploads;
 use App\Traits\FlashMsgTraits;
 use Livewire\Attributes\Computed;
 use App\Traits\UploadingFilesTrait;
+use App\Services\CacheModelServices;
 use Spatie\LivewireFilepond\WithFilePond;
 use App\Services\CacheStatusModelServices;
 use App\Services\CacheSettingModelServices;
 
 class ContactCreate extends Component
 {
-   protected  $listeners = ['address-property' => 'getAddressProp' ];
+ 
  
     use UploadingFilesTrait;
     use WithFileUploads;
     use WithFilePond;
 
-    public $profile_image ;
+    public $profile_image ="";
     public $contact_type=17;
     public $full_name;
     public $identity_number;
@@ -40,33 +41,32 @@ class ContactCreate extends Component
     public $city_id;
     public $neighbourhood_id;
     public $location_id;
-
-
-    // public $short_description;
-    // public $responsible;
-    // public $address_name;
-    // public $note;
-    // public $ContactTypeToshow = 1236;
-
-     
     public $contactImage;
 
     public $personalSide=true;
 
- 
-    public function getAddressProp($value)
+   
+    public function updatedregionId($prop)
     {
-
-        dd($value);
-        $this->region_id = ($value['region_id']);
-        $this->city_id = ($value['city_id']);
-        $this->neighbourhood_id = ($value['neighbourhood_id']);
-        $this->location_id = ($value['location_id']);
-        $this->address_specific = ($value['address_specific']);
-        $this->notes = ($value['notes']);
-        $this->address_type = ($value['address_type']);
+        
+        $this->region_id = $prop;
     }
 
+    public function updatedCityId($prop)
+    {
+
+        $this->city_id = $prop;
+    }
+
+
+    public function updatedNeighbourhoodId($prop)
+    {
+
+        $this->neighbourhood_id = $prop;
+    }
+
+ 
+   
     public function updatedContactType($prop){
        if($prop==17) {
         $this->personalSide=true;
@@ -75,19 +75,29 @@ class ContactCreate extends Component
        }
     }
 
+
+
     public function store()
     {
-        dd($this->all());
+        
+        // dd($this->all());
 
         $this->validate([
-          
-          
+           
             'fname' => ['required'],
             'lname' => ['required'],
             'phone_primary' => ['required', 'min_digits:10', 'max_digits:15', 'numeric'],
             'profile_image' => 'nullable|mimetypes:image/jpg,image/jpeg,image/png|max:1024',
         ]);
- 
+
+        // 
+
+        $image='';
+        if($this->profile_image) {
+            $image=UploadingFilesTrait::uploadSingleFile($this->profile_image,'contactProfile','public' );
+        }
+      
+        
      Contact::create([
                 'contact_type' => 16,
                 'identity_number' => $this->identity_number,
@@ -96,9 +106,14 @@ class ContactCreate extends Component
                 'sname' => $this->sname,
                 'tname' => $this->tname,
                 'lname' => $this->lname,
-               
+                'profile_image'=>$image,
                 'phone_primary' => $this->phone_primary,
                 'phone_secondary' => $this->phone_secondary,
+                'region'=>$this->region_id,
+                'city'=>$this->city_id,
+                'niberhood'=>$this->neighbourhood_id,
+                'location'=>$this->location_id,
+
              
             ]);    
 
@@ -108,16 +123,16 @@ class ContactCreate extends Component
        
     }
 
-
-
+ 
     public function chkExists($value, $property)
     {
-
-        $existedData = $this->Contacts->where($property, $value)->first();
-
+     
+        
+        $existedData = Contact::where($property, $value)->first();
+       
         if ($property === 'phone_primary' && $existedData) {
 
-
+            
             $this->dispatch(
                 'alert',
                 type: 'question',
@@ -140,11 +155,11 @@ class ContactCreate extends Component
 
     
 
-    #[Computed]
+    // #[Computed]
     public  function Contacts()
     {
 
-        return Contact::get();
+          Contact::get();
     }
 
     public function render()
@@ -155,6 +170,13 @@ class ContactCreate extends Component
        $statuses= CacheStatusModelServices::getData();
        $settings=CacheSettingModelServices::getData();
 
-        return view('livewire.contact.contact-create',compact('statuses','settings'))->layoutData(['pageTitle' => $pageTitle, 'title' => $pageTitle]);
+     
+       $regions = CacheModelServices::getRegionVwData();
+       $cities  = CacheModelServices::getCityTableData();
+       $neighbourhoods = CacheModelServices::getNeighbourhoodTableData();
+       $locations = CacheModelServices::getLocationTableData();
+ 
+
+        return view('livewire.contact.contact-create',compact('statuses','settings','regions', 'cities', 'neighbourhoods' ,'locations'))->layoutData(['pageTitle' => $pageTitle, 'title' => $pageTitle]);
     }
 }

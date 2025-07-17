@@ -1,9 +1,10 @@
 <?php
 
 use App\Livewire\Contact\Index;
-use App\Livewire\Contact\ContactList;
+ 
 use Illuminate\Support\Facades\Route;
 use App\Livewire\contact\ContactCreate;
+use App\Livewire\AddressesModule\AddressesIndex;
 
  
 Route::prefix('contact/')->name('contact.')->middleware('web', 'auth')->group( function() {
@@ -12,9 +13,13 @@ Route::prefix('contact/')->name('contact.')->middleware('web', 'auth')->group( f
 
       Route::get('index',Index::class)->name('index');
 
-      Route::get('list',ContactList::class)->name('list');
+      Route::get('addresses-index',AddressesIndex::class)->name('index');
+
+ 
 
 });
 
 
+ 
+ 
  

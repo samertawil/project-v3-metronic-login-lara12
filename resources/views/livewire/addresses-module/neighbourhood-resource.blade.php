@@ -1,8 +1,5 @@
 <div>
-    @push('css')
-        <link rel="stylesheet" href="{{ asset('assets/my-css/select2.min.css') }}">
-    @endpush
-
+ 
     <p class="card-header"> </p>
 
     @can('neighbourhood.create')
@@ -18,8 +15,7 @@
 
                 </div>
 
-                <x-saveClearbuttons></x-saveClearbuttons>
-
+                <x-button class="btn btn-success font-weight-bold text-uppercase py-3 px-9"></x-button>
             </form>
 
         </div>
@@ -113,7 +109,7 @@
     @endcan
 
     @push('js')
-        <script src="{{ asset('assets/my-js/select2.min.js') }}"></script>
+       
 
         <script>
             window.addEventListener('showModal', event => {
