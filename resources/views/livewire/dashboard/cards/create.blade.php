@@ -12,7 +12,7 @@
         <x-radio label wire:model='active' name="activation" value1="1" value2="0" value_title1="active"
             value_title2="deactivated" divWidth='2' divclass="mx-5"></x-radio>
 
-        <x-select wire:model='status_id' name='status_id' label></x-select>
+        <x-select wire:model='status_id' name='status_id' label :options="$this->status->pluck('status_name','id')"> </x-select>
 
     </div>
 

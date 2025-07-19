@@ -116,7 +116,7 @@
                             @can('status_view')
                                 <ul class="menu-subnav">
 
-                                    <li class="menu-item mt-2 " aria-haspopup="true"><a href="{{ route('status') }}"
+                                    <li class="menu-item mt-2 " aria-haspopup="true"><a href="{{ route('dashboard.status') }}"
                                             class="menu-link "><i
                                                 class="menu-bullet menu-bullet-dot"><span></span></i><span
                                                 class="menu-text">{{ __('customTrans.status system') }}</span></a></li>
@@ -141,11 +141,20 @@
 
                             </ul>
 
+                            <ul class="menu-subnav">
+
+                                <li class="menu-item mt-2 " aria-haspopup="true"><a
+                                        href="{{ route('contact.addresses.index') }}" class="menu-link "><i
+                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                            class="menu-text">ادارة العناوين </span></a></li>
+
+                            </ul>
+
 
                             <ul class="menu-subnav">
 
                                 <li class="menu-item mt-2 " aria-haspopup="true"><a
-                                        href="{{ route('website.card.resource') }}" class="menu-link "><i
+                                        href="{{ route('dashboard.card.resource') }}" class="menu-link "><i
                                             class="menu-bullet menu-bullet-dot"><span></span></i><span
                                             class="menu-text">{{ __('customTrans.website card managment') }}</span></a>
                                 </li>

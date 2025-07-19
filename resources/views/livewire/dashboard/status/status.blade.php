@@ -22,7 +22,7 @@
                         </a>
 
  
-                              <livewire:StatusModule.SystemClass   ></livewire:StatusModule.SystemClass>
+                              <livewire:Dashboard.StatusModule.SystemClass   ></livewire:Dashboard.StatusModule.SystemClass>
  
  
                         <form wire:submit="store">
@@ -43,7 +43,7 @@
 
 
 
-                                    <x-input name="status_name" wire:model="status_name" label="yes"></x-input>
+                                    <x-input name="status_name" wire:model="status_name" label="yes" ></x-input>
 
 
                                   
@@ -70,10 +70,8 @@
 
                                     <div id="scrollToHere"></div>
                                 </div>
-                                <div class="d-flex justify-content-start" dir="ltr">
-                                    <x-button type="submit"></x-button>
-                                 
-                                </div>
+                                <x-saveClearbuttons clear ></x-saveClearbuttons>
+
 
                         </form>
                 </div>

@@ -16,17 +16,14 @@
 
                 </div>
 
-                <div class="d-flex justify-content-start" dir="ltr">
-                    <x-button type="submit"></x-button>
-                   
-                </div>
 
+                <x-saveClearbuttons clear ></x-saveClearbuttons>
 
             </form>
 
         </div>
 
- 
+
 
         <div class="container">
             <table class="table  my-5">
@@ -46,7 +43,8 @@
                                 'text-success' => ($system_data->active = 1),
                                 'text-danger' => ($system_data->active = 0),
                             ])>
-                                {{ $system_data->active = 1 ? __('customTrans.active') : __('customTrans.not active') }}</td>
+                                {{ $system_data->active = 1 ? __('customTrans.active') : __('customTrans.not active') }}
+                            </td>
                             <td>{{ $system_data->description }}</td>
 
                         </tr>

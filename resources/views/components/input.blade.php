@@ -25,7 +25,7 @@
 <div   @class([ "form-group mb-$marginBottom col-md-4 col-lg-$divWidth" , $divlclass  ]) data-url={{ $dataUrl }}>
 
     @if ($label)
-    <label for="{{ $id }}" @class(["col-form-label   $labelclass "])>{{$labelname?$labelname: __("customTrans.$name") }}
+    <label for="{{ $id }}" @class(["col-form-label   $labelclass " ])>{{$labelname?$labelname: __("customTrans.$name") }}
         @if($req)
         <span class="text-danger">*</span>
         @endif
@@ -48,7 +48,7 @@
           title="{{$title}}"
           
           {{$attributes->class(['form-control',
-            'is-invalid' => $errors->has($name)]) }}>
+            'is-invalid px-8' => $errors->has($name)]) }}>
         <small class="text-muted">{{$description_field}}</small>
 
         @include('partials.general._show-error',['field_name'=>$name])

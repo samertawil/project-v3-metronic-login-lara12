@@ -109,7 +109,7 @@ class AttributesList extends Component
         <x-button wire:click.prevent='store' label="save and back"></x-button>
  
 
-        <p> {{ __('customTrans.add new colums') }} <span><a href="{{ route('status') }}"
+        <p> {{ __('customTrans.add new colums') }} <span><a href="{{ route('dashboard.status') }}"
                     target="_blank">{{ __('customTrans.here') }} </a> </span></p>
  
               

@@ -2,12 +2,18 @@
 
 namespace App\Providers;
 
+use App\Models\City;
+use App\Models\region;
 use App\Models\Status;
 use App\Models\Ability;
+use App\Models\Neighbourhood;
 use App\Models\SettingSystem;
+use App\Observers\CityObserver;
+use App\Observers\RegionObserver;
 use App\Observers\StatusObserver;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use App\Observers\NeighbourhoodObserver;
 use App\Observers\SystemSettingObserver;
 
 class AppServiceProvider extends ServiceProvider
@@ -32,7 +38,10 @@ class AppServiceProvider extends ServiceProvider
 
         SettingSystem::observe(SystemSettingObserver::class);
         Status::observe(StatusObserver::class);
-
+        region::observe(RegionObserver::class);
+        City::observe(CityObserver::class);
+        Neighbourhood::observe(NeighbourhoodObserver::class);
+        
 
         foreach (Ability::get() as $data) {
 

@@ -493,5 +493,6 @@ return [
 'cityModal'=>'ادارة المدن',
 'neighbourhoodModal'=>'ادارة الاحياء',
 'locationModal'=>'ادارة المواقع',
+'cancel'=>'الغاء',
 
 ];

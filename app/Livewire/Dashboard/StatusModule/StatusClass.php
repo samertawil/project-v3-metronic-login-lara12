@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\StatusModule;
+namespace App\Livewire\Dashboard\StatusModule;
 
 
 
@@ -9,7 +9,6 @@ use Livewire\Component;
 use App\Traits\SortTrait;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
-use App\Models\SettingSystem;
 use App\Traits\FlashMsgTraits;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Computed;
@@ -166,6 +165,6 @@ class  StatusClass extends Component
 
         $pageTitle =  __('customTrans.status system');
 
-        return view('livewire.status.status')->layoutData(['title' => $pageTitle, 'pageTitle' => $pageTitle]);
+        return view('livewire.dashboard.status.status')->layoutData(['title' => $pageTitle, 'pageTitle' => $pageTitle]);
     }
 }

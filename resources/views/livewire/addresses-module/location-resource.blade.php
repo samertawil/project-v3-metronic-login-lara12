@@ -5,23 +5,23 @@
 
     <form wire:submit="store">
 
-        <div class="d-flex border  align-items-center p-2 " id="address-cont">
+        <div class=" row border col-12 align-items-center p-2 " id="address-cont">
 
 
 
             <x-input name="location_name" wire:model="location_name" label="yes"></x-input>
 
-            <x-select class=" js-select2-address setDataSelect" wireIgone jsSelect2 divId="regionDivId" :options="$cities->pluck('region_name', 'region_id')"
-                name="region_id" id="region_id" wire:model="region_id" label="yes" 
-                wire:ignore></x-select>
+            <x-select class="js-select2" wireIgone   divId="regionDivId" :options="$regions->pluck('region_name', 'region_id')"
+                name="region_id" id="region_id" wire:model="region_id" label="yes"    
+                divWidth="4" ></x-select>
 
 
-            <x-select class=" js-select2-address setDataSelect" wireIgone jsSelect2 id="city_id" name="city_id"
-                wire:model="city_id" label="yes" wire:ignore></x-select>
+            <x-select class="js-select2" wireIgone   id="city_id" name="city_id" :options="$cities->pluck('city_name', 'city_id')"
+                wire:model="city_id" label="yes"  ></x-select>
 
 
-            <x-select class=" setDataSelect" wireIgone jsSelect2 id="neighbourhood_id" name="neighbourhood_id"
-                wire:model="neighbourhood_id" label="yes" wire:ignore></x-select>
+            <x-select class="js-select2" wireIgone   id="neighbourhood_id" name="neighbourhood_id" :options="$neighbourhoods->pluck('neighbourhood_name', 'neighbourhood_id')"
+                wire:model="neighbourhood_id" label="yes"  ></x-select>
 
 
 

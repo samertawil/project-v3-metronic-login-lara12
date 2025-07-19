@@ -41,7 +41,7 @@ class RegionResource extends Component
 
         Region::create($this->all());
 
-        $this->dispatch('alterRegion');
+        $this->dispatch('refresh-region');
       
         $this->reset('region_name');
        
@@ -78,7 +78,7 @@ class RegionResource extends Component
             'region_name'=>$this->regionName,
         ]);
         
-         $this->dispatch('alterRegion');
+         $this->dispatch('refresh-region');
 
          $this->cancelEdit();
     }
@@ -104,7 +104,7 @@ class RegionResource extends Component
 
             DB::commit();
 
-            $this->dispatch('alterRegion');
+            $this->dispatch('refresh-region');
 
         } catch (Exception $e) {
 

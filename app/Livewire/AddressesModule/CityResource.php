@@ -22,7 +22,7 @@ class CityResource extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    protected $listeners = ['alterRegion' => '$refresh'];
+    protected $listeners = ['refresh-region' => '$refresh'];
 
     public $city_name;
 
@@ -30,7 +30,7 @@ class CityResource extends Component
 
     public $region_id;
 
-    public $cityId;
+    public $cityId='';
 
     public $editCityName;
 

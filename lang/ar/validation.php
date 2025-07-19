@@ -369,6 +369,8 @@ return [
 'contact_type'=>'نوع جهة الاتصال',
 'fname '=>'الاسم الاول',
 'lname '=>'اسم العائلة',
+'system_name'=>'اسم النظام',
+'status_name'=>'اسم الثابت',
  
 
 

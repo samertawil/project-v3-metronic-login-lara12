@@ -15,10 +15,13 @@ use Livewire\Attributes\Title;
 use Illuminate\Support\Facades\DB;
 use App\Services\CacheModelServices;
 use App\Services\AddressNameServices;
+use Livewire\Attributes\Computed;
 
 class AddressesIndex extends Component
 {
 
+    protected $listeners = ['refresh-region' => '$refresh','refresh-city' => '$refresh','refresh-neighbourhood'=>'$refresh'];
+    
     use SortTrait;
 
     #[Url()]
@@ -52,7 +55,7 @@ class AddressesIndex extends Component
             $groupBy = 'neighbourhood_id';
         }
 
-        $address =  AddressNameServices::getCityVwDataApi($groupBy, $model, $value);
+        $address =  AddressNameServices::getCityVwDataApi($groupBy='', $model, $value);
 
         return response($address, 200);
     }
@@ -72,31 +75,50 @@ class AddressesIndex extends Component
             DB::rollBack();
         }
     }
+    
+    #[Computed()]
+    public function regions()
+    {
+        return   CacheModelServices::getRegionVwData();
+    }
+
+    #[Computed()]
+    public function cities()
+    {
+        return    CacheModelServices::getCityVwData();
+    }
+
+
+    #[Computed()]
+    public function neighbourhoods()
+    {
+        return   CacheModelServices::getNeighbourhoodVwData();
+    }
+
+
+
+    #[Computed()]
+    public function locations()
+    {
+        return     AddressNameVw::groupby('location_id')
+        ->orderBy($this->sortBy, $this->sortdir)
+        ->LocationNameSearch($this->search)
+        ->RegionListSearch($this->regionIdSearch)
+        ->CityListSearch($this->cityIdSearch)
+        ->NeighbourhoodListSearch($this->neighbourhoodIdSearch)
+
+        ->paginate($this->perPage);
+    }
 
 
     #[Title('اجزاء العنوان')]
     public function render()
     {
-         
+
         $TitlePage = 'اجزاء العنوان';
 
-        $regions =   CacheModelServices::getRegionVwData();
-        $cities  =   CacheModelServices::getCityVwData();
-
-        $locations = AddressNameVw::groupby('location_id')
-            ->orderBy($this->sortBy, $this->sortdir)
-            ->LocationNameSearch($this->search)
-            ->RegionListSearch($this->regionIdSearch)
-            ->CityListSearch($this->cityIdSearch)
-            ->NeighbourhoodListSearch($this->neighbourhoodIdSearch)
-
-            ->paginate($this->perPage);
-
-        $neighbourhoods = CacheModelServices::getNeighbourhoodVwData();
 
 
-
-        return view('livewire.addresses-module.address-index', compact('cities', 'locations', 'regions', 'neighbourhoods'))
-            ->layoutData(['pageTitle' => $TitlePage,]);
+        return view('livewire.addresses-module.address-index')->layoutData(['pageTitle' => $TitlePage,]);
     }
 }

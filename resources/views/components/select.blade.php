@@ -65,7 +65,7 @@
     @push('js')
         <script>
             $('.js-select2').select2({
-                placeholder: "اختر",
+                 placeholder: "اختر",
                 allowClear: true,
 
             });

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\StatusModule;
+namespace App\Livewire\Dashboard\StatusModule;
 
 
 use Livewire\Component;
@@ -49,7 +49,7 @@ class SystemClass extends Component
         if (Gate::denies('status_view')) {
             abort(403,'ليس لديك الصلاحية اللازمة');;
         }
-        return view('livewire.status.system');
+        return view('livewire.dashboard.status.system');
     }
 
 

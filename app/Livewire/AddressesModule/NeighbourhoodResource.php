@@ -86,6 +86,8 @@ class NeighbourhoodResource extends Component
         ]);
 
         $this->reset(['city_id', 'neighbourhood_name']);
+
+        $this->dispatch('refresh-neighbourhood');
     }
 
     public function edit($id)
@@ -130,6 +132,8 @@ class NeighbourhoodResource extends Component
          
         ]);
 
+        $this->dispatch('refresh-neighbourhood');
+
         $this->cancelEdit();
     }
 
@@ -145,6 +149,9 @@ class NeighbourhoodResource extends Component
         try {
             Neighbourhood::destroy($id);
             DB::commit();
+
+            $this->dispatch('refresh-neighbourhood');
+            
         } catch (\Exception $e) {
             FlashMsgTraits::created($msgType = 'error', $msg = 'لا يمكن حذف قيمة مرتبطة ببيانات اخرى');
             DB::rollBack();
@@ -155,6 +162,8 @@ class NeighbourhoodResource extends Component
     {
         $this->reset('editNeighbourhoodId');
     }
+
+
 
     public function render()
     {

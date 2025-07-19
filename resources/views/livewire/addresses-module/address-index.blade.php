@@ -69,16 +69,16 @@
 
                         <x-search-index-section>
 
-                            <x-select class="js-select2"   :options="$regions->pluck('region_name', 'region_id')" name="regionIdSearch"
-                                wire:model.live="regionIdSearch" divWidth="2"></x-select>
+                            <x-select class="js-select2"  jsSelect2 :options="$this->regions->pluck('region_name', 'region_id')" name="regionIdSearch"
+                                wire:model.live="regionIdSearch" divWidth="2"   ></x-select>
 
-                            <x-select name="cityIdSearch" class="js-select2" jsSelect2 wireIgone :options="$cities->pluck('city_name', 'city_id')"
-                                wire:model.live="cityIdSearch" divWidth="2"></x-select>
+                            <x-select name="cityIdSearch" class="js-select2" jsSelect2  :options="$this->cities->pluck('city_name', 'city_id')"
+                                wire:model.live="cityIdSearch" divWidth="2"  ></x-select>
 
 
 
-                            <x-select name="neighbourhoodIdSearch" class="js-select2" jsSelect2 wireIgone
-                                :options="$neighbourhoods->pluck('neighbourhood_name', 'neighbourhood_id')" wire:model.live="neighbourhoodIdSearch"></x-select>
+                            <x-select name="neighbourhoodIdSearch" class="js-select2"  jsSelect2
+                                :options="$this->neighbourhoods->pluck('neighbourhood_name', 'neighbourhood_id')" wire:model.live="neighbourhoodIdSearch" ></x-select>
 
 
 
@@ -113,7 +113,7 @@
                                     </thead>
                                     <tbody>
 
-                                        @foreach ($locations as $key => $location)
+                                        @foreach ($this->locations as $key => $location)
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
 
@@ -130,7 +130,7 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                {{ $locations->links(data: ['scrollTo' => '#indexId']) }}
+                                {{ $this->locations->links(data: ['scrollTo' => '#indexId']) }}
                             </div>
                         </div>
 

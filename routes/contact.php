@@ -13,7 +13,7 @@ Route::prefix('contact/')->name('contact.')->middleware('web', 'auth')->group( f
 
       Route::get('index',Index::class)->name('index');
 
-      Route::get('addresses-index',AddressesIndex::class)->name('index');
+      Route::get('addresses-index',AddressesIndex::class)->name('addresses.index');
 
  
 

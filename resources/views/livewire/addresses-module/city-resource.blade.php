@@ -39,10 +39,11 @@
                         <th>{{ __('customTrans.actions') }}</th>
                     </thead>
                     <tbody>
-
+ 
                         @foreach ($cities as $key => $city)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
+                                
                                 @if ($cityId == $city->city_id)
                                     <td> <x-input wire:model='editCityName' name='editCityName' divWidth='10'> </x-input>
                                     </td>

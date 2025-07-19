@@ -183,7 +183,7 @@
 
         <x-actions plus wire:click.prevent='addQuestion'></x-actions>
 
-        <p> {{ __('customTrans.add new colums') }} <span><a href="{{ route('status') }}"
+        <p> {{ __('customTrans.add new colums') }} <span><a href="{{ route('dashboard.status') }}"
           target="_blank">{{ __('customTrans.here') }} </a> </span></p>
 
     </div>   --}}

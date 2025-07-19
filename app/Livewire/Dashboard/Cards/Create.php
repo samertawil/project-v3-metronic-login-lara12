@@ -5,9 +5,11 @@ namespace App\Livewire\Dashboard\Cards;
 use App\Models\Card;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
 use App\Traits\UploadingFilesTrait;
 use Spatie\LivewireFilepond\WithFilePond;
+use App\Services\CacheStatusModelServices;
 
 class Create extends Component
 {
@@ -47,6 +49,7 @@ class Create extends Component
          $this->validate();
       
        $file=  UploadingFilesTrait::uploadSingleFile($this->file,'cards','website');
+
          Card::create([
             'card_title' => $this->card_title,
             'card_text' => $this->card_text,
@@ -60,6 +63,12 @@ class Create extends Component
 
     }
 
+
+    #[Computed()]
+    public static function status()
+    {
+        return CacheStatusModelServices::getData();
+    }
 
 
     public function render()

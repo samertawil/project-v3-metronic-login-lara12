@@ -4,8 +4,6 @@ use Livewire\Livewire;
 use App\Livewire\Dashboard;
 use App\Livewire\Website\Index;
 use Illuminate\Support\Facades\Route;
-use App\Livewire\Dashboard\Cards\Create;
-use App\Livewire\Dashboard\Cards\Resource;
 use App\Http\Controllers\SendNotificationController;
 use App\Livewire\Website\ContactUs;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -35,9 +33,7 @@ Route::group(
 
         Route::get('/', Index::class)->name('website');
 
-        Route::get('dashboard/cards/create', Create::class);
 
-        Route::get('dashboard/cards/resource', Resource::class)->name('website.card.resource');
  
 
         include __DIR__.'/uiauth.php';
@@ -46,7 +42,7 @@ Route::group(
 
         include __DIR__.'/setting.php';
         
-        include __DIR__.'/status.php';
+        include __DIR__.'/dashboard.php';
           
         include __DIR__.'/permission.php';
         
