@@ -55,7 +55,7 @@ class  StatusClass extends Component
     public $statusPid;
     public $usedInSystem;
 
-
+    protected $listeners=['refresh-system'=>'$refresh'];
 
     public  function rules($p_id_sub): array
     {
@@ -151,11 +151,14 @@ class  StatusClass extends Component
             ->orderBy($this->sortBy, $this->sortdir)
             ->paginate($this->perPage);
     }
+    
     #[Computed()]
     public function systems_data()
     {
         return CacheSystemSettingServices::getData();
     }
+
+
 
     public function render()
     {

@@ -36,6 +36,9 @@ class Create extends Component
         ];
     }
 
+
+    
+
     public function updatedFile()
     {
         $this->validate($this->rules());
@@ -63,13 +66,14 @@ class Create extends Component
 
     }
 
+ 
 
     #[Computed()]
-    public static function status()
-    {
-        return CacheStatusModelServices::getData();
+    public  function statuses() {
+        $data= CacheStatusModelServices::getData();
+        $data=$data->select('status_name','id','p_id_sub')->Where('p_id_sub',config('StatusConstants.galarySystem'));
+        return $data;
     }
-
 
     public function render()
     {

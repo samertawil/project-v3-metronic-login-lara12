@@ -12,7 +12,7 @@
         <x-radio label wire:model='active' name="activation" value1="1" value2="0" value_title1="active"
             value_title2="deactivated" divWidth='2' divclass="mx-5"></x-radio>
 
-        <x-select wire:model='status_id' name='status_id' label :options="$this->status->pluck('status_name','id')"> </x-select>
+        <x-select wire:model='status_id' name='status_id' label :options="$this->statuses->pluck('status_name','id')"> </x-select>
 
     </div>
 
@@ -22,14 +22,18 @@
   
  
 
-
+{{-- 
     <div class="modal-footer " style="border-top:none;">
 
         <x-button default_class="btn ripple btn-secondary" data-dismiss="modal" label=close type="button"> </x-button>
 
         <x-button default_class="btn ripple btn-primary"  data-dismiss="modal"   wire:click.prevent='store'
-            style="width: 100px; height: 38px; font-size:13px;"></x-button>
-    </div>
+            style="width: 100px; height: 38px; font-size:13px;"></x-button> 
+    </div>--}}
+
+
+    <x-saveClearbuttons close wire:click.prevent='store'></x-saveClearbuttons>
+
 
     @filepondScripts
 @push('js')

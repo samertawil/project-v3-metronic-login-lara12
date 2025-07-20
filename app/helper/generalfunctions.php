@@ -30,3 +30,5 @@ function setting($key)
 {
     return CacheSettingModelServices::getData()[$key];
 }
+
+

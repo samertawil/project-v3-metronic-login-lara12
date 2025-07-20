@@ -494,5 +494,7 @@ return [
 'neighbourhoodModal'=>'ادارة الاحياء',
 'locationModal'=>'ادارة المواقع',
 'cancel'=>'الغاء',
+'Galary picture list'=>'قائمة صور المعرض',
+'Galary'=>'معرض الصور',
 
 ];

@@ -3,42 +3,60 @@
 namespace App\Livewire\Dashboard\Cards;
 
 use App\Models\Card;
-use App\Models\Status;
-use Livewire\Component;
+ use Livewire\Component;
 use App\Traits\SortTrait;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
-use Livewire\WithFileUploads;
 use Livewire\Attributes\Computed;
-use Livewire\Attributes\Validate;
 use App\Traits\UploadingFilesTrait;
 use Illuminate\Support\Facades\Storage;
 use Spatie\LivewireFilepond\WithFilePond;
+use App\Services\CacheStatusModelServices;
 
 class Resource extends Component
 {
     use SortTrait;
     use WithPagination;
-    use WithFileUploads;
-    use  WithFilePond;
+    use WithFilePond;
 
     public  $sortBy = 'created_at';
     protected $paginationTheme = 'bootstrap';
-    public $editCardId;
+
+
+
     #[Url()]
     public $perPage = 10;
     #[Url()]
     public $search = '';
-    #[Validate(['required'])]
     public $card_title = '';
     public $card_text = '';
     public $card_url = '';
-    #[Validate(['required'])]
     public $card_img;
-    #[Validate(['required'])]
+    public $card_img_show;
     public $active = 1;
     public $status_id;
     public $file;
+    public $data;
+    public $editCardId;
+
+    public function rules(): array
+    {
+        $rules = [
+
+            'card_img' => 'required|mimetypes:image/jpg,image/jpeg,image/png|max:1024',
+            'card_title' => ['required'],
+            'active' => ['required'],
+
+        ];
+
+        if (empty($this->card_img) &&  $this->data['card_img']) {
+           
+            unset($rules['card_img']); // Remove the email validation rule
+
+        }
+        
+        return $rules;
+    }
 
 
     #[Computed()]
@@ -49,50 +67,50 @@ class Resource extends Component
             ->paginate($this->perPage);
     }
 
-    #[Computed()]
-    public static function status()
-    {
-        return Status::get();
-    }
 
     public function edit($id)
     {
 
         $this->editCardId = $id;
-        $data = $this->Cards->find($id);
+        $this->data = $this->Cards->find($id);
 
-        $this->card_title = $data->card_title;
-        $this->card_text = $data->card_text;
-        $this->card_url = $data->card_url;
-        $this->card_img = $data->card_img;
-        $this->active = $data->active;
-        $this->status_id = $data->status_id;
+        $this->card_title = $this->data->card_title;
+        $this->card_text = $this->data->card_text;
+        $this->card_url = $this->data->card_url;
+        $this->card_img_show = $this->data->card_img;
+        $this->active = $this->data->active;
+        $this->status_id = $this->data->status_id;
     }
 
 
-    public function updatedFile()
-    {
-        $this->validate(Create::rules());
-    }
-
+    
     public function update()
     {
 
+     
+         $this->validate();
+      
+        // $data = $this->Cards->find($this->editCardId);
 
-        $this->validate();
 
-        $data = $this->Cards->find($this->editCardId);
+        if ($this->card_img) {
+            $image =  UploadingFilesTrait::uploadSingleFile($this->card_img, 'cards', 'website');
+        } else {
+            $image = $this->data['card_img'];
+        }
 
-        $file =  UploadingFilesTrait::uploadSingleFile($this->file, 'cards', 'website');
+       
 
-        $data->update([
+        $this->data->update([
             'card_title' => $this->card_title,
             'card_text' => $this->card_text,
             'card_url' => $this->card_url,
             'active' => $this->active,
             'status_id' => $this->status_id,
-            'card_img' => $file,
+            'card_img' => $image,
         ]);
+
+        $this->dispatch('closeModel');
     }
 
     public function destroy($id)
@@ -108,9 +126,22 @@ class Resource extends Component
        $data->delete();
     }
 
+ 
+
+    
+
+    #[Computed()]
+    public  function statuses() {
+        $data= CacheStatusModelServices::getData();
+        $data=$data->select('status_name','id','p_id_sub')->Where('p_id_sub',config('StatusConstants.galarySystem'));
+        return $data;
+    }
+
+
     public function render()
     {
-    
-        return view('livewire.dashboard.cards.resource');
+        $title=__('customTrans.Galary');
+        $pageTitle=__('customTrans.Galary picture list') ;
+        return view('livewire.dashboard.cards.resource')->layoutData(['title'=>$title,'pageTitle'=>$pageTitle]);
     }
 }

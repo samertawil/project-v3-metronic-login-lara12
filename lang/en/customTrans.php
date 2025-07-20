@@ -378,7 +378,8 @@ return [
 'connect_ways'=>'Communication',
 'Please select at least 1 option'=>'Please select at least 1 option',
 'Review your Details and Submit'=>'Review your Details and Submit',
-
+'Galary picture list'=>'Galary picture list',
+'Galary'=>'Galary',
  
 ];
 

@@ -17,7 +17,7 @@
                 </div>
 
 
-                <x-saveClearbuttons clear ></x-saveClearbuttons>
+                <x-saveClearbuttons clear></x-saveClearbuttons>
 
             </form>
 
@@ -35,18 +35,41 @@
                 </thead>
                 <tbody>
 
-                    @foreach ($this->systems_data as $system_data)
+                    @foreach ($this->systems as $data)
                         <tr>
-                            <td>{{ $system_data->id }}</td>
-                            <td>{{ $system_data->system_name }}</td>
-                            <td @class ([
-                                'text-success' => ($system_data->active = 1),
-                                'text-danger' => ($system_data->active = 0),
-                            ])>
-                                {{ $system_data->active = 1 ? __('customTrans.active') : __('customTrans.not active') }}
-                            </td>
-                            <td>{{ $system_data->description }}</td>
+                            <td>{{ $data->id }}</td>
 
+                            @if ($editId == $data->id)
+                                <td> <x-input name="system_name" wire:model="system_name" divWidth="8"></x-input></td>
+                            @else
+                                <td>{{ $data->system_name }}</td>
+                            @endif
+
+                            <td @class ([
+                                'text-success' => ($data->active = 1),
+                                'text-danger' => ($data->active = 0),
+                            ])>
+                                {{ $data->active = 1 ? __('customTrans.active') : __('customTrans.not active') }}
+                            </td>
+
+                            @if ($editId == $data->id)
+                                <td> <x-input name="description" wire:model="description" divWidth="8"></x-input></td>
+                            @else
+                                <td>{{ $data->description }}</td>
+                            @endif
+
+                            <td class="d-flex  justify-content-center">
+                                            @if (!($editId === $data->id))
+                                                <x-actions edit
+                                                    wire:click.prevent='edit({{ $data->id }})'></x-actions>
+                                                <x-actions del
+                                                    wire:click.prevent='destroy({{ $data->id }})'></x-actions>
+                                            @else
+                                                <x-actions make wire:loading.attr='disabled'
+                                                    wire:click.prevent='update'></x-actions>
+                                                <x-actions cancel wire:click.prevent='cancelEdit'></x-actions>
+                                            @endif
+                                        </td>
                         </tr>
                     @endforeach
 

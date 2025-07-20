@@ -9,8 +9,8 @@
 ])
 
 <div>
-     {{-- wire:click.prevent='store'   --}}
-
+ 
+    
     <div class="modal-footer " style="border-top:none;">
 
         @if ($clear)
@@ -18,10 +18,10 @@
         @endif
 
         @if ($close)
-            <x-button default_class="btn ripple btn-secondary" label="close" type="button"> </x-button>
+            <x-button default_class="btn ripple btn-secondary" label="close" type="button"  data-dismiss="modal"> </x-button>
         @endif
 
-        <x-button default_class="btn ripple btn-success"
+        <x-button default_class="btn ripple btn-success" data-dismiss="modal" 
          wire:loading.remove {{$attributes}}
             style="width: 100px; height: 38px; font-size:13px;"></x-button>
     </div>

@@ -107,7 +107,7 @@
 
                                         <x-input wire:model='card_url' name='card_url' divWidth="10" label></x-input>
 
-                                        <x-select wire:model='status_id' name="status_id" :options="$this->status->pluck('status_name', 'id')"
+                                        <x-select wire:model='status_id' name="status_id" :options="$this->statuses->pluck('status_name', 'id')"
                                             divWidth="10" label></x-select>
 
 
@@ -121,28 +121,21 @@
 
 
                                         <div class="my-5">
-                                            <a href="{{ asset('website/' .$this->card_img) }}" target="_blank"> <img
-                                                    src="{{ asset('website/' . $this->card_img) }}"
+                                            <a href="{{ asset('website/' .$this->card_img_show) }}" target="_blank"> <img
+                                                    src="{{ asset('website/' . $this->card_img_show) }}"
                                                     style="width: 150px; height: 60px; font-size:13px;"></a>
                                                 
                                         </div>
 
-                                        <x-filepond::upload wire:model="file" name="file" required='true'
+                                        <x-filepond::upload wire:model="file" name="file" required='true' wire:model='card_img'
                                             allowFileSizeValidation maxFileSize='1024KB'
                                             class="@error('file') is-invalid   @enderror" />
                                             @include('partials.general._show-error',['field_name'=>'file'])
 
                                   
 
-                                    <div class="modal-footer " style="border-top:none;">
-                                        <x-button default_class="btn ripple btn-secondary" data-dismiss="modal"
-                                            label=close type="button"> </x-button>
-
-                                        <x-button default_class="btn ripple btn-primary" data-dismiss="modal"
-                                            type="button" wire:click.prevent='update'
-                                            style="width: 100px; height: 38px; font-size:13px;"></x-button>
-                                    </div>
-
+                                
+                                        <x-saveClearbuttons close wire:click.prevent='update'></x-saveClearbuttons>
                                 </x-modal>
 
                               
@@ -165,7 +158,7 @@
 
     </div>
 
-<x-button wire:click.prevent='update'></x-button>
+
 
 
 </div>

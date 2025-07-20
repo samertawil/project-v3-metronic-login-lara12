@@ -182,28 +182,5 @@
                     </div>
 
                 </div>
-@push('js')
-{{-- 
- <script src="{{asset('assets/my-js/select2.min.js')}}"></script> 
-<script>
-    $('#js-example-basic-single').select2({
-        placeholder: 'اختار',
-
-    });
-
-    $('#js-example-basic-single').on('change',function(event) {
-        console.log(event.target.value)
-    })
-
-</script> --}}
-
  
- 
-<script>
-    window.addEventListener('new-system-addes', event => {
-      location.reload();
-    })
-</script>
- 
-@endpush
             </div>
