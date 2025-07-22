@@ -38,7 +38,7 @@
     @push('js')
         <script>
             var modalId = $('.modal').attr('id');
-
+            
             window.addEventListener('closeModel', event => {
                 $(`#${modalId}`).modal('hide');
             })

@@ -7,6 +7,7 @@ use App\Models\Card;
 use App\Traits\SortTrait;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
+use App\Traits\FlashMsgTraits;
 use Livewire\Attributes\Computed;
 use App\Traits\UploadingFilesTrait;
 use Illuminate\Support\Facades\Storage;
@@ -112,7 +113,12 @@ class Resource extends Component
             'card_img' => $image,
         ]);
 
+      
         $this->dispatch('closeModel');
+
+        FlashMsgTraits::created($msgType = 'success', $msg = 'update');
+
+       
     }
 
     public function destroy($id)

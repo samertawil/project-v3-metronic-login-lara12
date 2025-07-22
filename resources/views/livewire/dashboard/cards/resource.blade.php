@@ -40,10 +40,10 @@
                         <x-table-th wire:click="setSortBy('publish_date')" name="publish_date"
                             sortBy={{ $sortBy }} sortdir={{ $sortdir }}></x-table-th>
 
-                            <x-table-th wire:click="setSortBy('created_at')" name="created_at"
-                            sortBy={{ $sortBy }} sortdir={{ $sortdir }}></x-table-th>
+                        <x-table-th wire:click="setSortBy('created_at')" name="created_at" sortBy={{ $sortBy }}
+                            sortdir={{ $sortdir }}></x-table-th>
 
-                     
+
 
 
                         <th class="text-center">{{ __('customTrans.actions') }}</th>
@@ -55,11 +55,14 @@
                     @foreach ($this->cards as $key => $card)
                         {{-- Main Row --}}
                         <tr class="main-row" wire:key="card-{{ $card->id }}">
-                            <td>
-                                <a href="#" onclick="toggleDetailsRow(this); return false;">
-                                    <i class="fa fa-caret-right text-success"></i>
+                            <td class="p-0">
+                                <a href="#" class="btn btn-icon pulse pulse-success mr-5" onclick="toggleDetailsRow(this); return false;">
+                                    <i class="fa fa-caret-right text-success"></i> <span class="pulse-ring"></span>
                                 </a>
                             </td>
+
+
+
                             <td>{{ ($this->cards->currentPage() - 1) * $this->cards->perPage() + $key + 1 }}</td>
 
                             <td>{{ $card->card_title }}</td>
@@ -165,23 +168,34 @@
 
     </div>
 
-    @push('js')
-        <script src="{{ asset('template-assets/metronic7/js/pages/crud/ktdatatable/advanced/row-details.min.js') }}"></script>
 
-        <script>
-            function toggleDetailsRow(trigger) {
-                const tr = trigger.closest('tr');
-                const nextRow = tr.nextElementSibling;
-                const icon = trigger.querySelector('i');
 
-                if (nextRow && nextRow.classList.contains('details-row')) {
-                    nextRow.style.display = nextRow.style.display === 'none' ? 'table-row' : 'none';
-                    icon.classList.toggle('fa-caret-right');
-                    icon.classList.toggle('fa-caret-down');
-                }
+
+ 
+@push('js')
+    <script src="{{ asset('template-assets/metronic7/js/pages/crud/ktdatatable/advanced/row-details.min.js') }}"></script>
+
+    <script>
+        function toggleDetailsRow(trigger) {
+            const tr = trigger.closest('tr');
+            const nextRow = tr.nextElementSibling;
+            const icon = trigger.querySelector('i');
+
+            if (nextRow && nextRow.classList.contains('details-row')) {
+                nextRow.style.display = nextRow.style.display === 'none' ? 'table-row' : 'none';
+                icon.classList.toggle('fa-caret-right');
+                icon.classList.toggle('fa-caret-down');
             }
-        </script>
-    @endpush
+        }
+    </script>
+
+
+    <script>
+        window.addEventListener('closeModel', event => {
+            $('#CardEditPreview').modal('hide');
+        })
+    </script>
+@endpush
 
 
 </div>

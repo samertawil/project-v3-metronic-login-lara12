@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ LaravelLocalization::getCurrentLocale() }}" dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}">
-
+ 
 <head>
     <base href="../../">
     <meta charset="utf-8" />

@@ -4,6 +4,7 @@ namespace App\Livewire\Dashboard\Cards;
 
 use App\Models\Card;
 use Livewire\Component;
+use App\Traits\FlashMsgTraits;
 use Livewire\Attributes\Computed;
 use App\Traits\UploadingFilesTrait;
 use Spatie\LivewireFilepond\WithFilePond;
@@ -61,6 +62,8 @@ class Create extends Component
          
  
          $this->dispatch('reload');
+
+         FlashMsgTraits::created();
         
     }
 

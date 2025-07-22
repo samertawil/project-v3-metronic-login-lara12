@@ -11,11 +11,13 @@ trait FlashMsgTraits
         
       
         if ($msg == 'create') {
+          
             return toastr()->progressBar(false)->timeOut(1000) 
             ->$msgType(__('customTrans.data_created_success'));
         }
 
          else if  ($msg == 'update') {
+             
             return toastr()->progressBar(false)->timeOut(1000) 
             ->$msgType(__('customTrans.data_edited_success'));
         }
