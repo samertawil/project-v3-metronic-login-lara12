@@ -92,3 +92,9 @@
         location.reload();
     })
 </script>
+
+<script>
+    window.addEventListener('reload', event => {
+      location.reload();
+    })
+</script>

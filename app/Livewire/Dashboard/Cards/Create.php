@@ -4,66 +4,64 @@ namespace App\Livewire\Dashboard\Cards;
 
 use App\Models\Card;
 use Livewire\Component;
-use Livewire\WithFileUploads;
 use Livewire\Attributes\Computed;
-use Livewire\Attributes\Validate;
 use App\Traits\UploadingFilesTrait;
 use Spatie\LivewireFilepond\WithFilePond;
 use App\Services\CacheStatusModelServices;
+ 
+
 
 class Create extends Component
 {
-    use  WithFileUploads;
     use  WithFilePond;
 
- 
- 
-    #[Validate(['required'])]
+
     public $card_title;
+    public $card_img;
     public $card_text ;
-    #[Validate(['required'])]
-    public $active = 1;
-    public $status_id;
+    public $active=true;
+    public $card_use_in;
     public $card_url  ;
-     public $file;
+    public $publish_date   ;
     public $upload;
 
-
-    public static function rules(): array
-    {
-        return [
-            'file' => 'required|mimetypes:image/jpg,image/jpeg,image/png|max:1024',
-        ];
+    public function mount() {
+         $this->publish_date = \Carbon\Carbon::now()->format('Y-m-d');
     }
 
-
-    
-
-    public function updatedFile()
+    public  function rules(): array
     {
-        $this->validate($this->rules());
-
-      
+        return [
+            'card_img' => 'required|mimetypes:image/jpg,image/jpeg,image/png|max:1024',
+            'active' => ['required'],
+            'card_title' => ['required'],
+            'card_use_in' => ['required'],
+            'publish_date'=>['required', 'date', 'date_format:Y-m-d'],
+        ];
     }
 
 
     public function store()
     {
-         $this->validate();
+ 
       
-       $file=  UploadingFilesTrait::uploadSingleFile($this->file,'cards','website');
-
+        $this->validate();
+      
+       $image=  UploadingFilesTrait::uploadSingleFile($this->card_img,'cards','website');
+  
          Card::create([
             'card_title' => $this->card_title,
             'card_text' => $this->card_text,
-            'card_img' => $file,
+            'card_img' => $image,
             'active' => $this->active,
-            'status_id' => $this->status_id,
+            'card_use_in' => $this->card_use_in,
             'card_url' => $this->card_url,
+            'publish_date'=>$this->publish_date,
         ]);
-       
-         $this->dispatch('pondReset');
-
+         
+ 
+         $this->dispatch('reload');
+        
     }
 
  
@@ -80,3 +78,8 @@ class Create extends Component
         return view('livewire.dashboard.cards.create');
     }
 }
+
+
+
+ 
+ 

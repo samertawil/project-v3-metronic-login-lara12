@@ -380,6 +380,8 @@ return [
 'Review your Details and Submit'=>'Review your Details and Submit',
 'Galary picture list'=>'Galary picture list',
 'Galary'=>'Galary',
+'card_title'=>'card title',
+'card_img'=>'Card image',
  
 ];
 

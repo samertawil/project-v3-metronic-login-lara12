@@ -42,7 +42,7 @@
     @endif
     <div @if ($wireIgone) wire:ignore @endif>
         <select id="{{ $id }}" name="{{ $name }}" dir={{ $dir }} title="{{ $title }}"
-            {{ $attributes->class(['form-control ', 'is-invalid' => $errors->has($name)]) }}>
+            {{ $attributes->class(['form-control ', 'is-invalid px-8' => $errors->has($name)]) }}>
             @if (!$NoOptions)
                 <option value="">{{ __("customTrans.$ChoseTitle") }} </option>
             @endif

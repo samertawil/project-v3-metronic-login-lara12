@@ -371,7 +371,10 @@ return [
 'lname '=>'اسم العائلة',
 'system_name'=>'اسم النظام',
 'status_name'=>'اسم الثابت',
- 
+'card_title'=>'عنوان البطاقة',
+'card_img'=>'الصورة',
+'card_use_in'=>'مكان استخدام البطاقة',
+'publish_date'=>'تاريح النشر',
 
 
 

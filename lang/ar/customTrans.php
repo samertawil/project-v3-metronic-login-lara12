@@ -496,5 +496,10 @@ return [
 'cancel'=>'الغاء',
 'Galary picture list'=>'قائمة صور المعرض',
 'Galary'=>'معرض الصور',
+'card_title'=>'عنوان البطاقة',
+'card_img'=>'الصورة',
+'card_use_in'=>'مكان استخدام البطاقة',
+'preview pic'=>'معاينة الصورة',
+ 'publish_date'=>'تاريح النشر',
 
 ];

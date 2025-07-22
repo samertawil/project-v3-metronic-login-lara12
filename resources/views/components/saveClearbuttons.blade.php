@@ -21,7 +21,7 @@
             <x-button default_class="btn ripple btn-secondary" label="close" type="button"  data-dismiss="modal"> </x-button>
         @endif
 
-        <x-button default_class="btn ripple btn-success" data-dismiss="modal" 
+        <x-button default_class="btn ripple btn-success"  
          wire:loading.remove {{$attributes}}
             style="width: 100px; height: 38px; font-size:13px;"></x-button>
     </div>
@@ -36,13 +36,10 @@
 
 
 
+     {{-- <div class="modal-footer " style="border-top:none;">
 
+        <x-button default_class="btn ripple btn-secondary" data-dismiss="modal" label=close type="button"> </x-button>
 
-
-{{-- <div class="d-flex justify-content-start"   dir="ltr">
-    
-    <x-button type="submit"   wire:loading.attr='disabled'></x-button>
-    <x-button type="reset" name="مسح" class="bg-secondary"  wire:loading.attr='disabled'></x-button>
-  
-   
-</div>   --}}
+        <x-button default_class="btn ripple btn-primary"      wire:click.prevent='store'
+            style="width: 100px; height: 38px; font-size:13px;"></x-button> 
+    </div> --}}

@@ -52,7 +52,9 @@ return [
         'answers.2'=>'Third Question Answer',
         'providerName'=>'Send From',
         'subject_id'=>' ',
-       'issue_description'=>'Issue Description'
+       'issue_description'=>'Issue Description',
+       'card_title'=>'card title',
+       'card_img'=>'Card image',
 
     ],
 

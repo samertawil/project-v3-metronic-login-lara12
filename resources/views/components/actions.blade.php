@@ -23,7 +23,7 @@
     @endif
 
     @if ($edit)
-        <a href={{ $route }} @class(['btn btn-lg text-info ']) {{ $attributes }}>
+        <a href={{ $route }} @class(['btn btn-lg text-info ']) {{ $attributes }} title="{{__('customTrans.edit')}}">
 
             <i class="ti-pencil-alt text-primary"></i>
 
@@ -31,7 +31,7 @@
     @endif
 
     @if ($del)
-        <a href={{ $route }} class="btn btn-lg text-danger "
+        <a href={{ $route }} class="btn btn-lg text-danger " title="{{__('customTrans.delete')}}"
                 wire:confirm= "{{__("customTrans.are you sure") }}"
             {{ $attributes }}>
 
@@ -61,9 +61,9 @@
 
 
     @if ($preview)
-        <a href="#" class="btn btn-lg text-primary "{{ $attributes }}>
+        <a href="#" class="btn btn-lg text-primary "{{ $attributes }} title="{{__('customTrans.preview')}}">
 
-            <i class="ti-eye text-primary" ></i>
+            <i class="ti-eye text-primary"></i>
 
         </a>
     @endif

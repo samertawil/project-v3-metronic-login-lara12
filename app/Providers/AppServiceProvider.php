@@ -28,7 +28,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
 
-    
+       
+       
+            date_default_timezone_set('Asia/Gaza');
+       
+
+
         Gate::before(function ($user, $ability) {
             $userType = ['programmer', 'superadmin'];
             if (in_array($user->user_type, $userType)) {

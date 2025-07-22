@@ -61,7 +61,8 @@
                     @forelse ($this->Contacts as $key => $Contact)
                         <tr>
 
-                            <td>{{ $key + 1 }}</td>
+                            <td>{{ ($this->Contacts->currentPage() - 1) * $this->Contacts->perPage() + $key + 1 }}</td>
+
                             <td>{{ $Contact->identity_number }}</td>
                             <td>{{ $Contact->full_name }}</td>
                             <td>{{ $Contact->phone_primary }}</td>

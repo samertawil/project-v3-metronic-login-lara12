@@ -33,19 +33,22 @@ class Resource extends Component
     public $card_url = '';
     public $card_img;
     public $card_img_show;
-    public $active = 1;
-    public $status_id;
+    public $active;
+    public $card_use_in;
     public $file;
     public $data;
     public $editCardId;
+
+    protected $listeners=['refresh-card'=>'$refresh'];
 
     public function rules(): array
     {
         $rules = [
 
             'card_img' => 'required|mimetypes:image/jpg,image/jpeg,image/png|max:1024',
-            'card_title' => ['required'],
             'active' => ['required'],
+            'card_title' => ['required'],
+            'card_use_in' => ['required'],
 
         ];
 
@@ -63,6 +66,7 @@ class Resource extends Component
     public  function cards()
     {
         return Card::with('statusname')
+         
             ->orderBy($this->sortBy, $this->sortdir)
             ->paginate($this->perPage);
     }
@@ -72,14 +76,14 @@ class Resource extends Component
     {
 
         $this->editCardId = $id;
-        $this->data = $this->Cards->find($id);
+        $this->data = $this->Cards()->find($id);
 
         $this->card_title = $this->data->card_title;
         $this->card_text = $this->data->card_text;
         $this->card_url = $this->data->card_url;
         $this->card_img_show = $this->data->card_img;
         $this->active = $this->data->active;
-        $this->status_id = $this->data->status_id;
+        $this->card_use_in = $this->data->card_use_in;
     }
 
 
@@ -90,8 +94,6 @@ class Resource extends Component
      
          $this->validate();
       
-        // $data = $this->Cards->find($this->editCardId);
-
 
         if ($this->card_img) {
             $image =  UploadingFilesTrait::uploadSingleFile($this->card_img, 'cards', 'website');
@@ -106,7 +108,7 @@ class Resource extends Component
             'card_text' => $this->card_text,
             'card_url' => $this->card_url,
             'active' => $this->active,
-            'status_id' => $this->status_id,
+            'card_use_in' => $this->card_use_in,
             'card_img' => $image,
         ]);
 
@@ -115,8 +117,8 @@ class Resource extends Component
 
     public function destroy($id)
     {
-        $data = $this->Cards->find($id);
-
+        $data = $this->Cards()->find($id);
+       
         if ( $data->card_img ) {
            
             Storage::disk('website')->delete($data->card_img);
