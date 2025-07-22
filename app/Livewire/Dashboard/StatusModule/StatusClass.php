@@ -55,7 +55,7 @@ class  StatusClass extends Component
     public $statusPid;
     public $usedInSystem;
 
-    protected $listeners=['refresh-system'=>'$refresh'];
+    protected $listeners = ['refresh-system' => '$refresh'];
 
     public  function rules($p_id_sub): array
     {
@@ -73,9 +73,9 @@ class  StatusClass extends Component
     {
 
         if (Gate::denies('status_view')) {
-            abort(403,'ليس لديك الصلاحية اللازمة');;
+            abort(403, 'ليس لديك الصلاحية اللازمة');;
         }
-        
+
         $this->validate($this->rules($this->p_id_sub));
 
         status::create($this->all());
@@ -89,7 +89,7 @@ class  StatusClass extends Component
     public function edit($id)
     {
         if (Gate::denies('status_view')) {
-            abort(403,'ليس لديك الصلاحية اللازمة');;
+            abort(403, 'ليس لديك الصلاحية اللازمة');;
         }
         $this->editStatusId = $id;
         $data = Status::find($id);
@@ -101,7 +101,7 @@ class  StatusClass extends Component
 
     public function update()
     {
-       
+
 
         $data = Status::find($this->editStatusId);
 
@@ -118,7 +118,7 @@ class  StatusClass extends Component
     {
 
         if (Gate::denies('status_view')) {
-            abort(403,'ليس لديك الصلاحية اللازمة');;
+            abort(403, 'ليس لديك الصلاحية اللازمة');;
         }
 
         Status::destroy($id);
@@ -135,9 +135,8 @@ class  StatusClass extends Component
     #[Computed()]
     public function statusesAll()
     {
-        return Status::with(['systemname', 'status_p_id_sub', 'status_p_id'])
+        return Status::with(['systemname:id,system_name', 'status_p_id_sub:id,p_id_sub,status_name', 'status_p_id:id,p_id,status_name'])
             ->select('status_name', 'id',   'p_id_sub', 'used_in_system_id');
-           
     }
 
 
@@ -145,13 +144,13 @@ class  StatusClass extends Component
     public function statuses()
     {
         return $this->statusesAll()
-             ->SearchName($this->search)
+            ->SearchName($this->search)
             ->SearchpId($this->PidSearch)
             ->SearchSystemName($this->SystemName)
             ->orderBy($this->sortBy, $this->sortdir)
             ->paginate($this->perPage);
     }
-    
+
     #[Computed()]
     public function systems_data()
     {
@@ -163,7 +162,7 @@ class  StatusClass extends Component
     public function render()
     {
         if (Gate::denies('status_view')) {
-            abort(403,'ليس لديك الصلاحية اللازمة');;
+            abort(403, 'ليس لديك الصلاحية اللازمة');;
         }
 
         $pageTitle =  __('customTrans.status system');

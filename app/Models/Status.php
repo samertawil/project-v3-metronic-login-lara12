@@ -22,17 +22,21 @@ class Status extends Model
  
     public function status_p_id()
     {
-        return $this->hasOne(status::class, 'id', 'p_id');
+        return $this->belongsTo(Status::class, 'p_id', 'id');
     }
 
     public function status_p_id_sub()
+
     {
-        return $this->hasOne(status::class, 'id', 'p_id_sub');
+        return $this->belongsTo(Status::class, 'p_id_sub', 'id');
+        
     }
+
+
 
     public function systemname()
     {
-        return $this->hasOne(SettingSystem::class, 'id', 'used_in_system_id');
+        return $this->belongsTo(SettingSystem::class, 'used_in_system_id', 'id');
     }
 
 
@@ -57,4 +61,8 @@ class Status extends Model
             $query->where('used_in_system_id',$value);
         }
     }
+
+ 
+
+
 }

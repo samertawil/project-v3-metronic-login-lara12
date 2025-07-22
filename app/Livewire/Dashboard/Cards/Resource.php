@@ -66,8 +66,8 @@ class Resource extends Component
     #[Computed()]
     public  function cards()
     {
-        return Card::with('statusname')
-         
+        return Card::with(['status:id,status_name'])
+        
             ->orderBy($this->sortBy, $this->sortdir)
             ->paginate($this->perPage);
     }
@@ -97,7 +97,7 @@ class Resource extends Component
       
 
         if ($this->card_img) {
-            $image =  UploadingFilesTrait::uploadSingleFile($this->card_img, 'cards', 'website');
+            $image =  UploadingFilesTrait::uploadSingleFile($this->card_img, 'cards', 'public');
         } else {
             $image = $this->data['card_img'];
         }

@@ -46,7 +46,14 @@ class AbilityResource extends Component
 
     public $perPage = 10;
 
-
+    #[Computed()]
+    public function abilities() {
+        return Ability::with(['module_name'])
+        ->SearchName($this->search)
+        ->searchModuleId($this->searchModuleId)
+        ->withoutGlobalScope('not-active')->orderBy($this->sortBy, $this->sortdir)->paginate($this->perPage);
+    }
+   
 
     public function edit($id)
     {
@@ -153,11 +160,8 @@ class AbilityResource extends Component
         $pageTitle = __('customTrans.create ability');
         $title = $pageTitle;
 
-        $abilities = Ability::with('module_name')
-            ->SearchName($this->search)
-            ->searchModuleId($this->searchModuleId)
-            ->withoutGlobalScope('not-active')->orderBy($this->sortBy, $this->sortdir)->paginate($this->perPage);
+       
 
-        return view('livewire.ability.ability-resource', compact('abilities'))->layoutData(['title' => $title, 'pageTitle' => $pageTitle]);
+        return view('livewire.ability.ability-resource')->layoutData(['title' => $title, 'pageTitle' => $pageTitle]);
     }
 }

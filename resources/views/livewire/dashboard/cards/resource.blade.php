@@ -68,7 +68,7 @@
                             <td>{{ $card->card_title }}</td>
 
 
-                            <td>{{ $card->statusname->status_name ?? '' }}</td>
+                            <td>{{ $card->status->status_name ?? '' }}</td>
                             <td class="{{ $card->active ? 'text-success' : 'text-danger' }}">
                                 <div class="{{ $card->active ? 'bg-success' : 'bg-danger' }} dot-label"></div>
                                 {{ $card->active ? __('customTrans.active') : __('customTrans.deactivated') }}
@@ -79,7 +79,7 @@
 
                             <td class="d-flex ">
 
-                                <a href="{{ asset('website/' . $card->card_img) }}" target="_blank"
+                                <a href="{{ asset('storage/' . $card->card_img) }}" target="_blank"
                                     class="btn btn-lg text-primary " title="{{ __('customTrans.preview pic') }}">
 
                                     <i class="ti-eye text-primary"></i>
@@ -112,9 +112,10 @@
 
 
                                     <div class="my-5">
-                                        <a href="{{ asset('website/' . $this->card_img_show) }}" target="_blank"> <img
-                                                src="{{ asset('website/' . $this->card_img_show) }}"
-                                                style="width: 150px; height: 60px; font-size:13px;"></a>
+                                        <a href="{{ asset('storage/' . $this->card_img_show) }}" target="_blank"> 
+                                            <img  src="{{ asset('storage/' . $this->card_img_show) }}"
+                                            style="width: 150px; height: 60px; font-size:13px;">
+                                              </a>
 
                                     </div>
 
@@ -173,7 +174,8 @@
 
  
 @push('js')
-    <script src="{{ asset('template-assets/metronic7/js/pages/crud/ktdatatable/advanced/row-details.min.js') }}"></script>
+    {{-- <script src="{{ asset('template-assets/metronic7/js/pages/crud/ktdatatable/advanced/row-details.min.js') }}"></script> --}}
+    
 
     <script>
         function toggleDetailsRow(trigger) {

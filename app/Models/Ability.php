@@ -6,6 +6,12 @@ use App\Models\ModuleName;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+
+/**
+ * @property-read \App\Models\ModuleName|null $module_name
+ */
+
+ 
 class Ability extends Model
 {
     use HasFactory;
@@ -29,10 +35,7 @@ class Ability extends Model
            return $this->belongsTo(ModuleName::class, 'module_id', 'id');
        }
        
-    //    public function module_name() {
-    //     return $this->hasOne(ModuleName::class,'id','module_id');
-    //    }
-
+ 
        public function scopeSearchName($query,$value) {
         if($value) {
             $query->where('ability_name','like',"%{$value}%")->orWhere('ability_description','like',"%{$value}%");

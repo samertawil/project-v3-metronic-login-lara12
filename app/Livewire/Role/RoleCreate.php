@@ -29,14 +29,15 @@ class RoleCreate extends Component
     public function store()
     {
 
-
+        $abilitiesDescription=[];
+        $abilities=[];
 
         foreach ($this->abilitiesId as $ability_name) {
 
             $ability = Ability::select('ability_description', 'ability_name')->where('ability_name', $ability_name)->first();
 
-            $array[] = $ability->ability_description ?? '';
-            $array2[] = $ability->ability_name ?? null;
+            $abilitiesDescription[] = $ability->ability_description ?? '';
+            $abilities[] = $ability->ability_name ?? null;
         }
 
         //  dd(  $array2,$array, $this->abilitiesId);
@@ -46,8 +47,8 @@ class RoleCreate extends Component
 
         Role::create([
             'name' => $this->name,
-            'abilities' => $array2,
-            'abilities_description' => $array,
+            'abilities' => $abilities,
+            'abilities_description' => $abilitiesDescription,
             'created_by' => Auth::id(),
         ]);
 

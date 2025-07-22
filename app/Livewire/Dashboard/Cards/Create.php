@@ -48,7 +48,7 @@ class Create extends Component
       
         $this->validate();
       
-       $image=  UploadingFilesTrait::uploadSingleFile($this->card_img,'cards','website');
+       $image=  UploadingFilesTrait::uploadSingleFile($this->card_img,'cards','public');
   
          Card::create([
             'card_title' => $this->card_title,

@@ -50,6 +50,8 @@
                             sortdir={{ $sortdir }}></x-table-th>
 
 
+                            <x-table-th wire:click="setSortBy('module_id')" name="module_id" sortBy={{ $sortBy }}
+                            sortdir={{ $sortdir }}></x-table-th>
 
                         <th class="text-center">{{ __('customTrans.actions') }}</th>
                     </tr>
@@ -58,8 +60,8 @@
 
 
 
-                    @foreach ($abilities as $key => $ability)
-                        <td> {{ $key + 1 }}</td>
+                    @foreach ($this->abilities as $key => $ability)
+                    <td>{{ ($this->abilities->currentPage() - 1) * $this->abilities->perPage() + $key + 1 }}</td>
 
 
                         <td>{{ $ability->ability_name }}</td>
@@ -84,9 +86,7 @@
                                     <option value="1">{{ __('customTrans.active') }}</option>
                                     <option value="0">{{ __('customTrans.not active') }}</option>
                                 </select>
-                                <label for="">
-
-                                </label>
+                                
                             </td>
                         @else
                             <td @class([
@@ -108,7 +108,7 @@
                                 <x-select wire:model="editAbilityModuleId" divWidth="12" :options="$this->moduleNames->pluck('name', 'id')" />
                             </td>
                         @else
-                            <td>{{ $ability->moduleName->name ?? '' }}</td>
+                            <td>{{ $ability->module_name->name ?? '' }}</td>
                         @endif
 
                         @if (!($editAbilityId === $ability->id))
@@ -147,7 +147,7 @@
                     @endforeach
                 </tbody>
             </table>
-            {{ $abilities->links() }}
+            {{ $this->abilities->links() }}
         </div>
 
     </div>
