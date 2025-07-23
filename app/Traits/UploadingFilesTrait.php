@@ -129,7 +129,7 @@ trait UploadingFilesTrait
                     $imageData = $image-> encodeByMediaType('image/webp', quality: $quality);
                     break;
                 default:
-                    $imageData = (string)$image;
+                    $imageData = $image;
             }
             $size = strlen($imageData); // حجم الصورة الناتجة
          
@@ -157,7 +157,8 @@ trait UploadingFilesTrait
         }
 
 
-
+        $attchments_file=[];
+        
         foreach ($uploadedFiles as $file) {
             if ($file->isValid()) {
 

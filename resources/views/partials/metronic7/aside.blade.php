@@ -60,7 +60,7 @@
                 </li>
 
 
-                {{-- @can('user.index') --}}
+                {{-- @can('dashboard.user.index') --}}
                 <ul class="menu-nav py-0">
 
 
@@ -106,7 +106,7 @@
                             @can('user.all.resource')
                             <ul class="menu-subnav">
                           
-                                    <li class="menu-item mt-2 " aria-haspopup="true"><a href="{{ route('user.index') }}"
+                                    <li class="menu-item mt-2 " aria-haspopup="true"><a href="{{ route('dashboard.user.index') }}"
                                             class="menu-link "><i
                                                 class="menu-bullet menu-bullet-dot"><span></span></i><span
                                                 class="menu-text">{{ __('customTrans.users') }}</span></a></li>
@@ -126,7 +126,7 @@
                             <ul class="menu-subnav">
 
                                 <li class="menu-item mt-2 " aria-haspopup="true"><a
-                                        href="{{ route('setting.index') }}" class="menu-link "><i
+                                        href="{{ route('dashboard.setting.index') }}" class="menu-link "><i
                                             class="menu-bullet menu-bullet-dot"><span></span></i><span
                                             class="menu-text">{{ __('customTrans.setting') }}</span></a></li>
 

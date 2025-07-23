@@ -9,7 +9,7 @@ class RecoveryAnswer extends Model
     protected $fillable=['user_id','question_id','answer'];
 
     public function questions() {
-        return $this->hasOne(RecoveryQuestion::class,'id','question_id');
+        return $this->belongsTo(RecoveryQuestion::class,'question_id','id');
     }
     
 }

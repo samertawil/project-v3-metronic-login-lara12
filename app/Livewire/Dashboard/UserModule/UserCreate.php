@@ -1,6 +1,6 @@
 <?php
 
-namespace  App\Livewire\UserModule ;
+namespace  App\Livewire\Dashboard\UserModule ;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Gate;
@@ -30,6 +30,6 @@ class UserCreate extends Component
 
        $pageTitle=__('customTrans.users');
         
-        return view('livewire.users.user-create')->layoutData(['pageTitle'=>$pageTitle,'Title'=>$pageTitle]);
+        return view('livewire.dashboard.users.user-create')->layoutData(['pageTitle'=>$pageTitle,'Title'=>$pageTitle]);
     }
 }

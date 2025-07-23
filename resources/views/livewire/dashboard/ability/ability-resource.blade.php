@@ -5,7 +5,7 @@
 
         <x-breadcrumb button data-target="#abilityCreateModel1" data-toggle="modal" :label="__('customTrans.create ability')">
            
-                <li class="breadcrumb-item"><a href="{{route('user.index')}}" class="text-muted">{{__('customTrans.users')}} </a></li>
+                <li class="breadcrumb-item"><a href="{{route('dashboard.user.index')}}" class="text-muted">{{__('customTrans.users')}} </a></li>
                 <li class="breadcrumb-item"><a href="{{route('ability.index')}}" class="text-muted">{{__('customTrans.abilities')}} </a></li>
                 <li class="breadcrumb-item"><a href="{{route('role.index')}}" class="text-muted">{{__('customTrans.role group')}} </a></li>
          

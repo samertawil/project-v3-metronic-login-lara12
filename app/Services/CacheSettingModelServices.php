@@ -11,7 +11,9 @@ class CacheSettingModelServices
     {
 
         return   Cache::rememberForever('settingData', function () {
-            return   Setting::get()->pluck('value', 'key');
+            // return   Setting::get()->pluck('value', 'key');
+            return Setting::pluck('value', 'key')->toArray();
+
         });
     }
 }

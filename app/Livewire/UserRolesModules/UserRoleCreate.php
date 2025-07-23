@@ -69,7 +69,7 @@ class UserRoleCreate extends Component
       $data->Delete();
     }
 
-    $this->redirectRoute('user.index');
+    $this->redirectRoute('dashboard.user.index');
   }
 
 

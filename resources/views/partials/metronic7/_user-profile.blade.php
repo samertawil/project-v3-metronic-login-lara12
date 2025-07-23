@@ -3,7 +3,7 @@
     <div class="offcanvas-header d-flex align-items-center justify-content-between pb-5">
         <h3 class="font-weight-bold m-0">
             User Profile
-            <small class="text-muted font-size-sm ml-2">12 messages</small>
+            <small class="text-muted font-size-sm ml-2">12 messages </small>
         </h3>
         <a href="#" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_user_close">
             <i class="ki ki-close icon-xs text-muted"></i>
@@ -13,15 +13,49 @@
     <div class="offcanvas-content pr-5 mr-n5">
 
         <div class="d-flex align-items-center mt-5">
-            <div class="symbol symbol-100 mr-5">
-                <div class="symbol-label"
-                    style="background-image:url('{{ asset('template-assets/metronic7/media/users/300_21.jpg') }}')">
+            <div class="symbol symbol-100">
+                <div class="col-lg-9 col-xl-9">
+                    <div class="image-input image-input-outline" id="kt_contact_add_avatar">
+
+                        @if ($this->userData->profile_image)
+                        <img src="{{ asset('storage/' . $userData->profile_image) }}" width="100">
+
+                        @else
+                            <div class="image-input-wrapper"
+                                style="background-image: url(template-assets/metronic7/media/users/blank.png)">
+                            </div>
+                        @endif
+
+                                          
+                        <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                            data-action="change" data-toggle="tooltip" title=""
+                            data-original-title="Change avatar">
+                            <i class="fa fa-pen icon-sm text-muted"></i>
+
+                            <input type="file" wire:model="profile_image" accept="image/*">
+                            
+                        </label>
+
+                        @error('profile_image')
+                            <span class="error text-danger">{{ $message }}</span>
+                        @enderror
+
+
+                        <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                            data-action="cancel" data-toggle="tooltip" title=""
+                            data-original-title="Cancel avatar">
+                            <i class="ki ki-bold-close icon-xs text-muted"></i>
+                        </span>
+
+                        
+                    </div>
                 </div>
-                <i class="symbol-badge bg-success"></i>
+
             </div>
+
             <div class="d-flex flex-column">
                 <a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">
-                    {{ Auth::user()->name ?? 'James Jones' }}
+                    {{ Auth::user()->name ?? 'not login' }}
                 </a>
                 <div class="text-muted mt-1">
                     Application Developer
@@ -44,7 +78,7 @@
                                         </g>
                                     </svg><!--end::Svg Icon--></span> </span>
                             <span
-                                class="navi-text text-muted text-hover-primary">{{ Auth::user()->email ?? 'jm@softplus.com' }}</span>
+                                class="navi-text text-muted text-hover-primary  ">{{ Auth::user()->email ?? 'mail.com' }}</span>
                         </span>
                     </a>
                     @include('partials.general._logout')

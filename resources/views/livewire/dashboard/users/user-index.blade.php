@@ -4,7 +4,7 @@
     <x-slot:crumb>
         <x-breadcrumb button data-target="#UserCreateModel1" data-toggle="modal" :label="__('customTrans.create new account')">
 
-            <li class="breadcrumb-item"><a href="{{ route('user.index') }}"
+            <li class="breadcrumb-item"><a href="{{ route('dashboard.user.index') }}"
                     class="text-muted">{{ __('customTrans.users') }} </a></li>
             <li class="breadcrumb-item"><a href="{{ route('ability.index') }}"
                     class="text-muted">{{ __('customTrans.abilities') }} </a></li>
@@ -26,7 +26,7 @@
     <x-modal idName="UserCreateModel1" :title="__('customTrans.create new account')">
 
 
-        @livewire('UserModule.register-form')
+        @livewire('dashboard.UserModule.register-form')
 
     </x-modal>
 
@@ -51,7 +51,7 @@
                 <thead>
                     <tr>
 
-
+                        <th>#</th>
                         <x-table-th wire:click="setSortBy('user_name')" name="user_name" sortBy={{ $sortBy }}
                             sortdir={{ $sortdir }}></x-table-th>
 
@@ -73,11 +73,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($users as $key => $user)
-                    <tr>
+                    @foreach ($this->users as $key => $user)
+                        <tr>
+
+                            <td>{{ ($this->users->currentPage() - 1) * $this->users->perPage() + $key + 1 }}</td>
 
 
-                      
                             <td>{{ $user->user_name }}</td>
 
                             @if ($editUserId === $user->id)
@@ -147,13 +148,18 @@
                                         data-toggle="modal"></x-actions>
 
 
-                                    <x-modal idName="Userpreview{{ $user->id }}">
+                                    <x-modal idName="Userpreview{{ $user->id }}" :title="$user->name" >
 
                                         {{ __('customTrans.created_at') }} :
                                         {{ myDateStyle1($user->created_at) }}</br>
                                         {{ __('customTrans.email') }} : {{ $user->email }}</br>
                                         {{ __('customTrans.need_to_change') }} :
-                                        {{ $user->need_to_change == 1 ? __('customTrans.yes') : __('customTrans.no') }}
+                                        {{ $user->need_to_change == 1 ? __('customTrans.yes') : __('customTrans.no') }}<br><br>
+
+                                        @if ($user->profile_image)
+                                            <img src="{{ asset('storage/' . $user->profile_image) }}" width="100">
+                                        @endif
+
 
                                     </x-modal>
 
@@ -177,7 +183,7 @@
 
                                     <div class="dropdown-menu tx-13 ">
                                         <a class="dropdown-item " href="#"
-                                            wire:click.prevent='resetPass({{ $user->id }})'>{{ __('customTrans.request_need_password') }}</a>
+                                            wire:click.prevent='resetPass({{ $user->id }})'    wire:confirm= "{{__("customTrans.are you sure") }}">{{ __('customTrans.request_need_password') }}</a>
 
                                         <a class="dropdown-item "
                                             href="{{ route('user-roles.create', $user->id) }}">{{ __('customTrans.grant_privileges') }}</a>
@@ -186,20 +192,14 @@
 
 
                             </td>
-                      
-                    </tr>
+
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
-            {{ $users->links() }}
+            {{ $this->users->links() }}
         </div>
 
     </div>
-
-
-
-
-    @push('js')
-    @endpush
 
 </div>

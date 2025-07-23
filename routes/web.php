@@ -37,15 +37,11 @@ Route::group(
  
 
         include __DIR__.'/uiauth.php';
-        
-        include __DIR__.'/user.php';
-
-        include __DIR__.'/setting.php';
-        
+ 
+       
         include __DIR__.'/dashboard.php';
           
-        include __DIR__.'/permission.php';
-        
+           
         include __DIR__ . '/citzenServices.php';
 
         include __DIR__. '/contact.php';

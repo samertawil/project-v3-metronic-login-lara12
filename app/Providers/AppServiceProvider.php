@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Models\City;
-use App\Models\region;
+use App\Models\Region;
 use App\Models\Status;
 use App\Models\Ability;
 use CacheAbilitiesServices;
@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
 
         SettingSystem::observe(SystemSettingObserver::class);
         Status::observe(StatusObserver::class);
-        region::observe(RegionObserver::class);
+        Region::observe(RegionObserver::class);
         City::observe(CityObserver::class);
         Neighbourhood::observe(NeighbourhoodObserver::class);
         Ability::observe(AbilityObserver::class);

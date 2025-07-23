@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Setting;
+namespace App\Livewire\Dashboard\Setting;
 
 use App\Models\Setting;
 use Livewire\Component;
@@ -8,10 +8,7 @@ use App\Traits\SortTrait;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
 use Livewire\Attributes\Rule;
-use Livewire\Attributes\Title;
- use Livewire\Attributes\Layout;
-use Livewire\Attributes\Validate;
-use App\Http\Requests\SettingRequest;
+
 
 class SettingIndex extends Component
 {
@@ -82,6 +79,6 @@ class SettingIndex extends Component
 
         $settings = Setting::orderBy($this->sortBy, $this->sortdir)->paginate($this->perPage);
 
-        return view('livewire.setting.setting-index', compact('settings'))->layoutData(['pageTitle'=>$pageTitle,'Title'=>$pageTitle]);
+        return view('livewire.dashboard.setting.setting-index', compact('settings'))->layoutData(['pageTitle'=>$pageTitle,'Title'=>$pageTitle]);
     }
 }

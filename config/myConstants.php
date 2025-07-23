@@ -6,7 +6,10 @@ return [
     'userType'=>[
         'user'=>'user',
         'admin'=>'admin',
-        'superadmin'=>'superadmin', ],   
+        'superadmin'=>'superadmin',
+        'programmer'=>'programmer',
+    
+    ],   
    
     'addressType'=>10,
     'contact_type'=>16,

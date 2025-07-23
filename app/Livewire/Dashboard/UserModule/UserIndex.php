@@ -1,6 +1,6 @@
 <?php
 
-namespace  App\Livewire\UserModule ;
+namespace  App\Livewire\Dashboard\UserModule ;
 
  
 use App\Models\User; 
@@ -13,6 +13,7 @@ use App\Traits\FlashMsgTraits;
 use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use Livewire\Attributes\Computed;
 
 class UserIndex extends Component
 {
@@ -44,12 +45,20 @@ class UserIndex extends Component
 
     #[Rule('required|in:0,1')]
     public $editActiovation = '';
-
+    public $profile_image;
 
     public $editMobile = '';
 
 
-
+    #[Computed()]
+    public function users() {
+        return  User::SearchName($this->search)
+        ->SearchUserType($this->searchUsertype)
+        ->orderBy($this->sortBy, $this->sortdir)
+        ->paginate($this->perPage);
+    
+    }
+    
 
     public function edit($id)
     {
@@ -62,7 +71,8 @@ class UserIndex extends Component
         $this->editName = $data->name;
         $this->editActiovation = $data->user_activation;
         $this->editMobile = $data->mobile;
-        $this->edituserType = $data->user_type;
+        $this->edituserType = $data->user_type; 
+        $this->profile_image=$data->profile_image;
     }
 
 
@@ -116,6 +126,10 @@ class UserIndex extends Component
         FlashMsgTraits::created($msgType = 'success', $msg = ' تم طلب اعادة تعيين كلمة المرور - كلمة المرور المؤقتة هي 12345');
     }
 
+
+
+
+
     #[Layout('components.layouts.metronic7-simple-app')]
     public function render()
     {
@@ -128,11 +142,7 @@ class UserIndex extends Component
         $title = __('customTrans.users') ;
         $pageTitle =  __('customTrans.users') ;
 
-        $users = User::SearchName($this->search)
-            ->SearchUserType($this->searchUsertype)
-            ->orderBy($this->sortBy, $this->sortdir)
-            ->paginate($this->perPage);
 
-        return view('livewire.users.user-index', compact('users'))->layoutData(['title' => $title, 'pageTitle' => $pageTitle]);
+        return view('livewire.dashboard.users.user-index')->layoutData(['title' => $title, 'pageTitle' => $pageTitle]);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace  App\Livewire\UserModule ;
+namespace  App\Livewire\Dashboard\UserModule ;
 
  use App\Models\User; 
 use Livewire\Component;
@@ -65,7 +65,7 @@ class RegisterForm extends Component
             abort(403,__('customTrans.you have no access'));
          }
          
-        return view('livewire.users.register-form');
+        return view('livewire.dashboard.users.register-form');
        
     }
 }

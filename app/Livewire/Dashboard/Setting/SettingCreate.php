@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Livewire\Setting;
+namespace App\Livewire\Dashboard\Setting;
 
 use App\Models\Setting;
 use Livewire\Component;
 use App\Traits\FlashMsgTraits;
-use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 
@@ -47,6 +46,6 @@ class SettingCreate extends Component
 
         $settings=Setting::get();
 
-        return view('livewire.setting.setting-create',compact('settings'))->layoutData(['pageTitle'=>$pageTitle,'Title'=>$pageTitle]);
+        return view('livewire.dashboard.setting.setting-create',compact('settings'))->layoutData(['pageTitle'=>$pageTitle,'Title'=>$pageTitle]);
     }
 }

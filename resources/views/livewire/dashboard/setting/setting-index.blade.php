@@ -16,7 +16,7 @@
     @endpush
 
     <x-modal idName="SettingCreateModel1" :title="__('customTrans.create_new_setting')"> 
-        <livewire:Setting.setting-create/>
+        <livewire:Dashboard.Setting.setting-create/>
     </x-modal>
 
 

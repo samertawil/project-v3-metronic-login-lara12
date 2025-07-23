@@ -9,6 +9,8 @@ function uploadsFile($request,$dbColumName,$disk)
     }
 
     $files = $request->file($dbColumName);
+    $attchments_file=[];
+    
     foreach ($files as $file) {
         if ($file->isValid()) {
 

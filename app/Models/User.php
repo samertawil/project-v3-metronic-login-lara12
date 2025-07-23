@@ -22,6 +22,7 @@ class User extends Authenticatable
         'user_activation',
         'status_id',
         'need_to_change',
+        'profile_image',
  
  
     ];
@@ -62,6 +63,6 @@ class User extends Authenticatable
     }
 
     public function rolesRelation() {
-        return $this->belongsToMany(role::class,'role_user');
+        return $this->belongsToMany(Role::class,'role_user');
      }
 }
