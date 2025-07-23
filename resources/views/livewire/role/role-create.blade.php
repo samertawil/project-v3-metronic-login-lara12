@@ -23,7 +23,7 @@
                 <div class="">
 
                     @foreach ($abilities_module as $module)
-                        <p class="fw-bolder p-3 bg-secondary">{{ $module->modulename->name ?? '' }}</p>
+                        <p class="fw-bolder p-3 bg-secondary">{{ $module->module_name->name ?? '' }}</p>
                 </div>
 
 

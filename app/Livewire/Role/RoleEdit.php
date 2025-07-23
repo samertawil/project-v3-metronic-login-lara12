@@ -29,11 +29,14 @@ class RoleEdit extends Component
 
         $role = Role::findOrfail($this->roles['id']);
 
+        $abilitiesDescription=[];
+        $abilities=[];
+
         foreach($this->abilitiesId as $ability_name)
         {
             $ability=Ability::select('ability_description','ability_name')->where('ability_name',$ability_name)->first();
-            $array[] = $ability->ability_description??null;
-            $array2[]=$ability->ability_name??null;
+            $abilitiesDescription[] = $ability->ability_description??null;
+            $abilities[]=$ability->ability_name??null;
            
         }
          
@@ -43,8 +46,8 @@ class RoleEdit extends Component
 
         $new = $role->update([
             'name' => $this->name,
-            'abilities' => $array2,
-            'abilities_description'=> $array,
+            'abilities' => $abilities,
+            'abilities_description'=> $abilitiesDescription,
             'created_by' => Auth::id(),
         ]);
 
@@ -79,7 +82,7 @@ class RoleEdit extends Component
         $pageTitle = __('customTrans.edit role');
         $abilities_module = Ability::select('module_id')->groupby('module_id')->get();
 
-        $abilities = Ability::select('id', 'module_id', 'ability_description', 'ability_name', 'activation')->with('modulename')->withoutGlobalScope('not-active')->get();
+        $abilities = Ability::select('id', 'module_id', 'ability_description', 'ability_name', 'activation')->with('module_name')->withoutGlobalScope('not-active')->get();
 
 
 

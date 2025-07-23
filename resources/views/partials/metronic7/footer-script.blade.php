@@ -98,3 +98,16 @@
       location.reload();
     })
 </script>
+
+<script>
+    window.addEventListener('alert', (event) => {
+        let data = event.detail;
+
+        Swal.fire({
+            title: data.title,
+            text: data.text,
+            icon: data.type,
+            confirmButtonText: data.confirmButtonText
+        })
+    });
+</script>

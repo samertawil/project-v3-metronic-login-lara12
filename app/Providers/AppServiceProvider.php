@@ -6,49 +6,56 @@ use App\Models\City;
 use App\Models\region;
 use App\Models\Status;
 use App\Models\Ability;
+use CacheAbilitiesServices;
 use App\Models\Neighbourhood;
 use App\Models\SettingSystem;
 use App\Observers\CityObserver;
 use App\Observers\RegionObserver;
 use App\Observers\StatusObserver;
+use App\Observers\AbilityObserver;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\ServiceProvider;
 use App\Observers\NeighbourhoodObserver;
 use App\Observers\SystemSettingObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
- 
+
     public function register(): void
     {
         //
     }
 
- 
+
     public function boot(): void
     {
-
-       
-       
-            date_default_timezone_set('Asia/Gaza');
-       
-
-
-        Gate::before(function ($user, $ability) {
-            $userType = ['programmer', 'superadmin'];
-            if (in_array($user->user_type, $userType)) {
-                return true;
-            }
-        });
 
         SettingSystem::observe(SystemSettingObserver::class);
         Status::observe(StatusObserver::class);
         region::observe(RegionObserver::class);
         City::observe(CityObserver::class);
         Neighbourhood::observe(NeighbourhoodObserver::class);
-        
+        Ability::observe(AbilityObserver::class);
 
-        foreach (Ability::get() as $data) {
+
+        date_default_timezone_set('Asia/Gaza');
+
+
+        Gate::before(function ($user, $ability) {
+            if (!$user) return null;
+
+            $userTypesWithFullAccess = ['programmer', 'superadmin'];
+
+            return in_array($user->user_type, $userTypesWithFullAccess) ? true : null;
+        });
+
+
+        $abilities = Cache::rememberForever('abilities_list', function () {
+            return Ability::all();
+        });
+
+        foreach ($abilities as $data) {
 
             Gate::define($data->ability_name, function ($user) use ($data) {
 

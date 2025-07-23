@@ -37,7 +37,7 @@ class UserIndex extends Component
 
     public $editUserId;
 
-    // #[Rule('required')]
+    //  #[Rule('required')]
     public $editName = '';
 
     public $edituserType = '';

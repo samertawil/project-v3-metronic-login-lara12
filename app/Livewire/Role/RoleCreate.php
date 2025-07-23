@@ -81,9 +81,9 @@ class RoleCreate extends Component
         $pageTitle = __('customTrans.create new role');
 
 
-        $abilities_module = Ability::with('moduleName')->select('module_id')->groupby('module_id')->get();
+        $abilities_module = Ability::with('module_name')->select('module_id')->groupby('module_id')->get();
 
-        $abilities = Ability::select('id', 'module_id', 'ability_description', 'ability_name', 'activation')->with('modulename')->withoutGlobalScope('not-active')->get();
+        $abilities = Ability::select('id', 'module_id', 'ability_description', 'ability_name', 'activation')->with('module_name')->withoutGlobalScope('not-active')->get();
 
 
         return view('livewire.role.role-create', compact('abilities_module', 'abilities'))->layoutData(['pageTitle' => $pageTitle, 'title' => $pageTitle]);

@@ -8,17 +8,15 @@
     "require": {
         "php": "^8.2",
         "guzzlehttp/guzzle": "^7.9",
-     
         "intervention/image-laravel": "^1.5",
-        "laravel-frontend/templates": "^1.1",
-        "laravel-livewire/auth-ui": "^1.1",
-        "laravel-livewire/uc-modules": "dev-main",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.9",
         "laravel/vonage-notification-channel": "^3.3",
+        "livewire/livewire": "^3.6",
         "mcamara/laravel-localization": "^2.3",
-        "pusher/pusher-php-server": "^7.2" 
-      
+        "pusher/pusher-php-server": "^7.2",
+        "spatie/livewire-filepond": "^1.5",
+        "yoeunes/toastr": "^3.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.14",
