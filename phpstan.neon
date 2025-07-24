@@ -4,4 +4,16 @@ includes:
 parameters:
     paths:
         - app/
-    level: 2
+    level: 6
+    ignoreErrors:
+        - "#Relation 'status_p_id' is not found in App\\\\Models\\\\Status model#"
+        - "#Relation 'status_p_id_sub' is not found in App\\\\Models\\\\Status model#"
+        - "#Relation 'systemname' is not found in App\\\\Models\\\\Status model#"
+        - "#Relation 'module_name' is not found in App\\\\Models\\\\Ability model#"
+        - "#Relation 'questions' is not found in App\\\\Models\\\\RecoveryAnswer model#"
+        - "#Relation 'status' is not found in App\\\\Models\\\\Card model#"
+        - identifier: missingType.generics
+
+    reportUnmatchedIgnoredErrors: false  # optional, only if needed
+
+ 

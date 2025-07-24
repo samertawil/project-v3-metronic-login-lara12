@@ -23,7 +23,7 @@ class ModuleResource extends Component
 
     public $sortBy = 'created_at';
     public $perPage = 5;
-    protected $paginationTheme = 'bootstrap';
+    protected string $paginationTheme = 'bootstrap';
     public $search;
 
     public $name;

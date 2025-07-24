@@ -501,5 +501,6 @@ return [
 'card_use_in'=>'مكان استخدام البطاقة',
 'preview pic'=>'معاينة الصورة',
  'publish_date'=>'تاريح النشر',
+ 'dashboard'=>'لوحة التحكم',
 
 ];

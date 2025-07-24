@@ -3,13 +3,20 @@
 namespace App\Models;
 
  
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ * @property string $profile_image
+ 
+ */
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+
+    use  HasFactory,Notifiable;
 
 
     protected $fillable = [
@@ -43,26 +50,37 @@ class User extends Authenticatable
         ];
     }
    
-    public static function user($user_name) {
+    public static function user(string $user_name): ?User {
        return  $user = User::where('user_name', $user_name)->first();
     }
 
- 
-    public function scopeSearchName($query,$value) {
+ /**
+ * @param  \Illuminate\Database\Eloquent\Builder<User>  $query
+ * @param  string  $value
+ * @return \Illuminate\Database\Eloquent\Builder<User>
+ */
+    public function scopeSearchName(Builder  $query,string $value): Builder {
         if($value) {
             $query->where('name','like',"%{$value}%")->orWhere('user_name','like',"%{$value}%");
         }
-
+        return $query;
                
     }
 
-    public function scopeSearchUserType($query,$value) {
+     /**
+ * @param  \Illuminate\Database\Eloquent\Builder<User>  $query
+ * @param  string  $value
+ * @return \Illuminate\Database\Eloquent\Builder<User>
+ */
+    public function scopeSearchUserType(Builder $query,string $value): Builder {
         if($value) {
             $query->where('user_type',$value);
         }
+        return $query;
     }
 
-    public function rolesRelation() {
+ 
+    public function rolesRelation(): BelongsToMany {
         return $this->belongsToMany(Role::class,'role_user');
      }
 }

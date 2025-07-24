@@ -20,11 +20,7 @@ class RoleCreate extends Component
     public $abilities1;
 
 
-
-    public function placeholder()
-    {
-        return view('livewire.placeholder');
-    }
+ 
 
     public function store()
     {

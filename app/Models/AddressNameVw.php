@@ -5,6 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property string $location_name
+ * @property int $neighbourhood_id
+ */
 class AddressNameVw extends Model
 {
     use HasFactory;

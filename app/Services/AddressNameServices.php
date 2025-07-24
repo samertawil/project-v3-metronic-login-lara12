@@ -11,7 +11,7 @@ class AddressNameServices
 {
 
 
-    public static function getCityVwDataApi($groupBy='', $conditionCol='', $value='')
+    public static function getCityVwDataApi(string $groupBy='',string $conditionCol='',string $value=''): mixed
     {
        
             return   AddressNameVw::

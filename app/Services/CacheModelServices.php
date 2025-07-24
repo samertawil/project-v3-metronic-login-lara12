@@ -15,9 +15,9 @@ class CacheModelServices
 {
 
 use WithPagination;
-protected $paginationTheme ='bootstrap';
+protected string $paginationTheme ='bootstrap';
 
-    public static function getRegionVwData()
+    public static function getRegionVwData(): mixed
     {
        
        return   Cache::rememberForever('ٌRegionVwData', function () {
@@ -31,7 +31,7 @@ protected $paginationTheme ='bootstrap';
     }
 
 
-    public static function getCityVwData()
+    public static function getCityVwData():mixed 
     {
              
         return   Cache::rememberForever('CityVwData', function () {
@@ -45,7 +45,7 @@ protected $paginationTheme ='bootstrap';
 
 
 
-    public static function getCityVwDataApi($groupBy='', $conditionCol='', $value='')
+    public static function getCityVwDataApi(string $groupBy='',string $conditionCol='',string $value=''):mixed
     {
              
             return   Cache::rememberForever('CityVwDataApi', function () use($groupBy, $conditionCol, $value) {
@@ -58,7 +58,7 @@ protected $paginationTheme ='bootstrap';
     }
 
     
-    public static function getNeighbourhoodVwData()
+    public static function getNeighbourhoodVwData():mixed
     {
              
         return   Cache::rememberForever('NeighbourhoodVwData', function () {
@@ -71,7 +71,7 @@ protected $paginationTheme ='bootstrap';
     }
 
 
-    public static function getCityTableData()
+    public static function getCityTableData(): mixed
     {
              
         return   Cache::rememberForever('CityTableData', function () {
@@ -81,7 +81,7 @@ protected $paginationTheme ='bootstrap';
     }
 
  
-    public static function getNeighbourhoodTableData()
+    public static function getNeighbourhoodTableData(): mixed
     {
              
         return   Cache::rememberForever('NeighbourhoodTableData', function () {
@@ -92,7 +92,7 @@ protected $paginationTheme ='bootstrap';
 
     
  
-    public static function getLocationTableData()
+    public static function getLocationTableData(): mixed
     {
              
         return   Cache::rememberForever('LocationTableData', function () {

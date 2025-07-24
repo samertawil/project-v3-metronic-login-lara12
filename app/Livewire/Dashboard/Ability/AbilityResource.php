@@ -22,7 +22,7 @@ class AbilityResource extends Component
 
     use WithPagination;
 
-    protected $paginationTheme = 'bootstrap';
+    protected string $paginationTheme = 'bootstrap';
 
     protected $listeners = ['Refresh_Ability_Index' => '$refresh'];
 
@@ -138,11 +138,7 @@ class AbilityResource extends Component
         $this->reset('editAbilityId');
     }
 
-    public function placeholder()
-    {
-        return view('livewire.placeholder');
-    }
-
+ 
     
     #[Computed]
     public function ModuleNames() {

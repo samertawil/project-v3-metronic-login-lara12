@@ -50,7 +50,7 @@ class ForgetPassword extends Component
                 $pos = strpos($user->email, '@');
                 $emailName = substr($user->email, 0, $pos);
                 $providerName = substr($user->email,  $pos);
-                $count = ceil(strlen($emailName) * 60 / 100);
+                $count = (int) ceil(strlen($emailName) * 60 / 100);
                 $name = Str::limit($emailName, -$count, '***');
                 $this->encryptEmailName = $name . $providerName;
 
@@ -113,8 +113,9 @@ class ForgetPassword extends Component
         ) {
             return  $this->checkResult = 1;
         } else {
-            return $this->checkResult = 0;
             $this->addError('wrongAnswer', __('customTrans.wrongAnswer'));
+            return $this->checkResult = 0;
+           
         }
     }
 

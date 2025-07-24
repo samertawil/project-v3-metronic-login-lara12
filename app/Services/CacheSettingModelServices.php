@@ -7,7 +7,7 @@ class CacheSettingModelServices
 {
 
 
-    public static function getData()
+    public static function getData(): mixed
     {
 
         return   Cache::rememberForever('settingData', function () {

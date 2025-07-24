@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Cache;
 
 class CacheSystemSettingServices  {
 
-    public static function getData() {
+    public static function getData(): mixed {
 
         return Cache::rememberForever('systemData', function () {
              return SettingSystem::get();

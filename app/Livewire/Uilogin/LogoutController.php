@@ -16,7 +16,7 @@ class LogoutController extends Controller
             case 'true':
                 Auth::guard('web')->logout();
                 return redirect(route(config('uilogin.redirectToWebsite')));
-                break;
+             
             
             default:
             Auth::guard('empAuth')->logout();

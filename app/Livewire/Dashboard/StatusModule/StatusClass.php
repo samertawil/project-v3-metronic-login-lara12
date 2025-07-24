@@ -28,7 +28,7 @@ class  StatusClass extends Component
 
     use WithPagination;
 
-    protected $paginationTheme = 'bootstrap';
+    protected string $paginationTheme = 'bootstrap';
 
 
     public $status_name;

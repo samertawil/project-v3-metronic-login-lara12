@@ -13,7 +13,7 @@ class Index extends Component
 {
     use SortTrait;
     use WithPagination;
-    protected $paginationTheme = 'bootstrap';
+    protected string $paginationTheme = 'bootstrap';
 
     #[Url()]
     public $perPage = 10;

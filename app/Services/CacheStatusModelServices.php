@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Cache;
 
 class CacheStatusModelServices {
 
-    public static function getData() {
+    public static function getData(): mixed {
 
        return Cache::rememberForever('statusData', function () {
             return Status::get();

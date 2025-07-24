@@ -4,7 +4,15 @@ namespace App\Models;
 
 use App\Models\SettingSystem;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+/**
+
+ * @property \App\Models\Status $status_p_id
+ * @property \App\Models\Status $status_p_id_sub
+ */
 
 class Status extends Model
 {
@@ -20,12 +28,12 @@ class Status extends Model
     ];
 
  
-    public function status_p_id()
+    public function status_p_id():BelongsTo
     {
         return $this->belongsTo(Status::class, 'p_id', 'id');
     }
 
-    public function status_p_id_sub()
+    public function status_p_id_sub():BelongsTo
 
     {
         return $this->belongsTo(Status::class, 'p_id_sub', 'id');
@@ -33,33 +41,48 @@ class Status extends Model
     }
 
 
-
-    public function systemname()
+    public function systemname() :BelongsTo
     {
         return $this->belongsTo(SettingSystem::class, 'used_in_system_id', 'id');
     }
 
 
-   
-    public function scopeSearchName($query,$value) {
+       /**
+ * @param  \Illuminate\Database\Eloquent\Builder<Status>  $query
+ * @param  string  $value
+ * @return \Illuminate\Database\Eloquent\Builder<Status>
+ */ 
+    public function scopeSearchName(Builder $query,string $value): Builder {
         if($value) {
             $query->where('status_name','like',"%{$value}%");
         }
+        return $query;
     }
-    
-    public function scopeSearchpId($query,$value) {
+   
+           /**
+ * @param  \Illuminate\Database\Eloquent\Builder<Status>  $query
+ * @param  string  $value
+ * @return \Illuminate\Database\Eloquent\Builder<Status>
+ */ 
+    public function scopeSearchpId(Builder $query,string $value): Builder {
         if($value) {
           
             $query->where('p_id_sub', $value );
         }
+        return $query;
     }
 
 
-    
-    public function scopeSearchSystemName($query, $value) {
+               /**
+ * @param  \Illuminate\Database\Eloquent\Builder<Status>  $query
+ * @param  string  $value
+ * @return \Illuminate\Database\Eloquent\Builder<Status>
+ */ 
+    public function scopeSearchSystemName(Builder$query,string $value):Builder {
         if($value) {
             $query->where('used_in_system_id',$value);
         }
+        return $query;
     }
 
  

@@ -2,7 +2,7 @@
 
 namespace App\Livewire\AddressesModule;
 
-use App\Models\City;
+
 use App\Models\Region;
 use Livewire\Component;
 use App\Traits\SortTrait;
@@ -15,7 +15,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use App\Services\CacheModelServices;
 use Illuminate\Support\Facades\Gate;
-use App\Http\Requests\neighbourhoodRequest;
+
 
 class NeighbourhoodResource extends Component
 {
@@ -26,7 +26,7 @@ class NeighbourhoodResource extends Component
 
     use WithPagination;
 
-    protected $paginationTheme = 'bootstrap';
+    protected string $paginationTheme = 'bootstrap';
 
     public $neighbourhood_name;
     
@@ -34,7 +34,7 @@ class NeighbourhoodResource extends Component
 
     public $city_id;
 
-    public $region_id;
+
 
     #[Url(history: true)]
     public $perPage = 5;
@@ -100,7 +100,7 @@ class NeighbourhoodResource extends Component
         $data = Neighbourhood::findOrfail($id);
       
         $this->editNeighbourhoodName = $data->neighbourhood_name;
-        $this->regionIdUpdate = $data->region_id;
+        // $this->regionIdUpdate = $data->region_id;
         $this->cityIdUpdate = $data->city_id;
       
     }

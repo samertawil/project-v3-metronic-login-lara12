@@ -21,7 +21,7 @@ class Resource extends Component
     use WithFilePond;
 
     public  $sortBy = 'created_at';
-    protected $paginationTheme = 'bootstrap';
+    protected string $paginationTheme = 'bootstrap';
 
 
 

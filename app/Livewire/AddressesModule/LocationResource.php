@@ -27,7 +27,7 @@ class LocationResource extends Component
 
     use WithPagination;
 
-    protected $paginationTheme = 'bootstrap';
+    protected string $paginationTheme = 'bootstrap';
 
     public $neighbourhood_name;
 

@@ -6,7 +6,7 @@ namespace App\Traits;
 trait FlashMsgTraits
 {
  
-    public static function created($msgType = 'success', $msg = 'create' )
+    public static function created(string $msgType = 'success',string $msg = 'create' ): object
     {
         
       

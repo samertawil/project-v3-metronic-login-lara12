@@ -201,7 +201,7 @@ class Details extends Component
     {
 
         $data = CitzenServices::Where('id', $this->editServicesId)->first();
-        $data->card_header;
+      
         $deleteFromDisk = $data->card_header;
 
         $data->update([

@@ -7,8 +7,6 @@ namespace App\Livewire\AddressesModule;
 use Exception;
 use App\Models\Region;
 use Livewire\Component;
-use Livewire\Attributes\Rule;
-
 use App\Traits\FlashMsgTraits;
 use Illuminate\Support\Facades\DB;
 use App\Services\CacheModelServices;

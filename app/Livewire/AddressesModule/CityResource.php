@@ -20,7 +20,7 @@ use function PHPUnit\Framework\returnSelf;
 class CityResource extends Component
 {
     use WithPagination;
-    protected $paginationTheme = 'bootstrap';
+    protected string $paginationTheme = 'bootstrap';
 
     protected $listeners = ['refresh-region' => '$refresh'];
 

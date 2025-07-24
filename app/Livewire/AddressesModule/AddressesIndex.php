@@ -29,7 +29,7 @@ class AddressesIndex extends Component
 
     use WithPagination;
 
-    protected $paginationTheme = 'bootstrap';
+    protected string $paginationTheme = 'bootstrap';
 
     #[Url()]
     public $search;

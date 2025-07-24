@@ -6,8 +6,10 @@ use Livewire\Component;
 
 class Dashboard extends Component
 {
+
     public function render()
     {
-        return view('livewire.dashboard');
+       (string) $title= __('customTrans.dashboard');
+        return view('livewire.dashboard')->layoutData(['title'=>$title,'pageTitle'=>$title]);
     }
 }

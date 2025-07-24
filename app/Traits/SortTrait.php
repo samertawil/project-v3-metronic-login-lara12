@@ -4,43 +4,34 @@ namespace App\Traits;
 
 use Livewire\Attributes\Url;
 
-
- 
 trait SortTrait  {
 
-       
-    // #[Url()]
-    // public $sortBy='created_at';
- 
     #[Url()]
-    public $sortdir='DESC';
-
+    public string $sortdir='DESC';
  
-    public $editId;
-
  
-    public function setSortBy($sortByCol) {
+    public function setSortBy(string $sortByCol): string 
+    {
         
-        if($this->sortBy===$sortByCol) {
+          if($this->sortBy===$sortByCol) {
            
             $this->sortdir =($this->sortdir == "ASC") ? "DESC" : "ASC";
-            return;
+            
+            return $this->sortdir;
         }
-     
-        $this->sortBy=$sortByCol;
-        $this->sortdir='DESC';
+           
+            $this->sortBy=$sortByCol;
+            $this->sortdir='DESC';
 
+            return $this->sortdir;
+       
     }
 
-    public function updated($prop) {
+    public function updated(string $prop): mixed {
 
-        $this->resetPage();
+       return $this->resetPage();
 
     }
-
-
-
-
  
 }
 

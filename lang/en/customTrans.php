@@ -382,6 +382,7 @@ return [
 'Galary'=>'Galary',
 'card_title'=>'card title',
 'card_img'=>'Card image',
+'dashboard'=>'Dashboard',
  
 ];
 

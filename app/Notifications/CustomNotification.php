@@ -8,7 +8,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\VonageMessage;
 use Illuminate\Notifications\Messages\BroadcastMessage;
- 
+
 
 
 class CustomNotification extends Notification
@@ -30,7 +30,7 @@ class CustomNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return [  'broadcast'];
+        return ['broadcast'];
     }
 
     /**
@@ -52,14 +52,14 @@ class CustomNotification extends Notification
     //         ->unicode();
     // }
 
-    public function toBroadcast($notifiable)
-{
-   
-    return[
-        'content'=>'newwww',
-        'url'=>url('/'),
-    ];
-}
+    public function toBroadcast(object $notifiable): mixed
+    {
+
+        return [
+            'content' => 'newwww',
+            'url' => url('/'),
+        ];
+    }
 
     /**
      * Get the array representation of the notification.

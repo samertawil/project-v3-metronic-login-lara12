@@ -16,7 +16,7 @@ class UiloginBrowserLocale
       
         $browserLand=$request->header('accept-language');
         $browserLand=explode(',', $browserLand);
-        $uiloginLocale= $browserLand[0]??'en' ;
+        $uiloginLocale= $browserLand[0] ;
 
         App::setlocale( $uiloginLocale);
         return $next($request);

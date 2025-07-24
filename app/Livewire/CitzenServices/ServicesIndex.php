@@ -23,7 +23,7 @@ class ServicesIndex extends Component
     public $sortBy = 'created_at';
 
     use WithPagination;
-    protected $paginationTheme = 'bootstrap';
+    protected string $paginationTheme = 'bootstrap';
 
     #[Url()]
     public $perPage = 10;
