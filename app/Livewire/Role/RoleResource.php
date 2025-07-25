@@ -25,18 +25,14 @@ class RoleResource extends Component
     public int $perPage=5;
 
 
-    public function destroy($id): void 
+    public function destroy(int $id): void 
     {
-        // if(Gate::denies('role.delete')) {
-        //     abort(403,'ليس لديك الصلاحية اللازمة');
-        //  }
-
-
+       
         Role::destroy($id);
     
     }
 
-    public function edit($id): RedirectResponse 
+    public function edit(int $id): RedirectResponse 
     {
        
       $roles= Role::find($id);

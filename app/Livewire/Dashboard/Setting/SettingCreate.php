@@ -14,15 +14,15 @@ class SettingCreate extends Component
 {
 
     #[Validate(['required','unique:settings,key'])]
-    public $key;
+    public string $key;
     #[Validate(['required'])]
-    public $value;
-    public $description;
-    public $notes;
-    public $moduleName;
+    public mixed $value;
+    public string $description;
+    public string $notes;
+    public string $moduleName;
   
 
-    public function store() {
+    public function store(): void {
  
    
        $this->validate();

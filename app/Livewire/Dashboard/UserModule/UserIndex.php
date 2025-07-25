@@ -5,17 +5,18 @@ namespace  App\Livewire\Dashboard\UserModule;
 
 use App\Models\User;
 use Livewire\Component;
+use App\Enums\activeType;
 use App\Traits\SortTrait;
+use Illuminate\View\View;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
-use Livewire\Attributes\Rule;
 use App\Traits\FlashMsgTraits;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Validation\Rule;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\View\View;
-use Livewire\Attributes\Computed;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserIndex extends Component
 {
@@ -31,26 +32,24 @@ class UserIndex extends Component
     public int $perPage = 5;
 
     #[Url()]
-    public int $searchUsertype;
+    public mixed  $searchUsertype='' ;
 
     #[Url()]
     public string $search = '';
 
     public int $editUserId;
     public string $editName = '';
-    public int $edituserType;
-
-    #[Rule('required|in:0,1')]
-    public int $editActiovation;
+    public string|int $edituserType;
+    public  mixed  $user_activation;
     /**
      * @property string $profile_image
      */
-    public  $profile_image;
+    public mixed  $profile_image;
     public string $editMobile = '';
 
 
     #[Computed()]
-    public function users(): Collection
+    public function users(): LengthAwarePaginator
     {
         return  User::SearchName($this->search)
             ->SearchUserType($this->searchUsertype)
@@ -59,16 +58,16 @@ class UserIndex extends Component
     }
 
 
-    public function edit($id): void
+    public function edit(int $id): void
     {
         if (Gate::denies('user.all.resource')) {
             abort(403, __('customTrans.you have no access'));
         }
         $this->editUserId = $id;
         $data = User::find($id);
-
+        
         $this->editName = $data->name;
-        $this->editActiovation = $data->user_activation;
+        $this->user_activation = $data->user_activation;
         $this->editMobile = $data->mobile;
         $this->edituserType = $data->user_type;
         $this->profile_image = $data->profile_image;
@@ -84,15 +83,17 @@ class UserIndex extends Component
     public function update(): void
     {
 
-
+     
         $user = User::find($this->editUserId);
 
-        $this->validate();
+        $this->validate([
+            'user_activation' => ['required', Rule::enum(ActiveType::class)],
+        ]);
 
 
         $user->update([
             'name' => $this->editName,
-            'user_activation' => $this->editActiovation,
+            'user_activation' => $this->user_activation,
             'mobile' => $this->editMobile,
             'user_type' => $this->edituserType,
         ]);
@@ -107,7 +108,7 @@ class UserIndex extends Component
 
 
 
-    public function resetPass($id): void
+    public function resetPass(int $id): void
     {
         if (Gate::denies('user.all.resource')) {
             abort(403, __('customTrans.you have no access'));

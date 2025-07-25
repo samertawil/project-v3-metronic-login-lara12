@@ -2,19 +2,17 @@
 
 namespace App\Livewire\Dashboard\RoleModuleName;
 
-use App\Models\Ability;
 use Livewire\Component;
 use App\Enums\activeType;
 use App\Traits\SortTrait;
+use Illuminate\View\View;
 use App\Models\ModuleName;
 use Livewire\WithPagination;
-use App\Traits\FlashMsgTraits;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Computed;
-use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\View\View;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ModuleResource extends Component
 {
@@ -22,33 +20,32 @@ class ModuleResource extends Component
     use WithPagination;
     use SortTrait;
 
-    public $sortBy = 'created_at';
-    public $perPage = 5;
+    public string $sortBy = 'created_at';
+    public int $perPage = 5;
     protected string $paginationTheme = 'bootstrap';
-    public $search;
+    public string $search;
 
-    public $name;
-    public $description;
-    public $active = "1";
+    public string $name;
+    public string $description;
+    public mixed $active = "1";
+    public int $editId;
+    public mixed $data;
 
-    public $editId;
-    public $data;
-
-
+// @phpstan-ignore-next-line
     protected $listeners = ['reload-module' => '$refresh'];
 
-    public function edit($id)
+    public function edit(int $id):void
     {
 
         $this->editId = $id;
         $this->data = $this->ModuleNames()->find($id);
 
-        $this->name = $this->data->name;
-        $this->active = $this->data->active;
-        $this->description = $this->data->description;
+        $this->name = $this->data['name'];
+        $this->active = $this->data['active'];
+        $this->description = $this->data['description'];
     }
 
-    public function rules()
+    public function rules(): mixed
     {
         return [
             'name' => ['required', Rule::unique('module_names')->ignore($this->editId)],
@@ -56,7 +53,7 @@ class ModuleResource extends Component
         ];
     }
 
-    public function update()
+    public function update(): void
     {
 
 
@@ -72,12 +69,12 @@ class ModuleResource extends Component
         $this->cancelEdit();
     }
 
-    public function cancelEdit()
+    public function cancelEdit(): void
     {
         $this->reset('editId');
     }
 
-    public function destroy($id)
+    public function destroy(int $id): void
     {
         DB::beginTransaction();
         try {
@@ -96,7 +93,7 @@ class ModuleResource extends Component
     }
 
     #[Computed]
-    public function ModuleNames()
+    public function ModuleNames(): LengthAwarePaginator
     {
         return ModuleName::SearchName($this->search)
             ->orderBy($this->sortBy, $this->sortdir)->paginate($this->perPage);

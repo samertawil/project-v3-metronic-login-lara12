@@ -55,9 +55,8 @@
         </div>
 
 
-
-
-        <x-button></x-button>
+      
+        <x-saveClearbuttons></x-saveClearbuttons>
 
     </form>
 

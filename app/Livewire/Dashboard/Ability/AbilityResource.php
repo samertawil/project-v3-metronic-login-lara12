@@ -6,48 +6,48 @@ use App\Models\Role;
 use App\Models\Ability;
 use Livewire\Component;
 use App\Traits\SortTrait;
+use Illuminate\View\View;
 use App\Models\ModuleName;
+use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\View\View;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class AbilityResource extends Component
 {
-    public $sortBy = 'created_at';
-
+    public string $sortBy = 'created_at';
     use  SortTrait;
-
     use WithPagination;
-
     protected string $paginationTheme = 'bootstrap';
 
+// @phpstan-ignore-next-line
     protected $listeners = ['Refresh_Ability_Index' => '$refresh'];
 
   #[Url('history:true')]
-    public $search = '';
-    public $searchModuleId;
-    public $editAbilityId = '';
+    public string $search ;
+    public int $searchModuleId;
+    public int $editAbilityId ;
 
     #[Validate('required|string')]
-    public $editAbilityName = '';
+    public string $editAbilityName;
 
     #[Validate(['required', 'string'])]
-    public $editAbilityDescription = '';
+    public string $editAbilityDescription;
 
     #[Validate(['required', 'in:"0","1"'])]
-    public $editAbilityActivation = '';
+    public mixed $editAbilityActivation ;
 
-    public $editAbilityUrl = '';
-    public $editDescription = '';
-    public $editAbilityModuleId='';
+    public string $editAbilityUrl;
+    public string $editDescription;
+    public string $editAbilityModuleId;
 
-    public $perPage = 10;
+    public int $perPage = 10;
 
     #[Computed()]
-    public function abilities() {
+    public function abilities(): LengthAwarePaginator {
         return Ability::with(['module_name'])
         ->SearchName($this->search)
         ->searchModuleId($this->searchModuleId)
@@ -55,7 +55,7 @@ class AbilityResource extends Component
     }
    
 
-    public function edit($id)
+    public function edit(int $id):void
     {
  
 
@@ -71,7 +71,7 @@ class AbilityResource extends Component
         $this->editDescription = $data->description;
     }
 
-    public function update()
+    public function update(): void
     {
 
   
@@ -94,11 +94,10 @@ class AbilityResource extends Component
 
 
 
-    public function destroy($id)
+    public function destroy(int $id): void
     {
 
  
-
         $abilities = Ability::find($id);
 
         $roles = Role::select('abilities', 'id', 'abilities_description')->where('abilities', 'like', "%$abilities->ability_name%")->get();
@@ -132,7 +131,7 @@ class AbilityResource extends Component
 
 
 
-    public function cancelEdit()
+    public function cancelEdit(): void
     {
 
         $this->reset('editAbilityId');
@@ -141,7 +140,7 @@ class AbilityResource extends Component
  
     
     #[Computed]
-    public function ModuleNames() {
+    public function ModuleNames(): Collection {
         return ModuleName::get();
         
     }

@@ -12,19 +12,20 @@ use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use App\Services\CacheSystemSettingServices;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\View;
 
 class SystemClass extends Component
 {
  
-    public $description='';
+    public string $description='';
     #[Validate(['required','unique:setting_systems,system_name'])]
-    public $system_name;
+    public string $system_name;
 
-    public $editId=null;
-    public $data;
+    public mixed $editId=null;
+    public mixed $data;
 
-    public function systemStore()
+    public function systemStore(): void
     {
 
         $this->validate();
@@ -40,7 +41,7 @@ class SystemClass extends Component
         $this->reset();
     }
 
-    public function edit($id) {
+    public function edit(int $id): void {
        $this->editId=$id;
        $this->data=SettingSystem::findOrfail($id);
 
@@ -48,7 +49,7 @@ class SystemClass extends Component
         $this->description=  $this->data->description ;
     }
 
-    public function update() {
+    public function update(): void {
         
         $this->data->update([
             'system_name'=>  $this->system_name,
@@ -61,7 +62,8 @@ class SystemClass extends Component
         
      }
 
-     public function destroy($id){
+     public function destroy(int $id): void 
+     {
 
         DB::beginTransaction();
 
@@ -84,17 +86,16 @@ class SystemClass extends Component
             
         }
 
-      
 
      }
  
 
     #[Computed()]
-    public  function systems() {
+    public  function systems(): Collection {
       return CacheSystemSettingServices::getData() ;
     }
 
-    public function cancelEdit()
+    public function cancelEdit(): void
     {
 
         $this->reset('editId');

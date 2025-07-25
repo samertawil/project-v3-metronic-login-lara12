@@ -14,32 +14,24 @@ class RegisterForm extends Component
 {
 
     #[Validate(['required'])]
-    public $name = '';
-
+    public  string $name = '';
     #[Validate(['required', 'unique:users,user_name', 'min:3', 'max:35'])]
-    public $user_name = '';
-
+    public mixed $user_name = '';
      #[Validate(['required', 'numeric', 'min_digits:10', 'max_digits:15', 'unique:users,mobile'])]
-    public $mobile = '';
+    public string $mobile = '';
 	#[Validate(['nullable', 'email'])]
-    public $email = '';
-
+    public string $email = '';
     #[Validate(['required', 'min:4', 'same:passwordConfirmation'])]
-    public $password = '';
-
-    public $passwordConfirmation = '';
-     
- 
-
+    public string $password = '';
+    public string $passwordConfirmation = '';
     
-    public function register()
+    
+    public function register(): void
     {
        
           $this->validate();
 
-         
-
-           $user = User::create([
+             $user = User::create([
             'user_name' => $this->user_name,
             'name' => $this->name,
 			'email'=>$this->email,

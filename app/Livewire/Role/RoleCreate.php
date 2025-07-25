@@ -5,7 +5,6 @@ namespace App\Livewire\Role;
 use App\Models\Role;
 use App\Models\Ability;
 use Livewire\Component;
-use App\Http\Requests\RoleRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
@@ -14,16 +13,11 @@ class RoleCreate extends Component
 {
 
 
-    public $name;
+    public string $name;
+    public mixed $abilitiesId = [];
+    public mixed $roles;
 
-    public $abilitiesId = [];
-    public $roles;
-    public $abilities1;
-
-
- 
-
-    public function store()
+    public function store(): void
     {
 
         $abilitiesDescription=[];
@@ -54,7 +48,7 @@ class RoleCreate extends Component
         redirect()->route('role.index');
     }
 
-    public function mount($id = '')
+    public function mount(mixed $id = ''): void
     {
         $data = Role::find($id);
 

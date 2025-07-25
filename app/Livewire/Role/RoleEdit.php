@@ -4,7 +4,6 @@ namespace App\Livewire\Role;
 
 use App\Models\Role;
 use App\Models\Ability;
-use Illuminate\Http\RedirectResponse;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -15,8 +14,8 @@ class RoleEdit extends Component
 
 
     public string $name;
-    public array $abilitiesId = [];
-    public array $roles;
+    public mixed $abilitiesId = [];
+    public mixed $roles;
  
 
 
@@ -52,7 +51,7 @@ class RoleEdit extends Component
         redirect()->route('role.index');
     }
 
-    public function mount($id = ''): void
+    public function mount(mixed $id = ''): void
     {
         $data = Role::find($id);
 

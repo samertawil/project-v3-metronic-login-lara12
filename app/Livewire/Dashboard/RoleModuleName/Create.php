@@ -14,18 +14,18 @@ class Create extends Component
 {
 
 
-    public $name;
-    public $description;
-    public $active="1" ;
+    public string $name;
+    public string $description;
+    public mixed $active="1" ;
  
-    public function rules() {
+    public function rules(): mixed {
         return [
             'name'=>['required','unique:module_names,name','string'],
             'active'=>['required', Rule::enum(activeType::class)],
         ];
     }
 
-    public function store() {
+    public function store(): void {
        
         $this->validate();
        

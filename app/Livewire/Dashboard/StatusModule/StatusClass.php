@@ -7,6 +7,7 @@ namespace App\Livewire\Dashboard\StatusModule;
 use App\Models\Status;
 use Livewire\Component;
 use App\Traits\SortTrait;
+use Illuminate\View\View;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
 use App\Traits\FlashMsgTraits;
@@ -14,47 +15,42 @@ use Illuminate\Validation\Rule;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\Gate;
 use App\Services\CacheSystemSettingServices;
-use Illuminate\View\View;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class  StatusClass extends Component
 {
     use SortTrait;
-
-    #[Url()]
-    public $sortBy = 'created_at';
-
     use WithPagination;
-
     protected string $paginationTheme = 'bootstrap';
 
-
-    public $status_name;
-    public $p_id_sub;
-    public $used_in_system_id;
-    public $page_name;
-    public $route_system_name;
-    public $route_name;
+    #[Url()]
+    public string $sortBy = 'created_at';
+    public string $status_name;
+    public int $p_id_sub;
+    public int $used_in_system_id;
+    public string $page_name;
+    public string $route_system_name;
+    public string $route_name;
 
     #[Url()]
-    public $search = null;
+    public string|null $search = null;
+    #[Url()]
+    public int $perPage = 10;
+    #[Url()]
+    public int|null $PidSearch;
 
     #[Url()]
-    public $perPage = 10;
+    public string $SystemName;
 
-    #[Url()]
-    public $PidSearch;
+    public int $editStatusId;
+    public string $StatusName;
+    public int $statusPid;
+    public mixed $usedInSystem;
+// @phpstan-ignore-next-line
+    protected   $listeners = ['refresh-system' => '$refresh'];
 
-    #[Url()]
-    public $SystemName;
-
-    public $editStatusId;
-    public $StatusName;
-    public $statusPid;
-    public $usedInSystem;
-
-    protected $listeners = ['refresh-system' => '$refresh'];
-
-    public  function rules($p_id_sub): array
+    public  function rules(int $p_id_sub): mixed
     {
         return [
             'status_name' => [
@@ -66,7 +62,7 @@ class  StatusClass extends Component
         ];
     }
 
-    public function store()
+    public function store(): void
     {
 
         if (Gate::denies('status_view')) {
@@ -83,7 +79,7 @@ class  StatusClass extends Component
     }
 
 
-    public function edit($id)
+    public function edit(int $id): void
     {
         if (Gate::denies('status_view')) {
             abort(403, 'ليس لديك الصلاحية اللازمة');;
@@ -96,9 +92,8 @@ class  StatusClass extends Component
         $this->usedInSystem = $data->used_in_system_id;
     }
 
-    public function update()
+    public function update(): void
     {
-
 
         $data = Status::find($this->editStatusId);
 
@@ -111,7 +106,7 @@ class  StatusClass extends Component
         $this->cancelEdit();
     }
 
-    public function destroy($id)
+    public function destroy(int $id): void
     {
 
         if (Gate::denies('status_view')) {
@@ -122,7 +117,7 @@ class  StatusClass extends Component
     }
 
 
-    public function cancelEdit()
+    public function cancelEdit(): void
     {
 
         $this->reset('editStatusId');
@@ -130,7 +125,7 @@ class  StatusClass extends Component
 
 
     #[Computed()]
-    public function statusesAll()
+    public function statusesAll(): mixed
     {
         return Status::with(['systemname:id,system_name', 'status_p_id_sub:id,p_id_sub,status_name', 'status_p_id:id,p_id,status_name'])
             ->select('status_name', 'id',   'p_id_sub', 'used_in_system_id');
@@ -138,7 +133,7 @@ class  StatusClass extends Component
 
 
     #[Computed()]
-    public function statuses()
+    public function statuses(): LengthAwarePaginator
     {
         return $this->statusesAll()
             ->SearchName($this->search)
@@ -149,7 +144,7 @@ class  StatusClass extends Component
     }
 
     #[Computed()]
-    public function systems_data()
+    public function systems_data(): Collection
     {
         return CacheSystemSettingServices::getData();
     }

@@ -109,21 +109,21 @@
 
                             @if ($editUserId === $user->id)
                                 <td>
-                                    <select wire:model="editActiovation" class="form-control bg-white">
+                                    <select wire:model="user_activation" name="user_activation" class="form-control bg-white">
 
-                                        <option value="1">{{ __('customTrans.active') }}</option>
-                                        <option value="0">{{ __('customTrans.not active') }}</option>
+                                        <option value="1">{{__('customTrans.active')}}</option>
+                                        <option value="0">{{__('customTrans.not active')}}</option>
                                     </select>
                                 </td>
                             @else
                                 <td @class([
-                                    'text-danger' => $user->user_activation == 0,
-                                    'text-success' => $user->user_activation == 1,
+                                    'text-danger' => $user->user_activation == false,
+                                    'text-success' => $user->user_activation == true,
                                 ])>
 
                                     <div @class([
-                                        'bg-danger' => $user->user_activation == 0,
-                                        'bg-success' => $user->user_activation == 1,
+                                        'bg-danger' => $user->user_activation == false,
+                                        'bg-success' => $user->user_activation == true,
                                     ])></div>
                                     {{ $user->user_activation == 1 ? __('customTrans.active') : __('customTrans.not active') }}
                                 </td>

@@ -14,25 +14,20 @@ use Livewire\Attributes\Rule;
 class SettingIndex extends Component
 {
     use SortTrait;
-
-    #[Url()]
-    public $sortBy = 'created_at';
-
     use WithPagination;
     protected string $paginationTheme = 'bootstrap';
 
-
-    public $editSettingId;
-
+    #[Url()]
+    public string $sortBy = 'created_at';
+    public mixed $editSettingId;
     #[Rule('required')]
-    public $value;
+    public mixed $value;
+    public string $key;
+    public string $description;
+    public string $notes;
+    public int $perPage = 10;
 
-    public $key;
-    public $description;
-    public $notes;
-    public $perPage = 10;
-
-    public function edit($id)
+    public function edit(int $id): void
     {
 
         $this->editSettingId = $id;
@@ -44,7 +39,7 @@ class SettingIndex extends Component
         $this->notes = $data->notes;
     }
 
-    public function update()
+    public function update(): void
     {
 
         $this->validate();
@@ -63,12 +58,12 @@ class SettingIndex extends Component
 
 
 
-    public function destroy($id)
+    public function destroy(int $id): void
     {
         Setting::destroy($id);
     }
 
-    public function cancelEdit()
+    public function cancelEdit(): void
     {
         $this->reset('editSettingId');
     }

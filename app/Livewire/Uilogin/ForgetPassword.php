@@ -37,7 +37,7 @@ class ForgetPassword extends Component
     public string $password = '';
     public string $passwordConfirmation = '';
     public string $status;
-    public array $data;
+    public mixed $data;
     public string $behavior;
     public string $QuestionBehavior;
     public string $check_type;
