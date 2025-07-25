@@ -5,31 +5,30 @@ namespace App\Livewire\Uilogin;
  
 use App\Models\User;
 use Livewire\Component;
-use Livewire\Attributes\Rule;
-use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\View\View;
 
 class ChangePassword extends Component
 {
     #[Validate(['required'])]
     #[Validate('exists:users,user_name',message:'خطأ باسم المستخدم')]
-    public $user_name;
+    public string $user_name;
  
 
     #[Validate(['required'])]
-    public $currentPassword;
+    public string $currentPassword;
 
     #[Validate(['required','min:4'])]
-    public $password;
+    public string $password;
 
     #[Validate(['same:password'])]
     #[Validate('required_with:password')]
-    public $passwordConfirmation;
+    public string $passwordConfirmation;
 
-    public function resetPassword() {
+    public function resetPassword(): mixed {
       
         $this->validate();
       
@@ -40,7 +39,7 @@ class ChangePassword extends Component
             
             $this->addError('password', __('customTrans.same old password'));
        
-            return;
+            return '';
 
         } 
 
@@ -49,7 +48,7 @@ class ChangePassword extends Component
             
             $this->addError('currentPassword', trans('auth.password'));
        
-            return;
+            return '';
 
         } 
 
@@ -69,7 +68,7 @@ class ChangePassword extends Component
 
  
    #[Layout('components.layouts.uilogin-app')]
-    public function render()
+    public function render(): View
     {
         $pageTitle=__('customTrans.renewPassword');
         $title=__('customTrans.renewPassword');

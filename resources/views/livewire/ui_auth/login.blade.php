@@ -50,6 +50,7 @@
                                     <a href="{{ route('uilogin.forgetpassword') }}" wire:navigate
                                         class="text-muted text-hover-primary">{{ __('customTrans.Forgot Your Password') }}</a>
                                 </div>
+                              
                                 <button
                                     class="btn btn-primary font-weight-bold  my-5  w-75">{{ __('customTrans.Login') }}</button>
 
@@ -62,10 +63,13 @@
                                 <a href="{{ route('register') }}" wire:navigate id="kt_login_signup"
                                     class="text-muted text-hover-primary font-weight-bold">{{ __('customTrans.register_new_account') }}</a>
                             </div>
-
+                            <div class="mt-5">
+                                <a href="{{ route('support.create') }}" wire:navigate
+                                class="text-muted text-hover-primary">{{ __('customTrans.technical support') }}</a>  
+                            </div>
                          
                         </div>
-                        <div class="mt-25">
+                        <div class="mt-20">
                             @include('partials.general._lang')
                         </div>
                       

@@ -5,6 +5,7 @@ namespace App\Livewire\Dashboard\Setting;
 use App\Models\Setting;
 use Livewire\Component;
 use App\Traits\SortTrait;
+use Illuminate\View\View;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
 use Livewire\Attributes\Rule;
@@ -73,7 +74,7 @@ class SettingIndex extends Component
     }
 
     //#[Layout('components.layouts.metronic7-simple-app')]
-    public function render()
+    public function render(): View
     {
         $pageTitle= __('customTrans.setting')  ; 
 

@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Status;
 use Livewire\Component;
 use App\Models\CitzenServices;
+use Illuminate\View\View;
 
 class AttributesList extends Component
 {
@@ -65,7 +66,7 @@ class AttributesList extends Component
     }
 
  
-    public function render()
+    public function render(): View
     {
         return <<<'HTML'
             <div>

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5fe83b76489457c3226fc5db53059e29",
+    "content-hash": "f7c72a30759739a3002453c3945b85ed",
     "packages": [
         {
             "name": "brick/math",
@@ -2682,6 +2682,79 @@
                 }
             ],
             "time": "2025-02-26T06:38:01+00:00"
+        },
+        {
+            "name": "mews/captcha",
+            "version": "3.4.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mewebstudio/captcha.git",
+                "reference": "cead591ddc544b2b80a4136897893dd3bd70e7a7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mewebstudio/captcha/zipball/cead591ddc544b2b80a4136897893dd3bd70e7a7",
+                "reference": "cead591ddc544b2b80a4136897893dd3bd70e7a7",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gd": "*",
+                "illuminate/config": "~5|^6|^7|^8|^9|^10|^11|^12",
+                "illuminate/filesystem": "~5|^6|^7|^8|^9|^10|^11|^12",
+                "illuminate/hashing": "~5|^6|^7|^8|^9|^10|^11|^12",
+                "illuminate/session": "~5|^6|^7|^8|^9|^10|^11|^12",
+                "illuminate/support": "~5|^6|^7|^8|^9|^10|^11|^12",
+                "intervention/image": "^3.7",
+                "php": "^7.2|^8.1|^8.2|^8.3"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.0",
+                "phpunit/phpunit": "^8.5|^9.5.10|^10.5|^11"
+            },
+            "type": "package",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Captcha": "Mews\\Captcha\\Facades\\Captcha"
+                    },
+                    "providers": [
+                        "Mews\\Captcha\\CaptchaServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Mews\\Captcha\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Muharrem ERİN",
+                    "email": "me@mewebstudio.com",
+                    "homepage": "https://github.com/mewebstudio",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel 5/6/7/8/9/10/11/12 Captcha Package",
+            "homepage": "https://github.com/mewebstudio/captcha",
+            "keywords": [
+                "captcha",
+                "laravel12 Captcha",
+                "laravel12 Security",
+                "laravel5 Security"
+            ],
+            "support": {
+                "issues": "https://github.com/mewebstudio/captcha/issues",
+                "source": "https://github.com/mewebstudio/captcha/tree/3.4.6"
+            },
+            "time": "2025-04-16T15:40:08+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -6863,6 +6936,77 @@
                 "source": "https://github.com/tijsverkoyen/CssToInlineStyles/tree/v2.3.0"
             },
             "time": "2024-12-21T16:25:41+00:00"
+        },
+        {
+            "name": "timehunter/laravel-google-recaptcha-v2",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/RyanDaDeng/laravel-google-recaptcha-v2.git",
+                "reference": "e4a8b2ac5c312747cbd5379a93c3039fbb48aafc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/RyanDaDeng/laravel-google-recaptcha-v2/zipball/e4a8b2ac5c312747cbd5379a93c3039fbb48aafc",
+                "reference": "e4a8b2ac5c312747cbd5379a93c3039fbb48aafc",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.0",
+                "php": "^7.2.5 || ^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0",
+                "php-coveralls/php-coveralls": "^2.4",
+                "phpunit/phpunit": "~9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "GoogleReCaptchaV2": "TimeHunter\\LaravelGoogleReCaptchaV2\\Facades\\GoogleReCaptchaV2"
+                    },
+                    "providers": [
+                        "TimeHunter\\LaravelGoogleReCaptchaV2\\Providers\\GoogleReCaptchaV2ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TimeHunter\\LaravelGoogleReCaptchaV2\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ryan Deng",
+                    "email": "ryandadeng@gmail.com",
+                    "homepage": "https://ryandeng.com"
+                }
+            ],
+            "description": "Laravel Package for google reCAPTCHA v2",
+            "homepage": "https://github.com/RyanDaDeng/laravel-google-recaptcha-v2",
+            "keywords": [
+                "Google ReCaptcha",
+                "GoogleReCaptcha",
+                "Laravel reCAPTCHA",
+                "google recaptcha v2",
+                "laravel",
+                "laravel google recaptcha",
+                "laravel google recaptcha v2",
+                "laravel recaptcha v2",
+                "reCAPTCHA V2",
+                "recaptcha",
+                "recaptcha v2 laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/RyanDaDeng/laravel-google-recaptcha-v2/issues",
+                "source": "https://github.com/RyanDaDeng/laravel-google-recaptcha-v2/tree/v1.0.3"
+            },
+            "time": "2021-03-12T01:48:48+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

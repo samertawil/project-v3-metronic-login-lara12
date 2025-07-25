@@ -8,7 +8,7 @@ use App\Models\ModuleName;
 use App\Traits\FlashMsgTraits;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Gate;
-
+use Illuminate\View\View;
 
 class Create extends Component
 {
@@ -42,7 +42,7 @@ class Create extends Component
     }
 
     
-    public function render()
+    public function render(): View
     {
 
         

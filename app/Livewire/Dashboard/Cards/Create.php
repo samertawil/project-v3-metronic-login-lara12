@@ -9,8 +9,7 @@ use Livewire\Attributes\Computed;
 use App\Traits\UploadingFilesTrait;
 use Spatie\LivewireFilepond\WithFilePond;
 use App\Services\CacheStatusModelServices;
- 
-
+use Illuminate\View\View;
 
 class Create extends Component
 {
@@ -76,7 +75,7 @@ class Create extends Component
         return $data;
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.dashboard.cards.create');
     }

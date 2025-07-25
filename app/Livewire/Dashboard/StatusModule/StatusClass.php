@@ -14,10 +14,7 @@ use Illuminate\Validation\Rule;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\Gate;
 use App\Services\CacheSystemSettingServices;
-
-
-
-
+use Illuminate\View\View;
 
 class  StatusClass extends Component
 {
@@ -159,7 +156,7 @@ class  StatusClass extends Component
 
 
 
-    public function render()
+    public function render(): View
     {
         if (Gate::denies('status_view')) {
             abort(403, 'ليس لديك الصلاحية اللازمة');;

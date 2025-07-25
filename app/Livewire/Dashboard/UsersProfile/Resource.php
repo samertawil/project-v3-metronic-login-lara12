@@ -8,16 +8,21 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Traits\UploadingFilesTrait;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class Resource extends Component
 {
     use WithFileUploads;
     
-    public $userData;
-    public $profile_image="";
+    public object $userData;
+    /**
+ * @property object $profile_image
+ 
+ */
+    public   $profile_image;
  
 
-    public function mount() {
+    public function mount(): void {
          
       $this->userData=  User::findOrfail(Auth::user()->id);
         
@@ -26,7 +31,7 @@ class Resource extends Component
   
     
  
-public function updatedProfileImage($attr) {
+public function updatedProfileImage($attr): void {
   
     $image='';
 
@@ -50,7 +55,7 @@ public function updatedProfileImage($attr) {
 }
 
 
-    public function render()
+    public function render(): View
     {
 
         return view('partials.metronic7._user-profile');

@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\DB;
 use App\Services\CacheModelServices;
 
 use Illuminate\Support\Facades\Gate;
+use Illuminate\View\View;
+
 use function PHPUnit\Framework\returnSelf;
 
 class CityResource extends Component
@@ -133,7 +135,7 @@ class CityResource extends Component
     {
         $this->reset('cityId');
     }
-    public function render()
+    public function render(): View
     {
 
         $cities = AddressNameVw::groupby('city_id')

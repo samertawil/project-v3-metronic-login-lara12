@@ -6,27 +6,26 @@ namespace App\Livewire\Role;
 use App\Models\Role;
 use Livewire\Component;
 use App\Traits\SortTrait;
+use Illuminate\View\View;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\RedirectResponse;
 
 class RoleResource extends Component
 {
-    public $sortBy='created_at';
     use SortTrait;
-
     use WithPagination;
-
     protected string $paginationTheme ='bootstrap';
 
+    public string $sortBy='created_at';
+    #[url()]
+    public string $search='';
+    #[url()]
+    public int $perPage=5;
 
-    public $search='';
 
-
-    public $perPage=5;
-
-
-    public function destroy($id) 
+    public function destroy($id): void 
     {
         // if(Gate::denies('role.delete')) {
         //     abort(403,'ليس لديك الصلاحية اللازمة');
@@ -37,7 +36,7 @@ class RoleResource extends Component
     
     }
 
-    public function edit($id) 
+    public function edit($id): RedirectResponse 
     {
        
       $roles= Role::find($id);
@@ -49,7 +48,7 @@ class RoleResource extends Component
     }
 
 
-    public function render()
+    public function render(): View
     {
 
         if (Gate::denies('abilities.groups.all.resource')) {

@@ -150,7 +150,7 @@
                               
                               
                                 <x-cancel-back class="btn btn-light-primary font-weight-bold px-9 py-4 my-3 mx-2"
-                                :route="route('login')" wire:navigate label="cancel_back" wire:loading.remove wire:target="sendResetLink"></x-cancel-back>
+                                :route="route('login')" wire:navigate label="cancel_back" wire:loading.remove ></x-cancel-back>
                                
                             </div>
                             @include('layouts._show_errors_all')

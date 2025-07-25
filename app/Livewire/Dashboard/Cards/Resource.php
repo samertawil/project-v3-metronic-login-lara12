@@ -13,6 +13,7 @@ use App\Traits\UploadingFilesTrait;
 use Illuminate\Support\Facades\Storage;
 use Spatie\LivewireFilepond\WithFilePond;
 use App\Services\CacheStatusModelServices;
+use Illuminate\View\View;
 
 class Resource extends Component
 {
@@ -146,7 +147,7 @@ class Resource extends Component
     }
 
 
-    public function render()
+    public function render(): View
     {
         $title=__('customTrans.Galary');
         $pageTitle=__('customTrans.Galary picture list') ;

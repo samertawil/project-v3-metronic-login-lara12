@@ -9,6 +9,7 @@ use Illuminate\Validation\Rule;
 use Livewire\Attributes\Validate;
 use App\Traits\UploadingFilesTrait;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 
 class Details extends Component
 {
@@ -214,7 +215,7 @@ class Details extends Component
     }
 
 
-    public function render()
+    public function render(): View
     {
         
         $title = __('customTrans.services managment');

@@ -9,6 +9,7 @@ use App\Models\CitzenServices;
 use App\Traits\FlashMsgTraits;
 use Livewire\Attributes\Validate;
 use App\Traits\UploadingFilesTrait;
+use Illuminate\View\View;
 
 class ServicesResoucre extends Component
 {
@@ -86,7 +87,7 @@ class ServicesResoucre extends Component
 
 
 
-    public function render()
+    public function render(): View
     {
         $title = __('customTrans.services managment');
         $serviceActivation = CitzenServices::where('id', $this->serviceId)->where('active', true)->first();

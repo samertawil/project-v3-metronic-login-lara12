@@ -6,22 +6,22 @@ use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use App\Models\TechnicalSupport;
+use Illuminate\View\View;
 
 class TechSupportCreate extends Component
 {
     #[Validate(['required'])]
-    public  $name;
-    public  $user_name;
+    public string $name;
+    public string $user_name='';
     #[Validate(['nullable','numeric','min_digits:10','max_digits:15'])]
-    public $mobile;
+    public string $mobile;
     #[Validate(['required'])]
-    public $subject_id;
+    public int $subject_id;
     #[Validate(['required'])]
-    public $issue_description;
+    public string $issue_description;
+    public string $captcha;
 
-    public $captcha;
-
-    public function create()
+    public function create(): void
     {
        $this->validate();
        
@@ -40,11 +40,20 @@ class TechSupportCreate extends Component
         ]);
         
         $this->reset();
+
+        $this->dispatch(
+            'alert',
+            type: 'success',
+            title: 'رسالة دعم فني',
+            text: ' تم الارسال ' ,
+            confirmButtonText: 'اغلاق'
+        );
     }
 
     #[Layout('components.layouts.uilogin-app')]
-    public function render()
+    public function render(): View
     {
-        return view('livewire.technical-support.create');
+        (string) $title=__('customTrans.technical support');
+        return view('livewire.technical-support.create')->layoutData(['title'=>$title,'pagetitle'=>$title]);
     }
 }

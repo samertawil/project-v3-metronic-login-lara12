@@ -8,6 +8,7 @@ use Livewire\Attributes\Validate;
 use Livewire\Attributes\Modelable;
 use App\Services\CacheModelServices;
 use App\Services\CacheStatusModelServices;
+use Illuminate\View\View;
 
 class AddressForm extends Component
 {
@@ -113,7 +114,7 @@ class AddressForm extends Component
 
 
 
-    public function render()
+    public function render(): View
     {
  
         $regions =  CacheModelServices::getRegionVwData();

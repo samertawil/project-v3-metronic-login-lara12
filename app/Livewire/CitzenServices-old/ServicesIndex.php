@@ -8,6 +8,7 @@ use Livewire\Attributes\Url;
 use Livewire\WithPagination;
 use App\Models\CitzenServices;
 use App\Traits\FlashMsgTraits;
+use Illuminate\View\View;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
 
@@ -114,7 +115,7 @@ class ServicesIndex extends Component
 
 
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.citzen-services.services-index');
     }

@@ -20,72 +20,73 @@ class Status extends Model
 
 
     protected $fillable = [
-        'status_name', 'p_id',
+        'status_name',
+        'p_id',
         'p_id_sub',
-        'route_name', 'page_name',
-        'route_system_name', 'description',
+        'route_name',
+        'page_name',
+        'route_system_name',
+        'description',
         'used_in_system_id',
     ];
 
- 
-    public function status_p_id():BelongsTo
+
+    public function status_p_id(): BelongsTo
     {
         return $this->belongsTo(Status::class, 'p_id', 'id');
     }
 
-    public function status_p_id_sub():BelongsTo
+    public function status_p_id_sub(): BelongsTo
 
     {
         return $this->belongsTo(Status::class, 'p_id_sub', 'id');
-        
     }
 
 
-    public function systemname() :BelongsTo
+    public function systemname(): BelongsTo
     {
         return $this->belongsTo(SettingSystem::class, 'used_in_system_id', 'id');
     }
 
 
-       /**
- * @param  \Illuminate\Database\Eloquent\Builder<Status>  $query
- * @param  string  $value
- * @return \Illuminate\Database\Eloquent\Builder<Status>
- */ 
-    public function scopeSearchName(Builder $query,string $value): Builder {
-        if($value) {
-            $query->where('status_name','like',"%{$value}%");
-        }
-        return $query;
-    }
-   
-           /**
- * @param  \Illuminate\Database\Eloquent\Builder<Status>  $query
- * @param  string  $value
- * @return \Illuminate\Database\Eloquent\Builder<Status>
- */ 
-    public function scopeSearchpId(Builder $query,string $value): Builder {
-        if($value) {
-          
-            $query->where('p_id_sub', $value );
+    /**
+     * @param  \Illuminate\Database\Eloquent\Builder<Status>  $query
+     * @param  string  $value
+     * @return \Illuminate\Database\Eloquent\Builder<Status>
+     */
+    public function scopeSearchName(Builder $query, string $value): Builder
+    {
+        if ($value) {
+            $query->where('status_name', 'like', "%{$value}%");
         }
         return $query;
     }
 
+    /**
+     * @param  \Illuminate\Database\Eloquent\Builder<Status>  $query
+     * @param  string  $value
+     * @return \Illuminate\Database\Eloquent\Builder<Status>
+     */
+    public function scopeSearchpId(Builder $query, string $value): Builder
+    {
+        if ($value) {
 
-               /**
- * @param  \Illuminate\Database\Eloquent\Builder<Status>  $query
- * @param  string  $value
- * @return \Illuminate\Database\Eloquent\Builder<Status>
- */ 
-    public function scopeSearchSystemName(Builder$query,string $value):Builder {
-        if($value) {
-            $query->where('used_in_system_id',$value);
+            $query->where('p_id_sub', $value);
         }
         return $query;
     }
 
- 
 
-
+    /**
+     * @param  \Illuminate\Database\Eloquent\Builder<Status>  $query
+     * @param  string  $value
+     * @return \Illuminate\Database\Eloquent\Builder<Status>
+     */
+    public function scopeSearchSystemName(Builder $query, string $value): Builder
+    {
+        if ($value) {
+            $query->where('used_in_system_id', $value);
+        }
+        return $query;
+    }
 }

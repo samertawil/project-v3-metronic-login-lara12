@@ -15,7 +15,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use App\Services\CacheModelServices;
 use Illuminate\Support\Facades\Gate;
-
+use Illuminate\View\View;
 
 class NeighbourhoodResource extends Component
 {
@@ -165,7 +165,7 @@ class NeighbourhoodResource extends Component
 
 
 
-    public function render()
+    public function render(): View
     {
         
  

@@ -4,6 +4,7 @@ namespace App\Livewire\CitzenServices;
 
 use Livewire\Component;
 use App\Models\CitzenServices;
+use Illuminate\View\View;
 use Livewire\Attributes\Computed;
 
 class ServicesHome extends Component
@@ -17,7 +18,7 @@ class ServicesHome extends Component
         ->get();
     }
     
-    public function render()
+    public function render(): View
     {
         return view('livewire.citzen-services.services-home');
     }

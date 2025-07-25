@@ -9,7 +9,7 @@ use App\Models\ModuleName;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Gate;
-
+use Illuminate\View\View;
 
 class AbilityCreate extends Component
 {
@@ -57,7 +57,7 @@ class AbilityCreate extends Component
         
     }
 
-    public function render()
+    public function render(): View
     {
 
         if(Gate::denies('ability.all.resource')) {

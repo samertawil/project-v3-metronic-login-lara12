@@ -4,28 +4,24 @@ namespace App\Livewire\Role;
 
 use App\Models\Role;
 use App\Models\Ability;
+use Illuminate\Http\RedirectResponse;
 use Livewire\Component;
-use Livewire\Attributes\Title;
-use App\Http\Requests\RoleRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\View\View;
 
 class RoleEdit extends Component
 {
 
 
-    public $name;
-    public $abilitiesId = [];
-    public $roles;
-    public $abilities1;
+    public string $name;
+    public array $abilitiesId = [];
+    public array $roles;
+ 
 
 
-    public function update()
+    public function update(): void
     {
-
-        // if(Gate::denies('role.update')) {
-        //     abort(403,'ليس لديك الصلاحية اللازمة');
-        //  }
 
         $role = Role::findOrfail($this->roles['id']);
 
@@ -44,7 +40,7 @@ class RoleEdit extends Component
 
         // $this->validate(RoleRequest::rules($this->roles['id']));
 
-        $new = $role->update([
+          $role->update([
             'name' => $this->name,
             'abilities' => $abilities,
             'abilities_description'=> $abilitiesDescription,
@@ -56,7 +52,7 @@ class RoleEdit extends Component
         redirect()->route('role.index');
     }
 
-    public function mount($id = '')
+    public function mount($id = ''): void
     {
         $data = Role::find($id);
 
@@ -71,7 +67,7 @@ class RoleEdit extends Component
 
 
 
-    public function render()
+    public function render(): View
     { 
 
         if (Gate::denies('abilities.groups.all.resource')) {

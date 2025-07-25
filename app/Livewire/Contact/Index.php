@@ -5,6 +5,7 @@ namespace App\Livewire\Contact;
 use App\Models\Contact;
 use Livewire\Component;
 use App\Traits\SortTrait;
+use Illuminate\View\View;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
 use Livewire\Attributes\Computed;
@@ -31,7 +32,7 @@ class Index extends Component
         ->paginate($this->perPage);
     }
 
-    public function render()
+    public function render(): View
     {
 
         $pageTitle = 'جهات الاتصال';

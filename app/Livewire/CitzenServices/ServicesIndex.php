@@ -11,6 +11,7 @@ use App\Traits\FlashMsgTraits;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 
 class ServicesIndex extends Component
 {
@@ -126,7 +127,7 @@ class ServicesIndex extends Component
 
 
     
-    public function render()
+    public function render(): View
     {
         
         $title = __('customTrans.services managment');

@@ -14,6 +14,7 @@ use App\Services\CacheModelServices;
 use Spatie\LivewireFilepond\WithFilePond;
 use App\Services\CacheStatusModelServices;
 use App\Services\CacheSettingModelServices;
+use Illuminate\View\View;
 
 class ContactCreate extends Component
 {
@@ -162,7 +163,7 @@ class ContactCreate extends Component
           Contact::get();
     }
 
-    public function render()
+    public function render(): View
     {
          
         $pageTitle = 'جهات الاتصال';

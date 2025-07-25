@@ -4,25 +4,25 @@ namespace  App\Livewire\Dashboard\UserModule ;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Gate;
-
+use Illuminate\View\View;
 
 class UserCreate extends Component
 {
 
-    public $name = '';
-    public $user_name = '';
-    public $mobile = '';
-    public $email = '';
-    public $password = '';
-    public $passwordConfirmation = '';
-    public $year = '';
-    public $month = '';
-    public $day = '';
+    public string $name = '';
+    public string $user_name = '';
+    public string $mobile = '';
+    public string $email = '';
+    public string $password = '';
+    public string $passwordConfirmation = '';
+    public int $year;
+    public int $month;
+    public int $day;
 
 
     
  
-    public function render()
+    public function render(): View
     {
         if(Gate::denies('user.all.resource')) {
             abort(403,__('customTrans.you have no access'));

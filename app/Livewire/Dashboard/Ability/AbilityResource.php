@@ -12,7 +12,7 @@ use Livewire\WithPagination;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Gate;
-
+use Illuminate\View\View;
 
 class AbilityResource extends Component
 {
@@ -146,7 +146,7 @@ class AbilityResource extends Component
         
     }
 
-    public function render()
+    public function render(): View
     {
         
          if(Gate::denies('ability.all.resource')) {

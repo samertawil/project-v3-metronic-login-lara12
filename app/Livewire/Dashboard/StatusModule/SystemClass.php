@@ -12,6 +12,7 @@ use Livewire\Attributes\Computed;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use App\Services\CacheSystemSettingServices;
+use Illuminate\View\View;
 
 class SystemClass extends Component
 {
@@ -100,7 +101,7 @@ class SystemClass extends Component
     }
 
 
-    public function render()
+    public function render(): View
     {
         $title='ثوابت النظام';
         if (Gate::denies('status_view')) {

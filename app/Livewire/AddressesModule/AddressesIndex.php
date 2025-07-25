@@ -15,6 +15,7 @@ use Livewire\Attributes\Title;
 use Illuminate\Support\Facades\DB;
 use App\Services\CacheModelServices;
 use App\Services\AddressNameServices;
+use Illuminate\View\View;
 use Livewire\Attributes\Computed;
 
 class AddressesIndex extends Component
@@ -112,7 +113,7 @@ class AddressesIndex extends Component
 
 
     #[Title('اجزاء العنوان')]
-    public function render()
+    public function render(): View
     {
 
         $TitlePage = 'اجزاء العنوان';

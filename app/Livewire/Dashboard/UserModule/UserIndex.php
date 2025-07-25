@@ -1,91 +1,90 @@
 <?php
 
-namespace  App\Livewire\Dashboard\UserModule ;
+namespace  App\Livewire\Dashboard\UserModule;
 
- 
-use App\Models\User; 
+
+use App\Models\User;
 use Livewire\Component;
 use App\Traits\SortTrait;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
 use Livewire\Attributes\Rule;
 use App\Traits\FlashMsgTraits;
+use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\View\View;
 use Livewire\Attributes\Computed;
 
 class UserIndex extends Component
 {
     use SortTrait;
     use FlashMsgTraits;
-
-
-    #[Url()]
-    public $sortBy = 'created_at';
-
     use WithPagination;
     protected string $paginationTheme = 'bootstrap';
 
     #[Url()]
-    public $perPage = 5;
+    public string $sortBy = 'created_at';
 
     #[Url()]
-    public $searchUsertype = '';
+    public int $perPage = 5;
 
     #[Url()]
-    public $search = '';
+    public int $searchUsertype;
 
-    public $editUserId;
+    #[Url()]
+    public string $search = '';
 
-    //  #[Rule('required')]
-    public $editName = '';
-
-    public $edituserType = '';
+    public int $editUserId;
+    public string $editName = '';
+    public int $edituserType;
 
     #[Rule('required|in:0,1')]
-    public $editActiovation = '';
-    public $profile_image;
-
-    public $editMobile = '';
+    public int $editActiovation;
+    /**
+     * @property string $profile_image
+     */
+    public  $profile_image;
+    public string $editMobile = '';
 
 
     #[Computed()]
-    public function users() {
-        return  User::SearchName($this->search)
-        ->SearchUserType($this->searchUsertype)
-        ->orderBy($this->sortBy, $this->sortdir)
-        ->paginate($this->perPage);
-    
-    }
-    
-
-    public function edit($id)
+    public function users(): Collection
     {
-        if(Gate::denies('user.all.resource')) {
-            abort(403,__('customTrans.you have no access'));
-         }
+        return  User::SearchName($this->search)
+            ->SearchUserType($this->searchUsertype)
+            ->orderBy($this->sortBy, $this->sortdir)
+            ->paginate($this->perPage);
+    }
+
+
+    public function edit($id): void
+    {
+        if (Gate::denies('user.all.resource')) {
+            abort(403, __('customTrans.you have no access'));
+        }
         $this->editUserId = $id;
         $data = User::find($id);
 
         $this->editName = $data->name;
         $this->editActiovation = $data->user_activation;
         $this->editMobile = $data->mobile;
-        $this->edituserType = $data->user_type; 
-        $this->profile_image=$data->profile_image;
+        $this->edituserType = $data->user_type;
+        $this->profile_image = $data->profile_image;
     }
 
 
-    public function cancelEdit()
+    public function cancelEdit(): void
     {
-       
+
         $this->reset('editUserId');
     }
 
-    public function update()
+    public function update(): void
     {
 
-      
+
         $user = User::find($this->editUserId);
 
         $this->validate();
@@ -106,13 +105,13 @@ class UserIndex extends Component
     }
 
 
-    
 
-    public function resetPass($id)
+
+    public function resetPass($id): void
     {
-        if(Gate::denies('user.all.resource')) {
-            abort(403,__('customTrans.you have no access'));
-         }
+        if (Gate::denies('user.all.resource')) {
+            abort(403, __('customTrans.you have no access'));
+        }
 
         $user = User::findOrfail($id);
 
@@ -131,16 +130,16 @@ class UserIndex extends Component
 
 
     #[Layout('components.layouts.metronic7-simple-app')]
-    public function render()
+    public function render(): View
     {
-		
-        if(Gate::denies('user.all.resource')) {
-            abort(403,__('customTrans.you have no access'));
-         }
 
-		 
-        $title = __('customTrans.users') ;
-        $pageTitle =  __('customTrans.users') ;
+        if (Gate::denies('user.all.resource')) {
+            abort(403, __('customTrans.you have no access'));
+        }
+
+
+        $title = __('customTrans.users');
+        $pageTitle =  __('customTrans.users');
 
 
         return view('livewire.dashboard.users.user-index')->layoutData(['title' => $title, 'pageTitle' => $pageTitle]);

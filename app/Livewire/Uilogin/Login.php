@@ -7,20 +7,21 @@ use App\Models\User;
 use Livewire\Component;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class Login extends Component
 {
 
-    public $email;
+    public string $email;
     #[Validate(['required'])]
-    public $password;
-    public $remember = false;
+    public string $password;
+    public bool $remember = false;
     #[Validate(['required'])]
-    public $user_name;
+    public string $user_name;
 
     
  
-    public function authenticate()
+    public function authenticate(): mixed
     {
        
          $this->validate();
@@ -31,14 +32,14 @@ class Login extends Component
           
             $this->addError('user_name',  __('auth.failed'));
 
-            return;
+            return '' ;
         }
 
         if ($user->user_activation != 1) {
 
             $this->addError('user_name',  __('customTrans.deactivated account'));
 
-            return;
+            return '';
         }
 
         if ($user->need_to_change == 1) {
@@ -50,7 +51,7 @@ class Login extends Component
 
             $this->addError('user_name', trans('auth.failed'));
 
-            return;
+            return '';
         }
 
         return redirect()->intended(route(config('uilogin.redirectToAdmin')));
@@ -59,7 +60,7 @@ class Login extends Component
 
  
    
-    public function render()
+    public function render(): View
     {
         if (Auth::guard('web')->user()) {
             

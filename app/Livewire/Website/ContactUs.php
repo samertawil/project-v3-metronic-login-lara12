@@ -9,17 +9,18 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Mail;
 use App\Notifications\CustomNotification;
+use Illuminate\View\View;
 
 class ContactUs extends Component
 {
  
     #[Validate('required')]
-    public $message;
-    public $name;
-    public $phone;
-    public $email;
+    public string $message;
+    public string $name;
+    public string $phone;
+    public string $email;
 
-    public function sendEmail() {
+    public function sendEmail(): void  {
       
         $this->validate();
 
@@ -39,12 +40,12 @@ class ContactUs extends Component
        
        $user->notify(new CustomNotification());
        
-       $this->reset();
+         $this->reset();
 
     }
     
     #[Layout('components.layouts.website-master')]
-    public function render()
+    public function render(): View
     {
         return view('livewire.website.contact-us');
     }

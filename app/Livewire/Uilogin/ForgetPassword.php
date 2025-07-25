@@ -12,35 +12,39 @@ use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
+use Illuminate\View\View;
 
 class ForgetPassword extends Component
 {
-    public $recoveryQuestions = [];
-    #[Validate([ 'exists:users,user_name'])]
-    public $user_name ='';
+    /**
+     * @var string[]
+     */
+    public array $recoveryQuestions = [];
+    #[Validate(['exists:users,user_name'])]
+    public string $user_name = '';
 
-    public $typeValue;
-    public $encryptEmailName;
-    public $userQuestions;
-    public $question1;
-    public $question2;
-    public $question3;
-    public $answer1;
-    public $answer2;
-    public $answer3;
-    public $checkResult = 0;
+    public string $typeValue;
+    public string $encryptEmailName;
+    public string $userQuestions;
+    public string $question1;
+    public string $question2;
+    public string $question3;
+    public string $answer1;
+    public string $answer2;
+    public string $answer3;
+    public int $checkResult = 0;
     #[Validate(['required', 'min:4', 'same:passwordConfirmation'])]
-    public $password = '';
-    public $passwordConfirmation = '';
-    public $status;
-    public $data;
-    public $behavior;
-    public $QuestionBehavior;
-    public $check_type;
+    public string $password = '';
+    public string $passwordConfirmation = '';
+    public string $status;
+    public array $data;
+    public string $behavior;
+    public string $QuestionBehavior;
+    public string $check_type;
 
 
     #[Computed]
-    public function user()
+    public function user(): mixed
     {
         $user = User::firstWhere('user_name', $this->user_name);
         if ($user) {
@@ -72,18 +76,20 @@ class ForgetPassword extends Component
             }
 
             $this->data = array_merge($part1, $part2);
-           
+
             return $this->data;
         }
+        return false;
     }
 
-    public function updatedcheckType($prop) {
-      $this->typeValue=$prop;
-    }
-
-    public function sendResetLink()
+    public function updatedcheckType(string $prop): void
     {
- 
+        $this->typeValue = $prop;
+    }
+
+    public function sendResetLink(): mixed
+    {
+
         if ($this->data['user']->email) {
 
 
@@ -100,10 +106,11 @@ class ForgetPassword extends Component
                 return redirect()->route('login');
             }
         }
+        return false;
     }
 
 
-    public function checkAnswers()
+    public function checkAnswers(): mixed
     {
 
         if (
@@ -115,18 +122,17 @@ class ForgetPassword extends Component
         } else {
             $this->addError('wrongAnswer', __('customTrans.wrongAnswer'));
             return $this->checkResult = 0;
-           
         }
     }
 
 
-    public function changePassword()
+    public function changePassword(): mixed
     {
         $result =  ForgetPassword::checkAnswers();
 
         if ($result === 0) {
             $this->addError('wrongAnswer', __('customTrans.wrongAnswer'));
-            return;
+            return '';
         }
         $this->validate();
 
@@ -142,7 +148,7 @@ class ForgetPassword extends Component
         return redirect()->route(config('uilogin.redirectToAdmin'));
     }
 
-    public function updated($prop)
+    public function updated(string $prop): void
     {
 
         $this->validateOnly($prop);
@@ -151,7 +157,7 @@ class ForgetPassword extends Component
 
 
     #[Layout('components.layouts.uilogin-admin-app')]
-    public function render()
+    public function render(): View
     {
         $title = __('customTrans.Forgot Password');
         return view('livewire.ui_auth.forget-password')->title($title);

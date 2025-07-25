@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -12,10 +11,15 @@ use Illuminate\Queue\SerializesModels;
 class SupportMail extends Mailable
 {
     use Queueable, SerializesModels;
+/**
+ * @var array<string, mixed>
+ */
+    public array $data;
 
-    public $data;
-
-    public function __construct($data)
+        /**
+     * @param iterable<string, string> $data
+     */
+    public function __construct(iterable  $data)
     {
         $this->data = $data;
       

@@ -11,7 +11,7 @@ use App\Traits\FlashMsgTraits;
 use Illuminate\Support\Facades\DB;
 use App\Services\CacheModelServices;
 use Illuminate\Support\Facades\Gate;
-
+use Illuminate\View\View;
 
 class RegionResource extends Component
 {
@@ -118,7 +118,7 @@ class RegionResource extends Component
         }
     }
 
-    public function render()
+    public function render(): View
     {
 
 

@@ -8,6 +8,7 @@ use Livewire\Component;
 use App\Http\Requests\RoleRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\View\View;
 
 class RoleCreate extends Component
 {
@@ -66,7 +67,7 @@ class RoleCreate extends Component
     }
 
 
-    public function render()
+    public function render(): View
     {
 
         if (Gate::denies('abilities.groups.all.resource')) {

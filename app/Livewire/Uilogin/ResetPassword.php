@@ -5,30 +5,32 @@ namespace App\Livewire\Uilogin;
 use Livewire\Component;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Hash;
-
-
+use Illuminate\View\View;
 
 class ResetPassword extends Component
 {
-    public $email;
-    public $token;
-    public $password;
-    public $password_confirmation;
-    public $status;
-    public $error;
+    public string  $email;
+    public string  $token;
+    public string  $password;
+    public string  $password_confirmation;
+    public string  $status;
+    public ?string  $error;
 
-    protected $rules = [
+/**
+ * @var array<string, string|string[]>
+ */
+    protected array $rules = [
         'email' => 'required|email|exists:users,email',
         'password' => 'required|min:4|confirmed',
     ];
 
-    public function mount($token)
+    public function mount(string $token): void
     {
         $this->token = $token;
         $this->email = request()->query('email');
     }
 
-    public function resetPassword()
+    public function resetPassword(): void
     {
         $this->validate();
 
@@ -54,7 +56,7 @@ class ResetPassword extends Component
 
     
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.ui_auth.reset-password');
     }

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 use App\Services\CacheModelServices;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\LocationRequest;
-
+use Illuminate\View\View;
 
 class LocationResource extends Component
 {
@@ -170,7 +170,7 @@ class LocationResource extends Component
     }
 
 
-    public function render()
+    public function render(): View
     {
 
         $regions =  CacheModelServices::getRegionVwData();

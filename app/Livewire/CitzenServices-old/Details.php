@@ -2,6 +2,7 @@
 
 namespace App\Livewire\CitzenServices;
 
+use Illuminate\View\View;
 use Livewire\Component;
 
 class Details extends Component
@@ -118,7 +119,7 @@ class Details extends Component
     }
 
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.citzen-services.details');
     }

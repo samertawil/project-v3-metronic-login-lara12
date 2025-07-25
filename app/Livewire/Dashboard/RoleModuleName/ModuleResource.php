@@ -14,6 +14,7 @@ use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\View\View;
 
 class ModuleResource extends Component
 {
@@ -103,7 +104,7 @@ class ModuleResource extends Component
 
 
     
-    public function render()
+    public function render(): View
     {
 
         

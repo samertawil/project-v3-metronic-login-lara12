@@ -9,19 +9,21 @@ use App\Models\RoleUser;
 use Livewire\Attributes\Title;
 use Illuminate\Support\Facades\Auth;
 use App\Services\FlashMsg;
- 
+use Illuminate\View\View;
 
 class UserRoleCreate extends Component
 {
 
-  public $granted_groups;
-  public $userID;
-  public $user_name;
-  public $rolesId = [];
-  public $exist1;
+  public int $userID;
+  public string $user_name;
+  /**
+ * @var int[] or string[]
+ */
+  public array $rolesId = [];
 
 
-  public function mount($userID)
+
+  public function mount(int $userID): void
   {
 
     $data = RoleUser::select('role_id')->where('user_id', $userID)->get();
@@ -40,7 +42,7 @@ class UserRoleCreate extends Component
     $this->rolesId = $role;
   }
 
-  public function store()
+  public function store(): void
   {
 
 
@@ -60,11 +62,11 @@ class UserRoleCreate extends Component
 
 
     if (empty($this->rolesId)) {
-      
+
       $data = RoleUser::where('user_id', $this->userID);
       $data->Delete();
     } else {
-     
+
       $data = RoleUser::wherenotin('role_id', $this->rolesId)->where('user_id', $this->userID);
       $data->Delete();
     }
@@ -74,13 +76,13 @@ class UserRoleCreate extends Component
 
 
 
- 
-  public function render()
+
+  public function render(): View
   {
-    $pageTitle= __('customTrans.user role');
-  
+    $pageTitle = __('customTrans.user role');
+
     $roles_group = Role::get();
 
-    return view('livewire.user-roles.user-role-create', compact('roles_group'))->layoutData(['pageTitle'=>$pageTitle,'title'=> $pageTitle]);
+    return view('livewire.user-roles.user-role-create', compact('roles_group'))->layoutData(['pageTitle' => $pageTitle, 'title' => $pageTitle]);
   }
 }

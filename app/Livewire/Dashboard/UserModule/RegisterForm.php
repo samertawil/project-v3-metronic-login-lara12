@@ -8,6 +8,7 @@ use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\View\View;
 
 class RegisterForm extends Component
 {
@@ -59,7 +60,7 @@ class RegisterForm extends Component
 
   
 
-    public function render()
+    public function render(): View
     {
         if(Gate::denies('user.all.resource')) {
             abort(403,__('customTrans.you have no access'));
