@@ -16,10 +16,8 @@ class SupportMail extends Mailable
  */
     public array $data;
 
-        /**
-     * @param iterable<string, string> $data
-     */
-    public function __construct(iterable  $data)
+ 
+    public function __construct(mixed  $data)
     {
         $this->data = $data;
       

@@ -15,10 +15,10 @@ trait UploadingFilesTrait
 
 
 
-    public static function uploadSingleFile(object $uploadedFile, string $folderName, string $disk): mixed
+    public static function uploadSingleFile(mixed $uploadedFile, string $folderName, string $disk): mixed
     {
 
-   
+
         $ex = $uploadedFile->getClientOriginalExtension();
         $filename = $folderName . time() . '_' . rand(00000, 99999) . '.' . $ex;
         $path = $uploadedFile->storeAs($folderName, $filename, $disk);
@@ -29,19 +29,19 @@ trait UploadingFilesTrait
 
 
 
-    public static function uploadSingleFileResize(object $uploadedFile, string $folderName, string $disk, int $hight, int $width): object|string
+    public static function uploadSingleFileResize(mixed $uploadedFile, string $folderName, string $disk, int $hight, int $width): object|string
     {
 
-            $extension = strtolower($uploadedFile->getClientOriginalExtension()); // الحصول على الامتداد الأصلي (مثل jpg، png..)
+        $extension = strtolower($uploadedFile->getClientOriginalExtension()); // الحصول على الامتداد الأصلي (مثل jpg، png..)
 
 
         $fileSize = $uploadedFile->getSize() / 1024;  //KB
         $tempPath = $uploadedFile->getRealPath();
         $mimeType = $uploadedFile->getMimeType();
         $info = getimagesize($tempPath);
-        $fileWidth = $info[0];
-        $fileHeight = $info[1];
-        $fileType = $info['mime'];
+        $fileWidth = $info[0] ?? '';
+        $fileHeight = $info[1] ?? '';
+        $fileType = $info['mime'] ?? '';
 
 
 
@@ -87,7 +87,7 @@ trait UploadingFilesTrait
 
 
 
-    public static function uploadAndCompress(object $uploadedFile, string $folderName, string $disk, int $requiredSizeInMega): object|string
+    public static function uploadAndCompress(mixed $uploadedFile, string $folderName, string $disk, int $requiredSizeInMega): object|string
     {
 
         $image = Image::read($uploadedFile);   // قراءة الصورة
@@ -98,6 +98,10 @@ trait UploadingFilesTrait
         // ضغط وتكرار الحفظ حتى يقل الصافي عن 1MB
         $sizeLimit = $requiredSizeInMega * 1024 * 1024; // 1 ميجا (بالبايت)
         $quality = 90; // بدءًا من جودة عالية
+
+ 
+
+
         do {
             switch ($extension) {
                 case 'jpg':
@@ -117,6 +121,7 @@ trait UploadingFilesTrait
                 default:
                     $imageData = $image;
             }
+            // @phpstan-ignore-next-line
             $size = strlen($imageData); // حجم الصورة الناتجة
 
             if ($size > $sizeLimit && $quality > 30) {
@@ -126,7 +131,7 @@ trait UploadingFilesTrait
             }
         } while ($size > $sizeLimit);
 
-
+// @phpstan-ignore-next-line
         Storage::disk($disk)->put($folderName . '/' . $fileName, $imageData); // حفظ الصورة النهائية على Storage
 
         return $folderName . '/' . $fileName;
@@ -136,9 +141,9 @@ trait UploadingFilesTrait
 
 
 
-    public  static function  uploadsFiles(object $uploadedFiles,string $dbColumName,string $disk): mixed
+    public  static function  uploadsFiles(mixed $uploadedFiles, string $dbColumName, string $disk): mixed
     {
- 
+
         $attchments_file = [];
 
         foreach ($uploadedFiles as $file) {

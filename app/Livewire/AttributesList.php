@@ -10,10 +10,10 @@ use Illuminate\View\View;
 class AttributesList extends Component
 {
 
-    public $all_templates = [];
-    public $attributeColumn = [];   // dropdown value
-    public $attributeValue = [''];
-    public $x1;
+    public mixed $all_templates = [];
+    public mixed $attributeColumn = [];   // dropdown value
+    public mixed $attributeValue = [''];
+    public mixed $x1;
 
 
     // public function SelectFileType($value)
@@ -26,7 +26,7 @@ class AttributesList extends Component
     //     }
     // }
 
-    public function mount()
+    public function mount(): void
     {
 
         $this->all_templates = Status::where('p_id_sub', config('attributesConst.p_sub_id'))->get();
@@ -34,7 +34,7 @@ class AttributesList extends Component
         
     }
 
-    public   function store()
+    public   function store(): void
     {
  
  
@@ -53,20 +53,20 @@ class AttributesList extends Component
 
 
 
-    public function addQuestion()
+    public function addQuestion(): void
     {
         $this->attributeValue[] = '';
     }
 
 
-    public function removeQuestion($index)
+    public function removeQuestion(mixed $index): void
     {
         unset($this->attributeValue[$index]);
         $this->attributeValue = array_values($this->attributeValue);
     }
 
  
-    public function render(): View
+    public function render(): mixed 
     {
         return <<<'HTML'
             <div>

@@ -30,12 +30,12 @@ class Resource extends Component
     #[Url()]
     public int $perPage = 10;
     #[Url()]
-    public string|null $search = '';
+    public string $search = '';
     public string $card_title;
     public string $card_text;
     public string $card_url;
     public object $card_img;
-    public mixed $card_img_show;
+    public mixed $card_img_show='';
     public mixed $active;
     public int $card_use_in;
     public object $file;
@@ -81,12 +81,12 @@ class Resource extends Component
         $this->editCardId = $id;
         $this->data = $this->Cards()->find($id);
 
-        $this->card_title = $this->data['card_title'];
-        $this->card_text = $this->data['card_text'];
-        $this->card_url = $this->data['card_url'];
+        $this->card_title = $this->data['card_title']??'';
+        $this->card_text = $this->data['card_text']??'';
+        $this->card_url = $this->data['card_url']??'';
         $this->card_img_show = $this->data['card_img'];
-        $this->active = $this->data['active'];
-        $this->card_use_in = $this->data['card_use_in'];
+        $this->active = $this->data['active']??'';
+        $this->card_use_in = $this->data['card_use_in']??'';
     }
 
 

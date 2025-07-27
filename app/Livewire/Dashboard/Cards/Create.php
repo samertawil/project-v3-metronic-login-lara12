@@ -16,62 +16,63 @@ class Create extends Component
     use  WithFilePond;
 
 
-    public $card_title;
-    public $card_img;
-    public $card_text ;
-    public $active=true;
-    public $card_use_in;
-    public $card_url  ;
-    public $publish_date   ;
-    public $upload;
+    public string $card_title;
+    public mixed $card_img;
+    public string $card_text;
+    public mixed $active = true;
+    public int $card_use_in;
+    public string $card_url;
+    public mixed $publish_date;
 
-    public function mount() {
-         $this->publish_date = \Carbon\Carbon::now()->format('Y-m-d');
+
+    public function mount(): void
+    {
+        $this->publish_date = \Carbon\Carbon::now()->format('Y-m-d');
     }
 
-    public  function rules(): array
+    public  function rules(): mixed
     {
         return [
             'card_img' => 'required|mimetypes:image/jpg,image/jpeg,image/png|max:1024',
             'active' => ['required'],
             'card_title' => ['required'],
             'card_use_in' => ['required'],
-            'publish_date'=>['required', 'date', 'date_format:Y-m-d'],
+            'publish_date' => ['required', 'date', 'date_format:Y-m-d'],
         ];
     }
 
 
-    public function store()
+    public function store(): void
     {
- 
-      
+
+
         $this->validate();
-      
-       $image=  UploadingFilesTrait::uploadSingleFile($this->card_img,'cards','public');
-  
-         Card::create([
+
+        $image =  UploadingFilesTrait::uploadSingleFile($this->card_img, 'cards', 'public');
+
+        Card::create([
             'card_title' => $this->card_title,
             'card_text' => $this->card_text,
             'card_img' => $image,
             'active' => $this->active,
             'card_use_in' => $this->card_use_in,
             'card_url' => $this->card_url,
-            'publish_date'=>$this->publish_date,
+            'publish_date' => $this->publish_date,
         ]);
-         
- 
-         $this->dispatch('reload');
 
-         FlashMsgTraits::created();
-        
+
+        $this->dispatch('reload');
+
+        FlashMsgTraits::created();
     }
 
- 
+
 
     #[Computed()]
-    public  function statuses() {
-        $data= CacheStatusModelServices::getData();
-        $data=$data->select('status_name','id','p_id_sub')->Where('p_id_sub',config('StatusConstants.galarySystem'));
+    public  function statuses(): mixed
+    {
+        $data = CacheStatusModelServices::getData();
+        $data = $data->select('status_name', 'id', 'p_id_sub')->Where('p_id_sub', config('StatusConstants.galarySystem'));
         return $data;
     }
 
@@ -80,8 +81,3 @@ class Create extends Component
         return view('livewire.dashboard.cards.create');
     }
 }
-
-
-
- 
- 

@@ -33,7 +33,7 @@ Route::group(
 
         Route::get('/', Index::class)->name('website');
 
-
+        
 
 
         include __DIR__ . '/uiauth.php';

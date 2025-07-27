@@ -17,13 +17,13 @@ class RegionResource extends Component
 {
 
 
-    public $region_name;
+    public string $region_name;
 
-    public $regionId;
+    public int $regionId;
 
-    public $regionName;
+    public string $regionName;
 
-    public function store()
+    public function store(): void
     {
 
         
@@ -45,7 +45,7 @@ class RegionResource extends Component
        
     }
 
-    public function edit($id)
+    public function edit(int $id): void
     {
         if( Gate::denies('region.update')) {
             abort(403,'ليس لديك الصلاحية اللازمة');
@@ -59,7 +59,7 @@ class RegionResource extends Component
         $this->regionName = $data->region_name;
     }
 
-    public function update()
+    public function update(): void
     {
 
         if( Gate::denies('region.update')) {
@@ -81,13 +81,13 @@ class RegionResource extends Component
          $this->cancelEdit();
     }
 
-    public function cancelEdit()
+    public function cancelEdit(): void
     {
 
         $this->reset('regionId');
     }
 
-    public function destroy($id)
+    public function destroy(int $id): void
     {
 
         if( Gate::denies('region.delete')) {

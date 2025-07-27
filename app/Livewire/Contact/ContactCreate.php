@@ -14,6 +14,7 @@ use App\Services\CacheModelServices;
 use Spatie\LivewireFilepond\WithFilePond;
 use App\Services\CacheStatusModelServices;
 use App\Services\CacheSettingModelServices;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\View;
 
 class ContactCreate extends Component
@@ -24,43 +25,43 @@ class ContactCreate extends Component
     use WithFileUploads;
     use WithFilePond;
 
-    public $profile_image ="";
-    public $contact_type=17;
-    public $full_name;
-    public $identity_number;
-    public $fname;
-    public $sname;
-    public $tname;
-    public $lname;
-    public $phone_primary;
-    public $phone_secondary;
-    public $email;
-    public $website;
-    public $connect_ways =[] ;
-    public $address_type;
-    public $region_id;
-    public $city_id;
-    public $neighbourhood_id;
-    public $location_id;
-    public $contactImage;
+    public mixed $profile_image ="";
+    public int $contact_type=17;
+    public string $full_name;
+    public int $identity_number;
+    public string $fname;
+    public string $sname;
+    public string $tname;
+    public string $lname;
+    public string $phone_primary;
+    public string $phone_secondary;
+    public string $email;
+    public string $website;
+    public mixed $connect_ways =[] ;
+    public int $address_type;
+    public int $region_id;
+    public int $city_id;
+    public int $neighbourhood_id;
+    public int $location_id;
+    public mixed $contactImage;
 
-    public $personalSide=true;
+    public bool $personalSide=true;
 
    
-    public function updatedregionId($prop)
+    public function updatedregionId(int $prop): void
     {
         
         $this->region_id = $prop;
     }
 
-    public function updatedCityId($prop)
+    public function updatedCityId(int $prop): void
     {
 
         $this->city_id = $prop;
     }
 
 
-    public function updatedNeighbourhoodId($prop)
+    public function updatedNeighbourhoodId(int $prop): void
     {
 
         $this->neighbourhood_id = $prop;
@@ -68,7 +69,7 @@ class ContactCreate extends Component
 
  
    
-    public function updatedContactType($prop){
+    public function updatedContactType(int $prop): void{
        if($prop==17) {
         $this->personalSide=true;
        } else {
@@ -78,7 +79,7 @@ class ContactCreate extends Component
 
 
 
-    public function store()
+    public function store(): void
     {
         
         // dd($this->all());
@@ -125,7 +126,7 @@ class ContactCreate extends Component
     }
 
  
-    public function chkExists($value, $property)
+    public function chkExists(mixed $value, string $property): void
     {
      
         
@@ -157,7 +158,7 @@ class ContactCreate extends Component
     
 
     // #[Computed]
-    public  function Contacts()
+    public  function Contacts(): void
     {
 
           Contact::get();

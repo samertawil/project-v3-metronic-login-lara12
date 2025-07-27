@@ -14,32 +14,32 @@ class AddressForm extends Component
 {
 
     #[Validate(['required', 'exists:regions,id'])]
-    public  $region_id = [];
+    public mixed  $region_id = [];
     #[Validate(['required', 'exists:cities,id'])]
-    public  $city_id = [];
+    public  mixed $city_id = [];
     #[Validate(['required'])]
-    public $address_type = [];
-    public  $neighbourhood_id = [];
-    public  $location_id = [];
-    public $cities = [];
-    public $neighbourhoods = [];
-    public $locations = [];
-    public $notes=[];
-    public $address_specific=[];
-    public $statuses = [];
-    public $reapeater = [''];
+    public mixed $address_type = [];
+    public mixed  $neighbourhood_id = [];
+    public  mixed $location_id = [];
+    public mixed $cities = [];
+    public mixed $neighbourhoods = [];
+    public mixed $locations = [];
+    public mixed $notes=[];
+    public mixed $address_specific=[];
+    public mixed $statuses = [];
+    public mixed $reapeater = [''];
 
    
    
 
-    public function addRow()
+    public function addRow(): void
     {
         $this->reapeater[] = '';
     }
 
  
 
-    public function removeRow($index)
+    public function removeRow(mixed $index): void
     {
         unset($this->reapeater[$index]);
         $this->reapeater = array_values($this->reapeater);
@@ -47,7 +47,7 @@ class AddressForm extends Component
 
 
 
-    public function addressDropDown()
+    public function addressDropDown(): void
     {
 
       
@@ -88,7 +88,7 @@ class AddressForm extends Component
 
 
 
-    public function consider()
+    public function consider(): void
     {
 
             $this->validate();
@@ -107,7 +107,7 @@ class AddressForm extends Component
         $this->dispatch('closeModel');
     }
 
-    public function placeholder()
+    public function placeholder(): mixed
     {
         return view('livewire.addresses-module.placeholder-items');
     }

@@ -17,37 +17,30 @@ use App\Services\CacheModelServices;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 
-use function PHPUnit\Framework\returnSelf;
+
 
 class CityResource extends Component
 {
     use WithPagination;
     protected string $paginationTheme = 'bootstrap';
-
+    
+// @phpstan-ignore-next-line
     protected $listeners = ['refresh-region' => '$refresh'];
 
-    public $city_name;
-
-    public $region_name;
-
-    public $region_id;
-
-    public $cityId='';
-
-    public $editCityName;
-
+    public string $city_name;
+    public string $region_name;
+    public int  $region_id;
+    public mixed  $cityId='';
+    public string $editCityName;
     #[Url(history: true)]
-    public $perPage = 5;
-
+    public int $perPage = 5;
     #[Url(history: true)]
-    public $regionIdSearch;
-
+    public string $regionIdSearch='';
     #[Url(history: true)]
-    public $search;
+    public string $search='';
+    public int $regionIdUpdate;
 
-    public $regionIdUpdate;
-
-    public function store()
+    public function store(): void
     {
         if (Gate::denies('city.create')) {
             abort(403, 'ليس لديك الصلاحية اللازمة');
@@ -72,7 +65,7 @@ class CityResource extends Component
         $this->dispatch('refresh-city');
     }
 
-    public function edit($id)
+    public function edit(int $id): void
     {
         if (Gate::denies('city.update')) {
             abort(403, 'ليس لديك الصلاحية اللازمة');
@@ -85,7 +78,7 @@ class CityResource extends Component
     }
 
 
-    public function update()
+    public function update(): void
     {
         if (Gate::denies('city.update')) {
             abort(403, 'ليس لديك الصلاحية اللازمة');
@@ -102,8 +95,9 @@ class CityResource extends Component
             ]
         ]);
 
-        $data = City::findOrfail($this->cityId);
-        $data->update([
+      
+        City::whereIn('id', $this->cityId)
+        ->update([
             'city_name' => $this->editCityName,
             'region_id' => $this->regionIdUpdate,
         ]);
@@ -113,7 +107,7 @@ class CityResource extends Component
         $this->dispatch('refresh-city');
     }
 
-    public function destroy($id)
+    public function destroy(int $id): void
     {
         if (Gate::denies('city.delete')) {
             abort(403, 'ليس لديك الصلاحية اللازمة');
@@ -131,7 +125,7 @@ class CityResource extends Component
         }
     }
 
-    public function cancelEdit()
+    public function cancelEdit(): void
     {
         $this->reset('cityId');
     }

@@ -7,6 +7,7 @@ use App\Models\User;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Traits\UploadingFilesTrait;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
@@ -14,7 +15,7 @@ class Resource extends Component
 {
     use WithFileUploads;
 
-    public object $userData;
+    public mixed $userData;
     /**
      * @property object $profile_image
      */

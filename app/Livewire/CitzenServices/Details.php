@@ -13,54 +13,37 @@ use Illuminate\View\View;
 
 class Details extends Component
 {
-    public $editServicesId;
-
-    public $conditions;
-
-    public $description;
-
-    public $note;
-
-    #[Validate(['date_format:Y-m-d'])]
-    public $url_active_from_date;
-
-    #[Validate(['after_or_equal:now', 'date_format:Y-m-d'])]
-    public $url_active_to_date;
-
-    public $url;
-
-    public $route_name;
-
-    public $Responsible;
-
-    public $logo1;
-
-    #[Validate(['logo1_1.*' => 'image|max:2048'])]
-    public $logo1_1;
-
-    public $card_header;
-
-    #[Validate(['card_header_1' => 'image|max:2048'])]
-    public $card_header_1;
- 
-
-    public $goEdit = 0;
-
-    public $dataToEdit;
-
-    public $teal;
-
-    public $home_page_order;
-
-    public $deactive_note;
-
-    public $properties = [];
-
     use WithFileUploads;
 
 
+    public int $editServicesId;
+    public string $conditions;
+    public string $description;
+    public string $note;
+    #[Validate(['date_format:Y-m-d'])]
+    public mixed $url_active_from_date;
+    #[Validate(['after_or_equal:now', 'date_format:Y-m-d'])]
+    public mixed $url_active_to_date;
+    public string $url;
+    public string $route_name;
+    public string $Responsible;
+    public mixed $logo1;
+    #[Validate(['logo1_1.*' => 'image|max:2048'])]
+    public mixed $logo1_1;
+    public mixed $card_header;
+    #[Validate(['card_header_1' => 'image|max:2048'])]
+    public mixed $card_header_1;
+    public int $goEdit = 0;
+    public mixed $dataToEdit;
+    public string $teal;
+    public int $home_page_order;
+    public string $deactive_note;
+    public mixed $properties = [];
+   
 
-    public function mount($id)
+
+
+    public function mount(int $id): void
     {
 
 
@@ -88,7 +71,7 @@ class Details extends Component
 
 
 
-    public function edit()
+    public function edit(): void
     {
         $this->goEdit = 1;
 
@@ -109,28 +92,28 @@ class Details extends Component
         // $this->properties = $this->dataToEdit->properties;
     }
 
-    public static function rules($id=''): array
+    public static function rules(mixed $id = ''): mixed
     {
         return [
-           
+
             "route_name" => ['required', Rule::unique('citzen_services')->ignore($id)],
-             
-            
+
+
         ];
     }
 
-    public function update()
+    public function update(): void
     {
- 
-    //    $this->validate($this->rules($this->editServicesId));
-      
-       $this->validate([
-        "route_name" => ['required', Rule::unique('citzen_services')->ignore($this->editServicesId)],
-        'card_header_1' => 'nullable|image|max:1024',
-        'logo1_1.*' => 'nullable|image|max:1024',
-         'url_active_from_date'=>'nullable|date_format:Y-m-d',
-       'url_active_to_date'=> 'nullable|after_or_equal:now|date_format:Y-m-d',
-       ]);
+
+        //    $this->validate($this->rules($this->editServicesId));
+
+        $this->validate([
+            "route_name" => ['required', Rule::unique('citzen_services')->ignore($this->editServicesId)],
+            'card_header_1' => 'nullable|image|max:1024',
+            'logo1_1.*' => 'nullable|image|max:1024',
+            'url_active_from_date' => 'nullable|date_format:Y-m-d',
+            'url_active_to_date' => 'nullable|after_or_equal:now|date_format:Y-m-d',
+        ]);
 
         $logo1 = $this->dataToEdit->logo1;
 
@@ -144,11 +127,11 @@ class Details extends Component
             }
         }
 
-        $card_header_1=$this->card_header;
+        $card_header_1 = $this->card_header;
 
         if ($this->card_header_1) {
-           
-           $card_header_1 =  UploadingFilesTrait::uploadSingleFile($this->card_header_1, 'card_header', 'public');
+
+            $card_header_1 =  UploadingFilesTrait::uploadSingleFile($this->card_header_1, 'card_header', 'public');
         }
 
         $this->dataToEdit->update([
@@ -171,14 +154,14 @@ class Details extends Component
         $this->cancelEdit();
     }
 
-    public function cancelEdit()
+    public function cancelEdit(): void
     {
 
         $this->goEdit = 0;
     }
 
 
-    public function deleteAttchment($key)
+    public function deleteAttchment(mixed $key): void
     {
 
         $data = CitzenServices::Where('id', $this->editServicesId)->first();
@@ -198,11 +181,11 @@ class Details extends Component
     }
 
 
-    public function deleteCard_header()
+    public function deleteCard_header(): void
     {
 
         $data = CitzenServices::Where('id', $this->editServicesId)->first();
-      
+
         $deleteFromDisk = $data->card_header;
 
         $data->update([
@@ -217,7 +200,7 @@ class Details extends Component
 
     public function render(): View
     {
-        
+
         $title = __('customTrans.services managment');
         return view('livewire.citzen-services.details')->layoutData(['title' => $title, 'pageTitle' => $title]);
     }

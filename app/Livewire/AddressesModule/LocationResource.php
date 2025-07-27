@@ -21,54 +21,42 @@ class LocationResource extends Component
 
 
     use SortTrait;
-
-    #[Url(history: true)]
-    public $sortBy = 'location_id';
-
     use WithPagination;
-
     protected string $paginationTheme = 'bootstrap';
 
-    public $neighbourhood_name;
-
-    public $neighbourhood_id;
-
     #[Url(history: true)]
-    public $neighbourhoodIdSearch;
-
-    public $location_name;
-
-    public $city_id;
-
-    public $region_id;
-
+    public string $sortBy = 'location_id';
+    public string $neighbourhood_name;
+    public string $neighbourhood_id;
     #[Url(history: true)]
-    public $perPage = 5;
-
+    public string $neighbourhoodIdSearch;
+    public string $location_name;
+    public int $city_id;
+    public int $region_id;
     #[Url(history: true)]
-    public $regionIdSearch;
-
+    public int $perPage = 5;
     #[Url(history: true)]
-    public $cityIdSearch;
-
+    public mixed $regionIdSearch='';
     #[Url(history: true)]
-    public $search;
+    public string $cityIdSearch='';
+    #[Url(history: true)]
+    public string $search='';
 
-    public $editNeighbourhoodId;
+    public int $editNeighbourhoodId;
 
-    public $editNeighbourhoodName;
+    public int $editNeighbourhoodName;
 
-    public $editLocationId;
+    public int $editLocationId;
 
-    public $editLocationName;
+    public string $editLocationName;
 
-    public $editRegionId;
+    public int $editRegionId;
 
-    public $editCityId;
+    public int $editCityId;
 
-    public $value;
+    public string $value;
 
-    public function store()
+    public function store(): void
     {
 
         if(Gate::denies('location.create')) {
@@ -98,7 +86,7 @@ class LocationResource extends Component
         $this->dispatch('reset-items');
     }
 
-    public function edit($id)
+    public function edit(int $id): void
     {
         
         if(Gate::denies('location.update')) {
@@ -113,7 +101,7 @@ class LocationResource extends Component
     }
 
 
-    public function update() {
+    public function update(): void {
 
      
         if(Gate::denies('location.update')) {
@@ -146,12 +134,12 @@ class LocationResource extends Component
 
 
 
-    public function cancelEdit()
+    public function cancelEdit(): void
     {
         $this->reset('editLocationId');
     }
 
-    public function destroy($id)
+    public function destroy(int $id): void
     {
         if(Gate::denies('location.delete')) {
             abort(403,'ليس لديك الصلاحية اللازمة');

@@ -14,43 +14,43 @@ use Illuminate\View\View;
 class ServicesResoucre extends Component
 {
 
-    public $num;
+    public int $num;
     #[Validate(['required'])]
-    public $name;
-    public $url;
-    public $status_id;
-    public $Responsible;
+    public string $name;
+    public string $url;
+    public int $status_id;
+    public string $Responsible;
 
-    public $url_active_from_date;
+    public mixed $url_active_from_date;
     #[Validate(['after_or_equal:now', 'date_format:Y-m-d'])]
-    public $url_active_to_date;
+    public mixed $url_active_to_date;
 
-    public $active_from_date;
+    public mixed $active_from_date;
     #[Validate(['after_or_equal:now', 'date_format:Y-m-d'])]
-    public $active_to_date;
+    public mixed $active_to_date;
     #[Validate(['required'])]
-    public $active = 1;
-    public $description;
-    public $note;
-    public $conditions;
+    public mixed $active = 1;
+    public string $description;
+    public string $note;
+    public string $conditions;
     #[Validate(['unique:citzen_services,route_name'])]
-    public $route_name;
+    public string $route_name;
 
     #[Validate(['logo1.*' => 'image|max:2048'])]
-    public $logo1 = [];
+    public mixed $logo1 = [];
 
-    public $home_page_order;
-    public $teal;
-    public $deactive_note;
-    protected $serviceId = 4;
-    public $Card_header;
+    public int $home_page_order;
+    public string $teal;
+    public string $deactive_note;
+    protected int $serviceId = 4;
+    public mixed $Card_header;
 
 
 
     use WithFileUploads;
 
 
-    public function store()
+    public function store(): void
     {
 
         $logo1 =  UploadingFilesTrait::uploadsFiles($this->logo1, 'logo1', 'public');

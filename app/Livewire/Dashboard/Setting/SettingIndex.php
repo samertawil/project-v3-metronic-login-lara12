@@ -44,9 +44,9 @@ class SettingIndex extends Component
 
         $this->validate();
 
-        $data = Setting::findOrfail($this->editSettingId);
+       Setting::where('id',$this->editSettingId) 
 
-        $data->update([
+        ->update([
             'key' => $this->key,
             'value' => $this->value,
             'description' => $this->description,
@@ -75,6 +75,6 @@ class SettingIndex extends Component
 
         $settings = Setting::orderBy($this->sortBy, $this->sortdir)->paginate($this->perPage);
 
-        return view('livewire.dashboard.setting.setting-index', compact('settings'))->layoutData(['pageTitle'=>$pageTitle,'Title'=>$pageTitle]);
+        return view('livewire.dashboard.setting.setting-index', compact('settings'))->layoutData(['pageTitle'=>$pageTitle,'title'=>$pageTitle]);
     }
 }

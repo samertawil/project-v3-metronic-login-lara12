@@ -34,17 +34,16 @@ class  StatusClass extends Component
     public string $route_name;
 
     #[Url()]
-    public string|null $search = null;
+    public string|int $search = '';
     #[Url()]
     public int $perPage = 10;
     #[Url()]
-    public int|null $PidSearch;
-
+    public string|int $PidSearch = '';
     #[Url()]
-    public string $SystemName;
-
+    public string|int $SystemName='';
     public int $editStatusId;
     public string $StatusName;
+    public string $description;
     public int $statusPid;
     public mixed $usedInSystem;
 // @phpstan-ignore-next-line

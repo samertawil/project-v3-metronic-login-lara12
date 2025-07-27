@@ -20,34 +20,29 @@ use Livewire\Attributes\Computed;
 
 class AddressesIndex extends Component
 {
-
+// @phpstan-ignore-next-line
     protected $listeners = ['refresh-region' => '$refresh','refresh-city' => '$refresh','refresh-neighbourhood'=>'$refresh'];
     
     use SortTrait;
-
-    #[Url()]
-    public $sortBy = 'location_id';
-
     use WithPagination;
 
     protected string $paginationTheme = 'bootstrap';
 
-    #[Url()]
-    public $search;
 
     #[Url()]
-    public $perPage = 5;
-
+    public  string $sortBy = 'location_id';
     #[Url()]
-    public $regionIdSearch;
-
+    public  string  $search='';
     #[Url()]
-    public $cityIdSearch;
-
+    public  int $perPage = 5;
     #[Url()]
-    public $neighbourhoodIdSearch;
+    public  string $regionIdSearch='';
+    #[Url()]
+    public  string $cityIdSearch='';
+    #[Url()]
+    public string $neighbourhoodIdSearch='';
 
-    public function  api_create_short_address($value = '', $model = '')
+    public function  api_create_short_address(mixed $value = '', mixed $model = ''): mixed
     {
 
         if ($model === 'region_id') {
@@ -62,7 +57,7 @@ class AddressesIndex extends Component
     }
 
 
-    public function destroy($id)
+    public function destroy(int $id): void
     {
 
         DB::beginTransaction();
@@ -78,20 +73,20 @@ class AddressesIndex extends Component
     }
     
     #[Computed()]
-    public function regions()
+    public function regions(): mixed
     {
         return   CacheModelServices::getRegionVwData();
     }
 
     #[Computed()]
-    public function cities()
+    public function cities(): mixed
     {
         return    CacheModelServices::getCityVwData();
     }
 
 
     #[Computed()]
-    public function neighbourhoods()
+    public function neighbourhoods(): mixed
     {
         return   CacheModelServices::getNeighbourhoodVwData();
     }
@@ -99,7 +94,7 @@ class AddressesIndex extends Component
 
 
     #[Computed()]
-    public function locations()
+    public function locations(): mixed
     {
         return     AddressNameVw::groupby('location_id')
         ->orderBy($this->sortBy, $this->sortdir)

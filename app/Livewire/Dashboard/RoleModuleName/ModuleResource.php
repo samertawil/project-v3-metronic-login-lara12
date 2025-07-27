@@ -93,7 +93,7 @@ class ModuleResource extends Component
     }
 
     #[Computed]
-    public function ModuleNames(): LengthAwarePaginator
+    public function ModuleNames(): mixed
     {
         return ModuleName::SearchName($this->search)
             ->orderBy($this->sortBy, $this->sortdir)->paginate($this->perPage);

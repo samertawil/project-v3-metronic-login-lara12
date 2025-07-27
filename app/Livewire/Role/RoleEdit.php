@@ -22,7 +22,7 @@ class RoleEdit extends Component
     public function update(): void
     {
 
-        $role = Role::findOrfail($this->roles['id']);
+    
 
         $abilitiesDescription=[];
         $abilities=[];
@@ -34,18 +34,16 @@ class RoleEdit extends Component
             $abilities[]=$ability->ability_name??null;
            
         }
-         
-
-
+      
         // $this->validate(RoleRequest::rules($this->roles['id']));
-
-          $role->update([
+        Role::where('id',$this->roles['id'])->
+           update([
             'name' => $this->name,
             'abilities' => $abilities,
             'abilities_description'=> $abilitiesDescription,
             'created_by' => Auth::id(),
         ]);
-
+     
        
 
         redirect()->route('role.index');

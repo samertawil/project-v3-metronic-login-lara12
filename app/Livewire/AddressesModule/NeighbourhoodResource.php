@@ -19,65 +19,48 @@ use Illuminate\View\View;
 
 class NeighbourhoodResource extends Component
 {
-    use SortTrait ;
-
-    #[Url()]
-    public $sortBy='neighbourhood_id';
-
+    use SortTrait;
     use WithPagination;
-
+    #[Url()]
+    public string $sortBy = 'neighbourhood_id';
     protected string $paginationTheme = 'bootstrap';
-
-    public $neighbourhood_name;
-    
-    public $neighbourhood_id;
-
-    public $city_id;
-
-
-
+    public string $neighbourhood_name;
+    public int $neighbourhood_id;
+    public int $city_id;
     #[Url(history: true)]
-    public $perPage = 5;
-
+    public int $perPage = 5;
     #[Url(history: true)]
-    public $regionIdSearch;
-    
+    public string $regionIdSearch='';
     #[Url(history: true)]
-    public $cityIdSearch;
-
+    public string $cityIdSearch='';
     #[Url(history: true)]
-    public $search;
-
+    public string $search='';
     #[Url(history: true)]
-    public $neighbourhoodIdSearch;
-    
+    public string $neighbourhoodIdSearch;
+    public mixed $editNeighbourhoodId;
+    public mixed $editNeighbourhoodName;
+    public mixed $regionIdUpdate;
+    public mixed $cityIdUpdate;
 
-    public $editNeighbourhoodId;
+    // @phpstan-ignore-next-line
+    protected  $listeners = ['refresh-city' => '$refresh',];
 
-    public $editNeighbourhoodName;
-
-    public $regionIdUpdate;
-
-    public $cityIdUpdate;
-
-    protected $listeners=['refresh-city'=>'$refresh',];
-
-    public function store()
+    public function store(): void
     {
 
-        if(Gate::denies('neighbourhood.create')) {
-          abort(403,'ليس لديك الصلاحية اللازمة');
+        if (Gate::denies('neighbourhood.create')) {
+            abort(403, 'ليس لديك الصلاحية اللازمة');
         }
-        
+
         $this->validate([
             'neighbourhood_name' => [
                 'required',
-                Rule::unique('neighbourhoods')->where(function ($query)  {
+                Rule::unique('neighbourhoods')->where(function ($query) {
                     return $query->where('city_id', $this->city_id);
                 }),
             ],
             'city_id' => ['required'],
-          
+
         ]);
 
         Neighbourhood::create([
@@ -90,58 +73,55 @@ class NeighbourhoodResource extends Component
         $this->dispatch('refresh-neighbourhood');
     }
 
-    public function edit($id)
+    public function edit(int $id): void
     {
-        if(Gate::denies('neighbourhood.update')) {
-            abort(403,'ليس لديك الصلاحية اللازمة');
-          }
+        if (Gate::denies('neighbourhood.update')) {
+            abort(403, 'ليس لديك الصلاحية اللازمة');
+        }
 
         $this->editNeighbourhoodId = $id;
         $data = Neighbourhood::findOrfail($id);
-      
+
         $this->editNeighbourhoodName = $data->neighbourhood_name;
         // $this->regionIdUpdate = $data->region_id;
         $this->cityIdUpdate = $data->city_id;
-      
     }
 
 
-    public function update()
+    public function update(): void
     {
 
-        if(Gate::denies('neighbourhood.update')) {
-            abort(403,'ليس لديك الصلاحية اللازمة');
-          }
+        if (Gate::denies('neighbourhood.update')) {
+            abort(403, 'ليس لديك الصلاحية اللازمة');
+        }
 
-          $this->validate([
+        $this->validate([
             'editNeighbourhoodName' => [
                 'required',
-                Rule::unique('neighbourhoods','neighbourhood_name')->where(function ($query)  {
+                Rule::unique('neighbourhoods', 'neighbourhood_name')->where(function ($query) {
                     return $query->where('city_id', $this->cityIdUpdate);
                 }),
             ],
             'cityIdUpdate' => ['required'],
-          
+
         ]);
 
-        $data = Neighbourhood::findOrfail($this->editNeighbourhoodId);
-
-        $data->update([
-            'neighbourhood_name'=>$this->editNeighbourhoodName,
-            'city_id' => $this->cityIdUpdate,
-         
-        ]);
+        Neighbourhood::whereIn('id', $this->editNeighbourhoodId)
+            ->update([
+                'neighbourhood_name' => $this->editNeighbourhoodName,
+                'city_id' => $this->cityIdUpdate,
+            ]);
 
         $this->dispatch('refresh-neighbourhood');
 
         $this->cancelEdit();
     }
 
-    public function destroy($id)
+    public function destroy(int $id): void
     {
-        if(Gate::denies('neighbourhood.delete')) {
-            abort(403,'ليس لديك الصلاحية اللازمة');
-          }
+        if (Gate::denies('neighbourhood.delete')) {
+            abort(403, 'ليس لديك الصلاحية اللازمة');
+        }
 
 
         DB::beginTransaction();
@@ -151,14 +131,13 @@ class NeighbourhoodResource extends Component
             DB::commit();
 
             $this->dispatch('refresh-neighbourhood');
-            
         } catch (\Exception $e) {
             FlashMsgTraits::created($msgType = 'error', $msg = 'لا يمكن حذف قيمة مرتبطة ببيانات اخرى');
             DB::rollBack();
         }
     }
 
-    public function cancelEdit()
+    public function cancelEdit(): void
     {
         $this->reset('editNeighbourhoodId');
     }
@@ -167,14 +146,14 @@ class NeighbourhoodResource extends Component
 
     public function render(): View
     {
-        
- 
-        $regions =Region::get(); 
-      
+
+
+        $regions = Region::get();
+
         $cities =  CacheModelServices::getCityVwData();
 
         $neighbourhoods = AddressNameVw::groupby('neighbourhood_id')
-        ->orderBy($this->sortBy,$this->sortdir)
+            ->orderBy($this->sortBy, $this->sortdir)
             ->NeighbourhoodNameSearch($this->search)
             ->RegionListSearch($this->regionIdSearch)
             ->CityListSearch($this->cityIdSearch)

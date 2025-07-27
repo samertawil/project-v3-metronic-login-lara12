@@ -8,7 +8,7 @@ use App\Notifications\CustomNotification;
 
 class SendNotificationController extends Controller
 {
-    public function index() {
+    public function index(): void {
         $user=User::find(1);
          $user->notify(new CustomNotification());
 

@@ -21,38 +21,29 @@ class ServicesIndex extends Component
 
 
     #[Url()]
-    public $sortBy = 'created_at';
-
+    public string $sortBy = 'created_at';
     use WithPagination;
     protected string $paginationTheme = 'bootstrap';
 
     #[Url()]
-    public $perPage = 10;
-
-
+    public int $perPage = 10;
     #[Url()]
-    public $search = '';
-
-    public $editServicesId;
-
+    public string $search;
+    public int $editServicesId;
     #[Validate('required')]
-    public $name = '';
-
+    public string $name = '';
     #[Validate('required')]
-    public $home_page_order;
-
+    public int $home_page_order;
     #[Validate('required|in:0,1')]
-    public $active = '';
-
+    public mixed $active = '';
     #[Validate(['date_format:Y-m-d'])]
-    public $active_from_date;
-
+    public mixed $active_from_date;
     #[Validate(['after_or_equal:now','date_format:Y-m-d'])]
-    public $active_to_date;
+    public mixed $active_to_date;
 
 
  
-    public function edit($id)
+    public function edit(int $id): void
     {
 
 
@@ -60,7 +51,7 @@ class ServicesIndex extends Component
 
         $data =  $this->services($id);
 
-        $this->name = $data->name;
+        $this->name = $data['name'];
 
         $this->home_page_order = $data->home_page_order;
         $this->active = $data->active;
@@ -69,13 +60,13 @@ class ServicesIndex extends Component
     }
 
 
-    public function cancelEdit()
+    public function cancelEdit(): void
     {
 
         $this->reset('editServicesId');
     }
 
-    public function update()
+    public function update(): void
     {
         $this->validate();
 
@@ -96,12 +87,8 @@ class ServicesIndex extends Component
         $this->resetPage();
     }
 
-
-   
-
-
     #[Computed()]
-    public static function services($id = null)
+    public static function services(int|null $id = null): mixed
     {
         if ($id) {
             $data = CitzenServices::find($id);
@@ -112,7 +99,7 @@ class ServicesIndex extends Component
     }
 
 
-    public function destroy($id)
+    public function destroy(int $id): void
     {
          
         $data = $this->services($id);

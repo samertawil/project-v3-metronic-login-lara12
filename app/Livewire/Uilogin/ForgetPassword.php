@@ -52,13 +52,28 @@ class ForgetPassword extends Component
                 $part1 =    ['user' => $user, 'emailData' => 'noRecoveryEmail'];
             } else {
                 $pos = strpos($user->email, '@');
-                $emailName = substr($user->email, 0, $pos);
-                $providerName = substr($user->email,  $pos);
-                $count = (int) ceil(strlen($emailName) * 60 / 100);
-                $name = Str::limit($emailName, -$count, '***');
+
+                if ($pos === false) {
+                    // '@' not found, treat entire email as the name part (no provider)
+                    $emailName = $user->email;
+                    $providerName = '';
+                } else {
+                    $emailName = substr($user->email, 0, $pos);
+                    $providerName = substr($user->email, $pos);
+                }
+
+
+                $count = (int) ceil(strlen($emailName) * 0.6);
+
+                $limitLength = max(strlen($emailName) - $count, 0);
+                
+                $name = Str::limit($emailName, $limitLength, '***');
+         
                 $this->encryptEmailName = $name . $providerName;
 
+
                 $part1 =  ['user' => $user, 'emailData' => $this->encryptEmailName];
+               
             }
 
             $userQuestions = RecoveryAnswer::with('questions')->where('user_id', $user->id)->get();

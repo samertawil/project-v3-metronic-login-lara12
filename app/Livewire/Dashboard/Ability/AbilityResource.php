@@ -27,8 +27,8 @@ class AbilityResource extends Component
     protected $listeners = ['Refresh_Ability_Index' => '$refresh'];
 
   #[Url('history:true')]
-    public string $search ;
-    public int $searchModuleId;
+    public string $search='' ;
+    public mixed $searchModuleId='';
     public int $editAbilityId ;
 
     #[Validate('required|string')]
@@ -42,7 +42,7 @@ class AbilityResource extends Component
 
     public string $editAbilityUrl;
     public string $editDescription;
-    public string $editAbilityModuleId;
+    public int|null $editAbilityModuleId;
 
     public int $perPage = 10;
 

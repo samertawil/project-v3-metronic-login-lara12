@@ -9,6 +9,7 @@ use Illuminate\View\View;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
 use Livewire\Attributes\Computed;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class Index extends Component
 {
@@ -17,14 +18,14 @@ class Index extends Component
     protected string $paginationTheme = 'bootstrap';
 
     #[Url()]
-    public $perPage = 10;
+    public int $perPage = 10;
     #[Url()]
-    public $search = '';
-    public $sortBy='full_name';
+    public   string $search=''  ;
+    public string $sortBy='full_name';
 
 
     #[Computed()]
-    public function Contacts()
+    public function Contacts(): LengthAwarePaginator 
     {
         return Contact::
         SearchName($this->search)

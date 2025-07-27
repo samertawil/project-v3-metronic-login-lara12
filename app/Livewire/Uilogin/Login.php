@@ -19,20 +19,20 @@ class Login extends Component
     #[Validate(['required'])]
     public string $user_name;
 
-    
- 
+
+
     public function authenticate(): mixed
     {
-       
-         $this->validate();
+
+        $this->validate();
 
         $user = User::user($this->user_name);
 
-        if(!$user) {
-          
+        if (!$user) {
+
             $this->addError('user_name',  __('auth.failed'));
 
-            return '' ;
+            return '';
         }
 
         if ($user->user_activation != 1) {
@@ -43,7 +43,7 @@ class Login extends Component
         }
 
         if ($user->need_to_change == 1) {
-           
+
             return redirect()->route('password.change', ['userId' => $user->user_name]);
         }
 
@@ -55,21 +55,22 @@ class Login extends Component
         }
 
         return redirect()->intended(route(config('uilogin.redirectToAdmin')));
- 
     }
 
- 
-   
+
+
     public function render(): View
     {
+        $title = __('customTrans.login_system');
+
         if (Auth::guard('web')->user()) {
-            
-            return view(config('uilogin.redirectToView'))->layout('components.layouts.metronic7-simple-app');   
- 
+
+            /** @var \Illuminate\View\View&\App\ViewMacros\HasLayoutData $view */
+            $view = view(config('uilogin.redirectToView'));
+
+            return $view->layoutData(['title' => $title])->layout('components.layouts.metronic7-simple-app');
         }
-    
-        $title=__('customTrans.login_system');
-        
-        return view('livewire.ui_auth.login')->layoutData(['title'=>$title])->layout('components.layouts.uilogin-admin-app');
+
+        return view('livewire.ui_auth.login')->layoutData(['title' => $title])->layout('components.layouts.uilogin-admin-app');
     }
 }
