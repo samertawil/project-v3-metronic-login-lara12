@@ -27,7 +27,7 @@ class  StatusClass extends Component
     #[Url()]
     public string $sortBy = 'created_at';
     public string $status_name;
-    public int $p_id_sub;
+    public  $p_id_sub;
     public int $used_in_system_id;
     public string $page_name;
     public string $route_system_name;
@@ -49,7 +49,7 @@ class  StatusClass extends Component
 // @phpstan-ignore-next-line
     protected   $listeners = ['refresh-system' => '$refresh'];
 
-    public  function rules(int $p_id_sub): mixed
+    public  function rules($p_id_sub): mixed
     {
         return [
             'status_name' => [

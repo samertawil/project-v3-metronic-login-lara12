@@ -56,7 +56,26 @@ class SettingIndex extends Component
         $this->cancelEdit();
     }
 
+ 
 
+    
+    public function destroyValueArray(int $id,int $key): void
+    {
+        
+        $setting = Setting::findOrFail($id);
+/** @phpstan-ignore-next-line */
+        $valueArray = $setting->value_array;
+    
+        if (isset($valueArray[$key])) {
+            unset($valueArray[$key]);
+            // Reindex array to maintain sequential keys if needed
+            $valueArray = array_values($valueArray);
+/** @phpstan-ignore-next-line */ 
+            $setting->value_array = $valueArray;
+            $setting->save();
+        }
+        
+    }
 
     public function destroy(int $id): void
     {

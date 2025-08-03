@@ -9,13 +9,15 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 /**
  * @property string $key
  */
+
 class Setting extends Model
 {
     use HasFactory;
-    protected $fillable = ['key', 'value','description','notes','attributes'];
+    protected $fillable = ['key', 'value','description','notes','attributes','value_array'];
 
     protected $casts=[
-        'attributes'=>'array'
+        'attributes'=>'array',
+        'value_array'=>'array'
     ];
 
     protected function Key(): Attribute

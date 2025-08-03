@@ -16,14 +16,10 @@ class ChangePassword extends Component
     #[Validate(['required'])]
     #[Validate('exists:users,user_name',message:'خطأ باسم المستخدم')]
     public string $user_name;
- 
-
-    #[Validate(['required'])]
+     #[Validate(['required'])]
     public string $currentPassword;
-
     #[Validate(['required','min:4'])]
     public string $password;
-
     #[Validate(['same:password'])]
     #[Validate('required_with:password')]
     public string $passwordConfirmation;
@@ -32,18 +28,9 @@ class ChangePassword extends Component
       
         $this->validate();
       
-        $user = User::where('user_name', $this->user_name)->first();
-        
       
-        if (Auth::attempt(['user_name' => $this->user_name, 'password' => $this->password])) {
-            
-            $this->addError('password', __('customTrans.same old password'));
-       
-            return '';
+        // 1. Verify current password is correct   
 
-        } 
-
-            
         if (!Auth::attempt(['user_name' => $this->user_name, 'password' => $this->currentPassword])) {
             
             $this->addError('currentPassword', trans('auth.password'));
@@ -52,8 +39,17 @@ class ChangePassword extends Component
 
         } 
 
-    
-        $user->update([
+        // 2. Check if new password is same as old password
+   
+        if (Hash::check($this->password, Auth::user()->password)) {
+
+            $this->addError('password', __('customTrans.same old password'));
+
+            return '';
+        }
+
+        
+         User::where('user_name', $this->user_name)->update([
             'password'=>Hash::make($this->password),
             'need_to_change'=>0,
         ]);
@@ -61,8 +57,7 @@ class ChangePassword extends Component
         session()->flash('message',__('customTrans.success updated'));
              return redirect()->intended(route('dashboard.home'));
 
-       
-
+      
     }
     
 

@@ -29,8 +29,10 @@ class UserRoleCreate extends Component
     $data = RoleUser::select('role_id')->where('user_id', $userID)->get();
 
     $user = User::find($userID);
-
-    $this->user_name =  $user->user_name;
+    if($user) {
+      $this->user_name =  $user->user_name;
+    }
+    
 
 
 

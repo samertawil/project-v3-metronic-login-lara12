@@ -1,12 +1,12 @@
 <div>
-   
+
     <x-slot:crumb>
 
         <x-breadcrumb button data-target="#SettingCreateModel1" data-toggle="modal" :label="__('customTrans.create_new_setting')">
-           
-                <li class="breadcrumb-item"><a href="" class="text-muted">Apps </a></li>
-                <li class="breadcrumb-item"><a href="" class="text-muted">profile </a></li>
-           
+
+            <li class="breadcrumb-item"><a href="" class="text-muted">Apps </a></li>
+            <li class="breadcrumb-item"><a href="" class="text-muted">profile </a></li>
+
         </x-breadcrumb>
 
     </x-slot:crumb>
@@ -15,8 +15,8 @@
     @push('css')
     @endpush
 
-    <x-modal idName="SettingCreateModel1" :title="__('customTrans.create_new_setting')"> 
-        <livewire:Dashboard.Setting.setting-create/>
+    <x-modal idName="SettingCreateModel1" :title="__('customTrans.create_new_setting')" footer>
+        <livewire:Dashboard.Setting.setting-create />
     </x-modal>
 
 
@@ -30,49 +30,70 @@
                         <th><span>#</span></th>
 
                         <x-table-th wire:click="setSortBy('key')" name="key" sortBy={{ $sortBy }}
-                            sortdir={{ $sortdir }}  ></x-table-th>
+                            sortdir={{ $sortdir }}></x-table-th>
 
                         <x-table-th wire:click="setSortBy('value')" name="value" sortBy={{ $sortBy }}
-                            sortdir={{ $sortdir }} ></x-table-th>
+                            sortdir={{ $sortdir }}></x-table-th>
 
-                        <th  name="description">{{__('customTrans.description')}}</th> 
-                       
-                        <th  name="notes">{{__('customTrans.notes')}}</th> 
+                        <th name="value_array">{{ __('customTrans.value_array') }}</th>
 
-                     
-                        <th class="text-center">{{__('customTrans.actions')}}</th>
+                        <th name="description">{{ __('customTrans.description') }}</th>
+
+                        <th name="notes">{{ __('customTrans.notes') }}</th>
+
+
+                        <th class="text-center">{{ __('customTrans.actions') }}</th>
                     </tr>
                 </thead>
                 <tbody>
 
-            
+
                     @foreach ($settings as $key => $setting)
-                        <td>{{ $key + 1 }}  </td>
-                        
-                      
+                        <td>{{ $key + 1 }} </td>
+
+
                         @if ($editSettingId === $setting->id)
                             <td>
                                 <input wire:model='key' placeholder="..." class="form-control bg-white">
                             </td>
                         @else
-                            <td>{{ $setting->key}}</td>
+                            <td>{{ $setting->key }}</td>
                         @endif
 
                         @if ($editSettingId === $setting->id)
-                        <td>
-                            <input wire:model='value' placeholder="..." class="form-control bg-white">
-                        </td>
-                    @else
-                        <td>{{ $setting->value}}</td>
-                    @endif
+                            <td>
+                                <input wire:model='value' placeholder="..." class="form-control bg-white">
+                            </td>
+                        @else
+                            <td>{{ $setting->value }}</td>
+                        @endif
+
+                        @if ($setting->value_array)
+                            <td  class="">
+                               
+                                    @foreach ($setting->value_array as $key=>$value)
+                                    <div class="d-flex align-items-center">
+                                        <div>{{ $value }}</div>
+                                       
+                                        <x-actions del wire:loading.attr='disabled'
+                                        wire:click.prevent='destroyValueArray({{ $setting->id }},{{$key}})'></x-actions>
+                                    </div>
+                                    @endforeach
+                              
+                            </td>
+                        @else
+                            <td class="">----</td>
+                        @endif
+
+
 
 
                         @if ($editSettingId === $setting->id)
-                        <td>
-                            <input wire:model='description' placeholder="..." class="form-control bg-white">
-                        </td> 
+                            <td>
+                                <input wire:model='description' placeholder="..." class="form-control bg-white">
+                            </td>
                         @else
-                        <td>{{ $setting->description}}</td>
+                            <td>{{ $setting->description }}</td>
                         @endif
 
 
@@ -88,13 +109,10 @@
 
                         <td class="d-flex  justify-content-center">
                             @if (!($editSettingId === $setting->id))
-                               
-
                                 <x-actions edit wire:loading.attr='disabled'
                                     wire:click.prevent='edit({{ $setting->id }})'></x-actions>
 
                                 <x-actions del wire:loading.attr='disabled'
-                                  
                                     wire:click.prevent='destroy({{ $setting->id }})'></x-actions>
                             @else
                                 <x-actions make wire:loading.attr='disabled' wire:click.prevent='update'></x-actions>
@@ -107,7 +125,7 @@
 
                         </tr>
                     @endforeach
-                  
+
                 </tbody>
             </table>
             {{-- {{ $settings->links() }} --}}

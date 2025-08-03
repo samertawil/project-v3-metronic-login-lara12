@@ -502,5 +502,6 @@ return [
 'preview pic'=>'معاينة الصورة',
  'publish_date'=>'تاريح النشر',
  'dashboard'=>'لوحة التحكم',
+ 'value_array'=>'قيم متعددة',
 
 ];

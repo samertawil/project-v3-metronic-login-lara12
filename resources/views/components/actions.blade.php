@@ -23,7 +23,7 @@
     @endif
 
     @if ($edit)
-        <a href={{ $route }} @class(['btn btn-lg text-info ']) {{ $attributes }} title="{{__('customTrans.edit')}}">
+        <a href={{ $route }} @class(['btn btn-lg text-info']) {{ $attributes }} title="{{__('customTrans.edit')}}">
 
             <i class="ti-pencil-alt text-primary"></i>
 
@@ -68,9 +68,9 @@
         </a>
     @endif
 
-
+    
     @if ($plus)
-        <a href="#" class="btn btn-lg text-primary " {{ $attributes }}>
+        <a href="#" @class(['btn btn-lg text-primary  px-1 ']) {{ $attributes }}>
 
             <i class=" icon-xl fas fa-plus-square text-primary"></i>
 

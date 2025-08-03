@@ -81,11 +81,12 @@ class ForgetPassword extends Component
             if (($userQuestions->isEmpty())) {
 
                 $part2 =    ['questionsData' => 'noQuestions'];
+                
             } else {
 
-                $this->question1 = $userQuestions[0];
-                $this->question2 = $userQuestions[1];
-                $this->question3 = $userQuestions[2];
+                $this->question1 = $userQuestions[0]??'';
+                $this->question2 = $userQuestions[1]??'';
+                $this->question3 = $userQuestions[2]??'';
 
                 $part2 =    ['questionsData' => [$this->question1, $this->question2, $this->question3]];
             }

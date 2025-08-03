@@ -4,7 +4,7 @@ includes:
 parameters:
     paths:
         - app/
-    level: 7
+    level: 8
     ignoreErrors:
         - "#Relation 'status_p_id' is not found in App\\\\Models\\\\Status model#"
         - "#Relation 'status_p_id_sub' is not found in App\\\\Models\\\\Status model#"
