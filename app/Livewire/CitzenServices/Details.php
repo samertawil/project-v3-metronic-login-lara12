@@ -165,11 +165,14 @@ class Details extends Component
     {
 
         $data = CitzenServices::Where('id', $this->editServicesId)->first();
+
+        if($data) {
+
         $array =  $data->logo1;
-        $deleteFromDisk = $array[$key];
+
+        $deleteFromDisk = $array[$key]??[];
 
         unset($array[$key]);
-
 
         $data->update([
             'logo1' => $array,
@@ -180,13 +183,18 @@ class Details extends Component
         $this->cancelEdit();
     }
 
+    }
+
 
     public function deleteCard_header(): void
     {
 
         $data = CitzenServices::Where('id', $this->editServicesId)->first();
 
-        $deleteFromDisk = $data->card_header;
+        if($data) {
+
+        
+          $deleteFromDisk = $data->card_header??[];
 
         $data->update([
             'card_header' => null,
@@ -195,6 +203,7 @@ class Details extends Component
         Storage::disk('public')->delete($deleteFromDisk);
 
         $this->cancelEdit();
+    }
     }
 
 

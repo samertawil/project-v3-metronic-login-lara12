@@ -36,7 +36,7 @@ class RegisterForm extends Component
             'name' => $this->name,
 			'email'=>$this->email,
             'mobile' => $this->mobile,
-            'created_by'=>Auth::user()->id,
+            'created_by'=>Auth::user()->id??'',
             'password' => Hash::make($this->password),
             'need_to_change'=>1,
 

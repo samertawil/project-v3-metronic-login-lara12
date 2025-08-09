@@ -23,8 +23,8 @@ class SettingIndex extends Component
     #[Rule('required')]
     public mixed $value;
     public string $key;
-    public string $description;
-    public string $notes;
+    public string|null $description='';
+    public string|null $notes='';
     public int $perPage = 10;
 
     public function edit(int $id): void

@@ -52,9 +52,12 @@ function myDateStyleSearch($date, $format = 'Y-m-d')
 
 
 
+
 function setting(string $key): mixed
 {
-    return CacheSettingModelServices::getData()[$key] ?? null;
+    $data = CacheSettingModelServices::getData();
+    if (is_array($data) && array_key_exists($key, $data)) {
+        return $data[$key];
+    }
+    return null;
 }
-
-

@@ -18,7 +18,7 @@ use Illuminate\View\View;
 class SystemClass extends Component
 {
  
-    public string $description='';
+    public string|null $description='';
     #[Validate(['required','unique:setting_systems,system_name'])]
     public string $system_name;
 

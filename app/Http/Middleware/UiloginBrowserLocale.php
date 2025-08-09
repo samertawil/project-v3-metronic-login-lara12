@@ -14,7 +14,7 @@ class UiloginBrowserLocale
     {
         
       
-        $browserLand=$request->header('accept-language');
+        $browserLand=$request->header('accept-language')??'ar';
         $browserLand=explode(',', $browserLand);
         $uiloginLocale= $browserLand[0] ;
 

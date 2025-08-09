@@ -10,7 +10,11 @@ class SendNotificationController extends Controller
 {
     public function index(): void {
         $user=User::find(1);
-         $user->notify(new CustomNotification());
+
+        if($user) {
+            $user->notify(new CustomNotification());
+        }
+       
 
     }
 }

@@ -36,11 +36,11 @@ class LocationResource extends Component
     #[Url(history: true)]
     public int $perPage = 5;
     #[Url(history: true)]
-    public mixed $regionIdSearch='';
+    public mixed $regionIdSearch = '';
     #[Url(history: true)]
-    public string $cityIdSearch='';
+    public string $cityIdSearch = '';
     #[Url(history: true)]
-    public string $search='';
+    public string $search = '';
 
     public int $editNeighbourhoodId;
 
@@ -59,21 +59,21 @@ class LocationResource extends Component
     public function store(): void
     {
 
-        if(Gate::denies('location.create')) {
-            abort(403,'ليس لديك الصلاحية اللازمة');
+        if (Gate::denies('location.create')) {
+            abort(403, 'ليس لديك الصلاحية اللازمة');
         }
 
 
         $this->validate([
             'location_name' => [
                 'required',
-                Rule::unique('locations')->where(function ($query)  {
+                Rule::unique('locations')->where(function ($query) {
                     return $query->where('neighbourhood_id', $this->neighbourhood_id);
                 }),
             ],
-         
+
             'neighbourhood_id' => ['required'],
-           
+
         ]);
 
         Location::create([
@@ -88,48 +88,53 @@ class LocationResource extends Component
 
     public function edit(int $id): void
     {
-        
-        if(Gate::denies('location.update')) {
-            abort(403,'ليس لديك الصلاحية اللازمة');
+
+        if (Gate::denies('location.update')) {
+            abort(403, 'ليس لديك الصلاحية اللازمة');
         }
 
         $this->editLocationId = $id;
+
         $data = AddressNameVw::where('location_id', $id)->first();
 
-        $this->editLocationName = $data->location_name;
-        $this->editNeighbourhoodId = $data->neighbourhood_id;
+        if ($data) {
+
+            $this->editLocationName = $data->location_name;
+            $this->editNeighbourhoodId = $data->neighbourhood_id;
+        }
     }
 
 
-    public function update(): void {
+    public function update(): void
+    {
 
-     
-        if(Gate::denies('location.update')) {
-            abort(403,'ليس لديك الصلاحية اللازمة');
+
+        if (Gate::denies('location.update')) {
+            abort(403, 'ليس لديك الصلاحية اللازمة');
         }
 
-        $data= Location::findOrfail($this->editLocationId);
+        $data = Location::findOrfail($this->editLocationId);
 
         $this->validate([
             'editLocationName' => [
                 'required',
-                Rule::unique('locations','location_name')->where(function ($query)  {
+                Rule::unique('locations', 'location_name')->where(function ($query) {
                     return $query->where('neighbourhood_id', $this->editNeighbourhoodId);
                 }),
             ],
-           
+
             'editNeighbourhoodId' => ['required'],
-           
+
         ]);
 
-  
-                $data->update([
+
+        $data->update([
             'location_name' => $this->editLocationName,
             'neighbourhood_id' => $this->editNeighbourhoodId,
         ]);
 
         $this->cancelEdit();
-     }
+    }
 
 
 
@@ -141,8 +146,8 @@ class LocationResource extends Component
 
     public function destroy(int $id): void
     {
-        if(Gate::denies('location.delete')) {
-            abort(403,'ليس لديك الصلاحية اللازمة');
+        if (Gate::denies('location.delete')) {
+            abort(403, 'ليس لديك الصلاحية اللازمة');
         }
 
 

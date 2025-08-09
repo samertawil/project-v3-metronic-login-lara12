@@ -26,7 +26,7 @@ class  StatusClass extends Component
 
     #[Url()]
     public string $sortBy = 'created_at';
-    public string $status_name;
+    public string|null $status_name='';
     // @phpstan-ignore-next-line
     public  $p_id_sub;
     public int $used_in_system_id;
@@ -45,7 +45,7 @@ class  StatusClass extends Component
     public int $editStatusId;
     public string $StatusName;
     public string $description;
-    public int $statusPid;
+    public int|null $statusPid;
     public mixed $usedInSystem;
 // @phpstan-ignore-next-line
     protected   $listeners = ['refresh-system' => '$refresh'];
@@ -87,9 +87,12 @@ class  StatusClass extends Component
         $this->editStatusId = $id;
         $data = Status::find($id);
 
-        $this->StatusName = $data->status_name;
-        $this->statusPid = $data->p_id_sub;
-        $this->usedInSystem = $data->used_in_system_id;
+        if($data) {
+            $this->StatusName = $data->status_name??'';
+            $this->statusPid = $data->p_id_sub;
+            $this->usedInSystem = $data->used_in_system_id;
+        }
+       
     }
 
     public function update(): void
@@ -97,12 +100,14 @@ class  StatusClass extends Component
 
         $data = Status::find($this->editStatusId);
 
+        if($data) {
+            
         $data->update([
             'status_name' => $this->StatusName,
             'p_id_sub' => $this->statusPid,
             'used_in_system_id' => $this->usedInSystem,
         ]);
-
+    }
         $this->cancelEdit();
     }
 

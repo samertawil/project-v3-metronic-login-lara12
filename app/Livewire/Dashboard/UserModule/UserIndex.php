@@ -32,7 +32,7 @@ class UserIndex extends Component
     public int $perPage = 5;
 
     #[Url()]
-    public mixed  $searchUsertype='' ;
+    public mixed  $searchUsertype = '';
 
     #[Url()]
     public string $search = '';
@@ -65,12 +65,15 @@ class UserIndex extends Component
         }
         $this->editUserId = $id;
         $data = User::find($id);
-        
-        $this->editName = $data->name;
-        $this->user_activation = $data->user_activation;
-        $this->editMobile = $data->mobile;
-        $this->edituserType = $data->user_type;
-        $this->profile_image = $data->profile_image;
+        if ($data) {
+
+
+            $this->editName = $data->name;
+            $this->user_activation = $data->user_activation;
+            $this->editMobile = $data->mobile;
+            $this->edituserType = $data->user_type;
+            $this->profile_image = $data->profile_image;
+        }
     }
 
 
@@ -83,13 +86,14 @@ class UserIndex extends Component
     public function update(): void
     {
 
-     
+
         $user = User::find($this->editUserId);
 
         $this->validate([
             'user_activation' => ['required', Rule::enum(ActiveType::class)],
         ]);
 
+        if($user) {
 
         $user->update([
             'name' => $this->editName,
@@ -97,6 +101,7 @@ class UserIndex extends Component
             'mobile' => $this->editMobile,
             'user_type' => $this->edituserType,
         ]);
+    }
 
 
 
