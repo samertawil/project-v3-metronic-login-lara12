@@ -1,20 +1,22 @@
 <!DOCTYPE html>
-<html lang="{{ LaravelLocalization::getCurrentLocale() }}" dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}">
+<html lang="<?php echo e(LaravelLocalization::getCurrentLocale()); ?>" dir="<?php echo e(LaravelLocalization::getCurrentLocaleDirection()); ?>">
  
 <head>
     <base href="../../">
     <meta charset="utf-8" />
-    <title>{{ $title ?? 'Page Title' }}</title>
+    <title><?php echo e($title ?? 'Page Title'); ?></title>
     <meta name="description" content="Page with empty content" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    @include('partials.metronic7.head')
+    <?php echo $__env->make('partials.metronic7.head', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
-    @stack('css')
+    <?php echo $__env->yieldPushContent('css'); ?>
   
-    @livewireStyles
-    @filepondScripts  
-    @vite(['resources/js/app.js'])   
+    <?php echo \Livewire\Mechanisms\FrontendAssets\FrontendAssets::styles(); ?>
+
+        <link rel="stylesheet" type="text/css" href="http://project-v3.local/_filepond/styles?v=1.5.0">
+    <script type="module" src="http://project-v3.local/_filepond/scripts?v=1.5.0" data-navigate-once defer data-navigate-track></script>  
+    <?php echo app('Illuminate\Foundation\Vite')(['resources/js/app.js']); ?>   
 </head>
 
  
@@ -26,7 +28,7 @@
     <div id="kt_header_mobile" class="header-mobile align-items-center  header-mobile-fixed ">
         <!--begin::Logo-->
         <a href="index.html">
-            {{-- <img alt="Logo" src=" {{ asset('template-assets/metronic7/media/logos/logo-light.png') }}" /> --}}
+            
 
 
         </a>
@@ -72,33 +74,26 @@
         <div class="d-flex flex-row flex-column-fluid page">
 
             <!--begin::Aside-->
-            @include('partials.metronic7.aside')
+            <?php echo $__env->make('partials.metronic7.aside', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
             <!--end::Aside-->
 
             <!--begin::Wrapper-->
             <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
                 <!--begin::Header-->
-                @include('partials.metronic7.header-simple')
+                <?php echo $__env->make('partials.metronic7.header-simple', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
-                {{-- 
-                <div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
-                  
-
-                    @include('partials.metronic7.subheader-simple')
-
-             
-                </div> --}}
+                
 
                 <div class="d-flex flex-column-fluid  ">
 
                     <div class=" container ">
 
-                        {{-- <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">
-                            {{ $pageTitle ?? 'Page Name' }} </h5> --}}
+                        
 
                         <div class="my-3">
                            
-                            {{ $crumb ?? '' }}
+                            <?php echo e($crumb ?? ''); ?>
+
 
                         </div>
  
@@ -106,7 +101,7 @@
                             <div
                                 class="mb-2 py-0 card-header d-flex justify-content-between align-items-center   tx-medium bd-0 tx-white bg-gray-800 ">
 
-                                <div class="w-50 text-light "> {{ $pageTitle ?? 'Page Title' }}</div>
+                                <div class="w-50 text-light "> <?php echo e($pageTitle ?? 'Page Title'); ?></div>
 
                                 <div class="w-50 " style="text-align: end">
                                     <button class="btn reload "> <i class="icon-1.5x  text-warning flaticon2-reload "></i></button>
@@ -115,14 +110,14 @@
 
                             </div>
 
-                            {{-- <p class="tx-12 tx-gray-500 m-3 ">{{ $pagedesc ?? '' }} <a
-                            href="{{ $pageUrl ?? '#' }}">{{ $pageHelp ?? '' }}</a> --}}
+                            
 
 
                             <div class="card-body pt-1">
 
  
-                                {{ $slot ?? '' }}
+                                <?php echo e($slot ?? ''); ?>
+
 
 
                             </div>
@@ -135,7 +130,7 @@
 
 
 
-                @include('partials.metronic7.footer')
+                <?php echo $__env->make('partials.metronic7.footer', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
                 <!--end::Footer-->
             </div>
             <!--end::Wrapper-->
@@ -149,8 +144,23 @@
 
 
     <!-- begin::User Panel-->
-    {{-- @include('partials.metronic7._user-profile') --}}
-    <livewire:Dashboard.UsersProfile.Resource>
+    
+    <?php
+$__split = function ($name, $params = []) {
+    return [$name, $params];
+};
+[$__name, $__params] = $__split('Dashboard.UsersProfile.Resource', []);
+
+$__html = app('livewire')->mount($__name, $__params, 'lw-3203725020-0', $__slots ?? [], get_defined_vars());
+
+echo $__html;
+
+unset($__html);
+unset($__name);
+unset($__params);
+unset($__split);
+if (isset($__slots)) unset($__slots);
+?>
     <!-- end::User Panel-->
 
 
@@ -191,7 +201,7 @@
                         </div>
                     </div>
                     <a href="#" class="symbol symbol-70 flex-shrink-0">
-                        <img src="  {{ asset('template-assets/metronic7/media/stock-600x400/img-1.jpg') }}"
+                        <img src="  <?php echo e(asset('template-assets/metronic7/media/stock-600x400/img-1.jpg')); ?>"
                             title="" alt="" />
 
                     </a>
@@ -222,7 +232,7 @@
                         </div>
                     </div>
                     <a href="#" class="symbol symbol-70 flex-shrink-0">
-                        <img src="{{ asset('template-assets/metronic7/media/stock-600x400/img-2.jpg') }}"
+                        <img src="<?php echo e(asset('template-assets/metronic7/media/stock-600x400/img-2.jpg')); ?>"
                             title="" alt="" />
                     </a>
                 </div>
@@ -253,7 +263,7 @@
                         </div>
                     </div>
                     <a href="#" class="symbol symbol-70 flex-shrink-0">
-                        <img src=" {{ asset('template-assets/metronic7/media/stock-600x400/img-3.jpg') }}"
+                        <img src=" <?php echo e(asset('template-assets/metronic7/media/stock-600x400/img-3.jpg')); ?>"
                             title="" alt="" />
 
                     </a>
@@ -284,7 +294,7 @@
                         </div>
                     </div>
                     <a href="#" class="symbol symbol-70 flex-shrink-0">
-                        <img src=" {{ asset('template-assets/metronic7/media/stock-600x400/img-4.jpg') }}"
+                        <img src=" <?php echo e(asset('template-assets/metronic7/media/stock-600x400/img-4.jpg')); ?>"
                             title="" alt="" />
 
                     </a>
@@ -315,7 +325,7 @@
                         </div>
                     </div>
                     <a href="#" class="symbol symbol-70 flex-shrink-0">
-                        <img src="  {{ asset('template-assets/metronic7/media/stock-600x400/img-8.jpg') }}"
+                        <img src="  <?php echo e(asset('template-assets/metronic7/media/stock-600x400/img-8.jpg')); ?>"
                             title="" alt="" />
 
                     </a>
@@ -381,7 +391,7 @@
                         <div class="d-flex align-items-center flex-wrap mb-5">
                             <div class="symbol symbol-50 symbol-light mr-5">
                                 <span class="symbol-label">
-                                    <img src=" {{ asset('template-assets/metronic7/media/svg/misc/006-plurk.svg') }}"
+                                    <img src=" <?php echo e(asset('template-assets/metronic7/media/svg/misc/006-plurk.svg')); ?>"
                                         class="h-50 align-self-center" alt="" />
                                 </span>
                             </div>
@@ -400,7 +410,7 @@
                         <div class="d-flex align-items-center flex-wrap mb-5">
                             <div class="symbol symbol-50 symbol-light mr-5">
                                 <span class="symbol-label">
-                                    <img src="  {{ asset('template-assets/metronic7/media/svg/misc/015-telegram.svg') }}"
+                                    <img src="  <?php echo e(asset('template-assets/metronic7/media/svg/misc/015-telegram.svg')); ?>"
                                         class="h-50 align-self-center" alt="" />
                                 </span>
                             </div>
@@ -419,7 +429,7 @@
                         <div class="d-flex align-items-center flex-wrap mb-5">
                             <div class="symbol symbol-50 symbol-light mr-5">
                                 <span class="symbol-label">
-                                    <img src="   {{ asset('template-assets/metronic7/media/svg/misc/003-puzzle.svg') }}"
+                                    <img src="   <?php echo e(asset('template-assets/metronic7/media/svg/misc/003-puzzle.svg')); ?>"
                                         class="h-50 align-self-center" alt="" />
                                 </span>
                             </div>
@@ -438,7 +448,7 @@
                         <div class="d-flex align-items-center flex-wrap mb-5">
                             <div class="symbol symbol-50 symbol-light mr-5">
                                 <span class="symbol-label">
-                                    <img src=" {{ asset('template-assets/metronic7/media/svg/misc/005-bebo.svg') }}"
+                                    <img src=" <?php echo e(asset('template-assets/metronic7/media/svg/misc/005-bebo.svg')); ?>"
                                         class="h-50 align-self-center" alt="" />
                                 </span>
                             </div>
@@ -457,7 +467,7 @@
                         <div class="d-flex align-items-center flex-wrap">
                             <div class="symbol symbol-50 symbol-light mr-5">
                                 <span class="symbol-label">
-                                    <img src="  {{ asset('template-assets/metronic7/media/svg/misc/014-kickstarter.svg') }}"
+                                    <img src="  <?php echo e(asset('template-assets/metronic7/media/svg/misc/014-kickstarter.svg')); ?>"
                                         class="h-50 align-self-center" alt="" />
                                 </span>
                             </div>
@@ -1131,14 +1141,15 @@
             </svg><!--end::Svg Icon--></span>
     </div>
 
-    {{-- @include('partials.metronic7.sticky-pannel') --}}
+    
 
-    @include('partials.metronic7.footer-script')
+    <?php echo $__env->make('partials.metronic7.footer-script', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
-    @stack('js')
-    @livewireScriptConfig  
+    <?php echo $__env->yieldPushContent('js'); ?>
+    <?php echo \Livewire\Mechanisms\FrontendAssets\FrontendAssets::scriptConfig(); ?>  
  
 </body>
 
 
 </html>
+<?php /**PATH C:\xampp\htdocs\project-v3-metronic-login-lara12\resources\views/components/layouts/metronic7-simple-app.blade.php ENDPATH**/ ?>

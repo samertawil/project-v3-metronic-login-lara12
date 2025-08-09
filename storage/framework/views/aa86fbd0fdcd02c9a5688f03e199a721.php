@@ -64,24 +64,24 @@
 
 </script>
 
- {{-- <script src="{{asset('template-assets/jquery.min.js')}}"></script> --}}
+ 
 
 
  
 <!--end::Global Config-->
 
 <!--begin::Global Theme Bundle(used by all pages)-->
-           <script src="{{asset('template-assets/metronic7/plugins/global/plugins.bundle.js')}}"></script>
-           <script src="{{asset('template-assets/metronic7/plugins/custom/prismjs/prismjs.bundle.js')}}"></script>
-           <script src="{{asset('template-assets/metronic7/js/scripts.bundle.js')}}"></script>
+           <script src="<?php echo e(asset('template-assets/metronic7/plugins/global/plugins.bundle.js')); ?>"></script>
+           <script src="<?php echo e(asset('template-assets/metronic7/plugins/custom/prismjs/prismjs.bundle.js')); ?>"></script>
+           <script src="<?php echo e(asset('template-assets/metronic7/js/scripts.bundle.js')); ?>"></script>
         <!--end::Global Theme Bundle-->
 
             <!--begin::Page Vendors(used by this page)-->
-                    <script src="{{asset('template-assets/metronic7/plugins/custom/fullcalendar/fullcalendar.bundle.js')}}"></script>
+                    <script src="<?php echo e(asset('template-assets/metronic7/plugins/custom/fullcalendar/fullcalendar.bundle.js')); ?>"></script>
                 <!--end::Page Vendors-->
 
             <!--begin::Page Scripts(used by this page)-->
-                    <script src="{{asset('template-assets/metronic7/js/pages/widgets.js')}}"></script>
+                    <script src="<?php echo e(asset('template-assets/metronic7/js/pages/widgets.js')); ?>"></script>
                 <!--end::Page Scripts-->
 
 <!--end::Body-->
@@ -132,4 +132,4 @@
             });
         });
     });
-</script>
+</script><?php /**PATH C:\xampp\htdocs\project-v3-metronic-login-lara12\resources\views/partials/metronic7/footer-script.blade.php ENDPATH**/ ?>

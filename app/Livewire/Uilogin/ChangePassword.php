@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Uilogin;
 
- 
+
 use App\Models\User;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
@@ -14,59 +14,71 @@ use Illuminate\View\View;
 class ChangePassword extends Component
 {
     #[Validate(['required'])]
-    #[Validate('exists:users,user_name',message:'خطأ باسم المستخدم')]
+    #[Validate('exists:users,user_name', message: 'خطأ باسم المستخدم')]
     public string $user_name;
-     #[Validate(['required'])]
+    #[Validate(['required'])]
     public string $currentPassword;
-    #[Validate(['required','min:4'])]
+    #[Validate(['required', 'min:4'])]
     public string $password;
     #[Validate(['same:password'])]
     #[Validate('required_with:password')]
     public string $passwordConfirmation;
 
-    public function resetPassword(): mixed {
-      
+    public string $userId;
+
+    public function mount(): void {
+        if(Auth::user()) {
+            $this->user_name=Auth::user()->user_name;
+        }
+       
+    }
+
+    public function resetPassword(): mixed
+    {
+
         $this->validate();
-      
-      
+
+
         // 1. Verify current password is correct   
 
         if (!Auth::attempt(['user_name' => $this->user_name, 'password' => $this->currentPassword])) {
-            
+
             $this->addError('currentPassword', trans('auth.password'));
-       
-            return '';
-
-        } 
-
-        // 2. Check if new password is same as old password
-   
-        if (Hash::check($this->password, Auth::user()->password)) {
-
-            $this->addError('password', __('customTrans.same old password'));
 
             return '';
         }
 
-        
-         User::where('user_name', $this->user_name)->update([
-            'password'=>Hash::make($this->password),
-            'need_to_change'=>0,
+        // 2. Check if new password is same as old password
+        if (! Auth::user()) {
+            return '';
+        }
+
+          
+            if (Hash::check($this->password, Auth::user()->password)) {
+
+                $this->addError('password', __('customTrans.same old password'));
+
+                return '';
+            }
+         
+
+
+
+        User::where('user_name', $this->user_name)->update([
+            'password' => Hash::make($this->password),
+            'need_to_change' => 0,
         ]);
 
-        session()->flash('message',__('customTrans.success updated'));
-             return redirect()->intended(route('dashboard.home'));
-
-      
+        session()->flash('message', __('customTrans.success updated'));
+        return redirect()->intended(route('dashboard.home'));
     }
-    
 
- 
-   #[Layout('components.layouts.uilogin-app')]
-    public function render(): View
+
+    #[Layout('components.layouts.uilogin-admin-app')]
+     public function render(): View
     {
-        $pageTitle=__('customTrans.renewPassword');
-        $title=__('customTrans.renewPassword');
-        return view('livewire.ui_auth.change-password')->layoutData(['pageTitle'=>$pageTitle,'title'=>$title]);
+        $pageTitle = __('customTrans.renewPassword');
+        $title = __('customTrans.renewPassword');
+        return view('livewire.ui_auth.change-password')->layoutData(['pageTitle' => $pageTitle, 'title' => $title]);
     }
 }

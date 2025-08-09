@@ -7,7 +7,6 @@ use App\Models\User;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Traits\UploadingFilesTrait;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
@@ -19,20 +18,21 @@ class Resource extends Component
     /**
      * @property object $profile_image
      */
-    public mixed $profile_image=''  ;
+    public mixed $profile_image = '';
 
 
     public function mount(): void
     {
-
-        $this->userData =  User::findOrfail(Auth::user()->id);
+        if (Auth::user()) {
+            $this->userData =  User::findOrfail(Auth::user()->id);
+        }
     }
 
 
     public function updatedProfileImage(mixed $attr): void
     {
 
-       $image = '';
+        $image = '';
 
         $this->validate([
             'profile_image' => 'image|mimes:jpg,jpeg,png|max:1024',

@@ -2,43 +2,57 @@
 
             <div class="login login-4 login-signin-on d-flex flex-row-fluid" id="kt_login">
                 <div class="d-flex flex-center flex-row-fluid bgi-size-cover bgi-position-top bgi-no-repeat"
-                    style="background-image: url('{{ asset('template-assets/metronic7/media/bg/bg-3.jpg') }}');">
+                    style="background-image: url('<?php echo e(asset('template-assets/metronic7/media/bg/bg-3.jpg')); ?>');">
 
                     <div class="login-form text-center p-7 position-relative overflow-hidden">
 
                         <div class="d-flex flex-center mb-10">
                             <a>
 
-                                <img src="{{ asset('Users_icon.png') }}" class="max-h-150px" alt="" />
+                                <img src="<?php echo e(asset('Users_icon.png')); ?>" class="max-h-150px" alt="" />
                             </a>
                         </div>
 
                         <div class="login-signin ">
                             <div class="mb-10">
-                                <h1>{{ __('customTrans.login_system') }}</h1>
+                                <h1><?php echo e(__('customTrans.login_system')); ?></h1>
                                 <div class="text-muted font-weight-bold">
-                                    {{ __('customTrans.Enter your details to login to your account') }}</div>
+                                    <?php echo e(__('customTrans.Enter your details to login to your account')); ?></div>
                             </div>
                             <form wire:submit="authenticate" class="form">
                                 <div class="form-group mb-5 ">
                                     <input
-                                        class="form-control h-auto form-control-solid py-4 m-auto  w-75 w-lg-100 text-center @error('user_name') is-invalid
+                                        class="form-control h-auto form-control-solid py-4 m-auto  w-75 w-lg-100 text-center <?php $__errorArgs = ['user_name'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid
                                         
-                                    @enderror"
-                                        type="text" placeholder="{{ __('customTrans.user_name') }}"
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                                        type="text" placeholder="<?php echo e(__('customTrans.user_name')); ?>"
                                         wire:model="user_name" id="user_name" name="user_name" dir="ltr"
                                         autofocus />
-                                    @include('layouts._show-error', ['field_name' => 'user_name'])
+                                    <?php echo $__env->make('layouts._show-error', ['field_name' => 'user_name'], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
                                 </div>
                                 <div class="form-group mb-5" style="position: relative; max-width: 600px; margin: auto;">
                                     <input wire:model="password" name="password" dir="ltr"
                                         id="password"
-                                        class="form-control h-auto form-control-solid py-4 w-75 w-lg-100 text-center @error('password') is-invalid @enderror"
-                                        type="password" placeholder="{{ __('customTrans.password') }}" autocomplete="new-password" />
+                                        class="form-control h-auto form-control-solid py-4 w-75 w-lg-100 text-center <?php $__errorArgs = ['password'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                                        type="password" placeholder="<?php echo e(__('customTrans.password')); ?>" autocomplete="new-password" />
                                  
                                         <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"
                                         style="position: absolute; top: 50%; right: 15px; transform: translateY(-50%); cursor: pointer;"></span>
-                                    @include('layouts._show-error', ['field_name' => 'password'])
+                                    <?php echo $__env->make('layouts._show-error', ['field_name' => 'password'], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
                                 </div>
                                 <div
                                     class="form-group d-flex flex-wrap justify-content-between align-items-center m-auto w-75 w-lg-100">
@@ -46,25 +60,27 @@
                                         <label class="checkbox m-0 text-muted">
                                             <input wire:model='remember' name="remember" type="checkbox" />
                                             <span></span>
-                                            {{ __('customTrans.remember') }}
+                                            <?php echo e(__('customTrans.remember')); ?>
+
                                         </label>
                                     </div>
-                                    <a href="{{ route('uilogin.forgetpassword') }}" wire:navigate
-                                        class="text-muted text-hover-primary">{{ __('customTrans.Forgot Your Password') }}</a>
+                                    <a href="<?php echo e(route('uilogin.forgetpassword')); ?>" wire:navigate
+                                        class="text-muted text-hover-primary"><?php echo e(__('customTrans.Forgot Your Password')); ?></a>
                                 </div>
                                 
 
                                 <button
-                                    class="btn btn-primary font-weight-bold  my-5  w-75" wire:loading.remove>{{ __('customTrans.Login') }}</button>
+                                    class="btn btn-primary font-weight-bold  my-5  w-75" wire:loading.remove><?php echo e(__('customTrans.Login')); ?></button>
 
 
                             </form>
                             <div class="mt-3">
                                 <span class="opacity-70 mr-4">
-                                    {{ __('customTrans.dont have account') }}
+                                    <?php echo e(__('customTrans.dont have account')); ?>
+
                                 </span>
-                                <a href="{{ route('register') }}" wire:navigate id="kt_login_signup"
-                                    class="text-muted text-hover-primary font-weight-bold">{{ __('customTrans.register_new_account') }}</a>
+                                <a href="<?php echo e(route('register')); ?>" wire:navigate id="kt_login_signup"
+                                    class="text-muted text-hover-primary font-weight-bold"><?php echo e(__('customTrans.register_new_account')); ?></a>
                             </div>
                             <div wire:loading>
 
@@ -72,13 +88,13 @@
                                 <span class="sr-only">Loading...</span>
                             </div>
                             <div class="mt-5">
-                                <a href="{{ route('support.create') }}" wire:navigate
-                                    class="text-muted text-hover-primary">{{ __('customTrans.technical support') }}</a>
+                                <a href="<?php echo e(route('support.create')); ?>" wire:navigate
+                                    class="text-muted text-hover-primary"><?php echo e(__('customTrans.technical support')); ?></a>
                             </div>
 
                         </div>
                         <div class="mt-20">
-                            @include('partials.general._lang')
+                            <?php echo $__env->make('partials.general._lang', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
                         </div>
                       
                     </div>
@@ -150,3 +166,4 @@
                 "font-family": "Poppins"
             };
         </script>
+<?php /**PATH C:\xampp\htdocs\project-v3-metronic-login-lara12\resources\views/livewire/ui_auth/login.blade.php ENDPATH**/ ?>

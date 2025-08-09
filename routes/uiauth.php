@@ -16,7 +16,7 @@ Route::middleware(['web'])->group(function () {
     Route::get('register', Register::class)->name('register');
 
 
-    Route::get('admin/password/change/{userId?}', ChangePassword::class)->name('password.change');
+    Route::get('admin/password/change/{userId?}', ChangePassword::class)->middleware('auth')->name('password.change');
 
     Route::get('forget-password', ForgetPassword::class)->name('uilogin.forgetpassword');
 
