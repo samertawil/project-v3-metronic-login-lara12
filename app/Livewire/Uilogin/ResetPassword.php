@@ -3,9 +3,11 @@
 namespace App\Livewire\Uilogin;
 
 use Livewire\Component;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
+use Livewire\Attributes\Layout;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 
 class ResetPassword extends Component
 {
@@ -16,9 +18,9 @@ class ResetPassword extends Component
     public string  $status;
     public ?string  $error;
 
-/**
- * @var array<string, string|string[]>
- */
+    /**
+     * @var array<string, string|string[]>
+     */
     protected array $rules = [
         'email' => 'required|email|exists:users,email',
         'password' => 'required|min:4|confirmed',
@@ -30,7 +32,7 @@ class ResetPassword extends Component
         $this->email = request()->query('email');
     }
 
-    public function resetPassword(): void
+    public function resetPassword(): mixed
     {
         $this->validate();
 
@@ -49,15 +51,19 @@ class ResetPassword extends Component
 
         if ($status == Password::PASSWORD_RESET) {
             $this->status = __('تم تغيير كلمة المرور بنجاح.');
+
+
+            return redirect()->intended(route('dashboard.home'));
         } else {
-            $this->error = __($status);
+            return  $this->error = __($status);
         }
     }
 
-    
 
+    #[Layout('components.layouts.uilogin-admin-app')]
     public function render(): View
     {
-        return view('livewire.ui_auth.reset-password');
+        $title = __('customTrans.reset password');
+        return view('livewire.ui_auth.reset-password')->layoutData(['title' => $title]);
     }
 }

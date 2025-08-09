@@ -503,5 +503,6 @@ return [
  'publish_date'=>'تاريح النشر',
  'dashboard'=>'لوحة التحكم',
  'value_array'=>'قيم متعددة',
+ 'reset password'=>'اعادة تعيين كلمة المرور',
 
 ];

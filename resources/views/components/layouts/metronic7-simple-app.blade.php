@@ -93,8 +93,7 @@
 
                     <div class=" container ">
 
-                        {{-- <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">
-                            {{ $pageTitle ?? 'Page Name' }} </h5> --}}
+                     
 
                         <div class="my-3">
                            

@@ -17,7 +17,7 @@
                 <div class="col-lg-9 col-xl-9">
                     <div class="image-input image-input-outline" id="kt_contact_add_avatar">
 
-                        @if ($this->userData->profile_image)
+                        @if ($this->userData)
                         <img src="{{ asset('storage/' . $userData->profile_image) }}" width="100">
 
                         @else

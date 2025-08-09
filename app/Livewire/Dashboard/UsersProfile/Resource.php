@@ -5,16 +5,17 @@ namespace App\Livewire\Dashboard\UsersProfile;
 
 use App\Models\User;
 use Livewire\Component;
+use Illuminate\View\View;
 use Livewire\WithFileUploads;
+use Livewire\Attributes\Layout;
 use App\Traits\UploadingFilesTrait;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\View\View;
 
 class Resource extends Component
 {
     use WithFileUploads;
 
-    public mixed $userData;
+    public mixed $userData='';
     /**
      * @property object $profile_image
      */
@@ -52,10 +53,11 @@ class Resource extends Component
         $this->dispatch('reload');
     }
 
-
+   
     public function render(): View
     {
-
-        return view('partials.metronic7._user-profile');
+      
+        $title=__('passwords.reset');
+        return view('partials.metronic7._user-profile')->layoutData(['pageTitle'=>$title,'Title'=>$title]);
     }
 }
