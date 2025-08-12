@@ -49,7 +49,7 @@
                                             {{ __('customTrans.remember') }}
                                         </label>
                                     </div>
-                                    <a href="{{ route('uilogin.forgetpassword') }}" wire:navigate
+                                    <a href="{{ route('uilogin.forgetpassword') }}" 
                                         class="text-muted text-hover-primary">{{ __('customTrans.Forgot Your Password') }}</a>
                                 </div>
                                 
@@ -63,7 +63,7 @@
                                 <span class="opacity-70 mr-4">
                                     {{ __('customTrans.dont have account') }}
                                 </span>
-                                <a href="{{ route('register') }}" wire:navigate id="kt_login_signup"
+                                <a href="{{ route('register') }}"   id="kt_login_signup"
                                     class="text-muted text-hover-primary font-weight-bold">{{ __('customTrans.register_new_account') }}</a>
                             </div>
                             <div wire:loading>
@@ -72,7 +72,7 @@
                                 <span class="sr-only">Loading...</span>
                             </div>
                             <div class="mt-5">
-                                <a href="{{ route('support.create') }}" wire:navigate
+                                <a href="{{ route('dashboard.support.create') }}"  
                                     class="text-muted text-hover-primary">{{ __('customTrans.technical support') }}</a>
                             </div>
 

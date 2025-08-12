@@ -13,7 +13,13 @@ return [
    
     'addressType'=>10,
     'contact_type'=>16,
+    'galarySystem'=>23,
     'attributeColumn'=>6,
+    'supportTerminal'=>45,
+    'supportForLogin'=>48,
+    'sendrecieveSupportstatus'=>61,
+    
+   
 
 
 ];

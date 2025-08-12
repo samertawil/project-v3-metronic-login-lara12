@@ -12,7 +12,7 @@
     'rows'=>'1',
     'divclass'=>'',
     'labelname'=>'',
-    'id'=>'',
+    'id'=>null,
     'req'=>'',
     'divWidth'=>3,
     'span'=>null,
@@ -38,7 +38,7 @@
      <textarea
       name="{{ $name }}" 
       type="{{ $type }}"
-       id="{{ $name }}" 
+       id={{$id ??$name}}
        cols="{{$cols}}"
         rows="{{$rows}}"
         placeholder="{{$placeholder}}"

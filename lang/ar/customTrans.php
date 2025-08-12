@@ -504,5 +504,8 @@ return [
  'dashboard'=>'لوحة التحكم',
  'value_array'=>'قيم متعددة',
  'reset password'=>'اعادة تعيين كلمة المرور',
-
+'technical support list'=>'طلبات الدعم الفني',
+'terminal_id'=>'بوابة تقديم الدعم',
+'subject_id'=>'الدعم المطلوب',
+'replay'=>'الرد',
 ];

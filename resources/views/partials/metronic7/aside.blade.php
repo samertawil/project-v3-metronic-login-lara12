@@ -192,13 +192,42 @@
                                                         class="menu-text">{{ __('customTrans.services index') }}</span></a>
                                             </li>
 
-
-
                                         </ul>
                                     </div>
                                 </li>
 
+                            </ul>
 
+                            
+                            <ul class="menu-subnav">
+
+                                <li class="menu-item  menu-item-submenu" aria-haspopup="true"
+                                    data-menu-toggle="hover"><a href="javascript:;" class="menu-link menu-toggle"><i
+                                            class="menu-bullet menu-bullet-line menu-danger"><span></span></i><span
+                                            class="menu-text">{{ __('customTrans.technical support list') }}</span><span
+                                            class="menu-label">
+                                        </span><i class="menu-arrow"></i></a>
+                                    <div class="menu-submenu "><i class="menu-arrow "></i>
+                                        <ul class="menu-subnav">
+
+                                            <li class="menu-item mt-2 " aria-haspopup="true"><a
+                                                    href="{{ route('website.support.show') }}" class="menu-link "><i
+                                                        class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                        class="menu-text">طلبات الموقع</span></a>
+                                            </li>
+
+                                            <li class="menu-item mt-2 " aria-haspopup="true"><a
+                                                    href="{{ route('citzen.services.resouces') }}"
+                                                    class="menu-link "><i
+                                                        class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                        class="menu-text">طلبات لوحة التحكم</span></a>
+                                            </li>
+
+                                           
+
+                                        </ul>
+                                    </div>
+                                </li>
 
                             </ul>
 

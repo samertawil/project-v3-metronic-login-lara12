@@ -33,7 +33,5 @@ Route::middleware(['web'])->group(function () {
 
 
 
-Route::prefix('support/')->middleware(['web'])->name('support.')->group(function () {
-    Route::get('create', TechSupportCreate::class)->name('create');
-});
+
 

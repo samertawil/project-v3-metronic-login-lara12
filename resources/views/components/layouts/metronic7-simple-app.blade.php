@@ -135,22 +135,19 @@
 
 
                 @include('partials.metronic7.footer')
-                <!--end::Footer-->
+               
             </div>
-            <!--end::Wrapper-->
+           
         </div>
-        <!--end::Page-->
+      
     </div>
-    <!--end::Main-->
+   
 
 
 
-
-
-    <!-- begin::User Panel-->
-    {{-- @include('partials.metronic7._user-profile') --}}
+ 
     <livewire:Dashboard.UsersProfile.Resource>
-    <!-- end::User Panel-->
+ 
 
 
     <!--begin::Quick Cart-->

@@ -72,7 +72,7 @@ class Create extends Component
     public  function statuses(): mixed
     {
         $data = CacheStatusModelServices::getData();
-        $data = $data->select('status_name', 'id', 'p_id_sub')->Where('p_id_sub', config('StatusConstants.galarySystem'));
+        $data = $data->select('status_name', 'id', 'p_id_sub')->Where('p_id_sub', config('myConstants.galarySystem'));
         return $data;
     }
 

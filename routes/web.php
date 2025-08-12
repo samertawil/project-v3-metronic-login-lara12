@@ -21,13 +21,7 @@ Route::group(
             return Route::post('/livewire/update', $handle);
         });
 
-        Route::post('/logout', function () {
-            return 'code is here';
-        })->name('logout');
-
-        Route::post('/home', function () {
-            return 'code is here';
-        })->name('home');
+      
 
         Route::get('dashboard', Dashboard::class)->name('dashboard.home')->middleware('auth');
 

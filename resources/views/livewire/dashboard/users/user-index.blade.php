@@ -16,13 +16,6 @@
     </x-slot:crumb>
 
 
-
-
-    @push('css')
-        <script src="https://cdn.tailwindcss.com"></script>
-    @endpush
-
-
     <x-modal idName="UserCreateModel1" :title="__('customTrans.create new account')">
 
 

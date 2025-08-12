@@ -1,15 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Dashboard\Setting\SettingIndex;
+use App\Livewire\Dashboard\UserModule\UserIndex;
+use App\Livewire\Dashboard\Setting\SettingCreate;
+use App\Livewire\Dashboard\UserModule\UserCreate;
+use App\Livewire\Dashboard\StatusModule\StatusClass;
 use App\Livewire\Dashboard\Cards\Create as  CardsCreate;
 use App\Livewire\Dashboard\Cards\Resource as CardsResource;
-use App\Livewire\Dashboard\StatusModule\StatusClass;
-use App\Livewire\Dashboard\UserModule\UserCreate;
-use App\Livewire\Dashboard\UserModule\UserIndex;
-use App\Livewire\Dashboard\Setting\SettingIndex;
-use App\Livewire\Dashboard\Setting\SettingCreate;
-
-
+use App\Livewire\TechnicalSupport\Dashboard\Create as DashboardTechSupportCreate;
+use App\Livewire\TechnicalSupport\Website\Show as WebsiteTechSupportShow;
 
 Route::prefix('dashboard/')->name('dashboard.')->middleware(['auth','web'])->group(function() {
 
@@ -29,14 +29,17 @@ Route::get('/users/create', UserCreate::class)->name('user.create');
 Route::get('setting/index',SettingIndex::class)->name('setting.index');
 Route::get('setting/create',SettingCreate::class)->name('setting.create');
  
- 
 
+// Dashboard user technicalSupport
+ 
+Route::get('support/create', DashboardTechSupportCreate::class)->name('support.create')->withoutMiddleware('auth');
+
+ 
 
 });
 
 
-
-
+Route::get('website/support/show', WebsiteTechSupportShow::class)->name('website.support.show');
 
 include __DIR__.'/permission.php';
 
