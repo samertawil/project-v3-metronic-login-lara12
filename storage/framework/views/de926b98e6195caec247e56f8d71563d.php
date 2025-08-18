@@ -1,11 +1,137 @@
 <div>
 
-    
+
+     <?php $__env->slot('crumb', null, []); ?> 
+        <?php if (isset($component)) { $__componentOriginale19f62b34dfe0bfdf95075badcb45bc2 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginale19f62b34dfe0bfdf95075badcb45bc2 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.breadcrumb','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('breadcrumb'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?> <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginale19f62b34dfe0bfdf95075badcb45bc2)): ?>
+<?php $attributes = $__attributesOriginale19f62b34dfe0bfdf95075badcb45bc2; ?>
+<?php unset($__attributesOriginale19f62b34dfe0bfdf95075badcb45bc2); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginale19f62b34dfe0bfdf95075badcb45bc2)): ?>
+<?php $component = $__componentOriginale19f62b34dfe0bfdf95075badcb45bc2; ?>
+<?php unset($__componentOriginale19f62b34dfe0bfdf95075badcb45bc2); ?>
+<?php endif; ?>
+
+     <?php $__env->endSlot(); ?>
+
+
+
+
+
+
+
+    <?php if (isset($component)) { $__componentOriginalb2ca74f246e2dddefd3b44697e7b5be9 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginalb2ca74f246e2dddefd3b44697e7b5be9 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.search-index-section','data' => ['place' => 'البحث باسم الحساب او صاحب الحساب']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('search-index-section'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['place' => 'البحث باسم الحساب او صاحب الحساب']); ?>
+
+        
+
+
+        <div class="col-5" wire:ignore>
+            <?php if (isset($component)) { $__componentOriginaled2cde6083938c436304f332ba96bb7c = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginaled2cde6083938c436304f332ba96bb7c = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.select','data' => ['wire:model' => 'searchStatusId','multiple' => 'true','class' => 'js-example-basic-multiple ','id' => 'searchStatusId','wire:ignore' => true,'divWidth' => '12','options' => $this->statuses['sendrecieveSupportstatus']]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('select'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['wire:model' => 'searchStatusId','multiple' => 'true','class' => 'js-example-basic-multiple ','id' => 'searchStatusId','wire:ignore' => true,'divWidth' => '12','options' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($this->statuses['sendrecieveSupportstatus'])]); ?> <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginaled2cde6083938c436304f332ba96bb7c)): ?>
+<?php $attributes = $__attributesOriginaled2cde6083938c436304f332ba96bb7c; ?>
+<?php unset($__attributesOriginaled2cde6083938c436304f332ba96bb7c); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginaled2cde6083938c436304f332ba96bb7c)): ?>
+<?php $component = $__componentOriginaled2cde6083938c436304f332ba96bb7c; ?>
+<?php unset($__componentOriginaled2cde6083938c436304f332ba96bb7c); ?>
+<?php endif; ?>
+        </div>
+
+
+
+        <div class="col-5 mt-7" wire:ignore>
+            <?php if (isset($component)) { $__componentOriginaled2cde6083938c436304f332ba96bb7c = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginaled2cde6083938c436304f332ba96bb7c = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.select','data' => ['wire:model' => 'searchSubjectId','multiple' => 'true','class' => 'js-example-basic-multiple ','id' => 'searchSubjectId','wire:ignore' => true,'divWidth' => '12','options' => $this->statuses['supportForLogin']]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('select'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['wire:model' => 'searchSubjectId','multiple' => 'true','class' => 'js-example-basic-multiple ','id' => 'searchSubjectId','wire:ignore' => true,'divWidth' => '12','options' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($this->statuses['supportForLogin'])]); ?> <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginaled2cde6083938c436304f332ba96bb7c)): ?>
+<?php $attributes = $__attributesOriginaled2cde6083938c436304f332ba96bb7c; ?>
+<?php unset($__attributesOriginaled2cde6083938c436304f332ba96bb7c); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginaled2cde6083938c436304f332ba96bb7c)): ?>
+<?php $component = $__componentOriginaled2cde6083938c436304f332ba96bb7c; ?>
+<?php unset($__componentOriginaled2cde6083938c436304f332ba96bb7c); ?>
+<?php endif; ?>
+        </div>
+
+
+        <div class="col-4 mt-7">
+            <?php if (isset($component)) { $__componentOriginaled2cde6083938c436304f332ba96bb7c = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginaled2cde6083938c436304f332ba96bb7c = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.select','data' => ['wire:model.live' => 'searchSupportTerminal','name' => 'searchSupportTerminal','choseTitle' => 'terminal_id','id' => 'searchSupportTerminal','divWidth' => '12','options' => $this->statuses['supportTerminal']]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('select'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['wire:model.live' => 'searchSupportTerminal','name' => 'searchSupportTerminal','ChoseTitle' => 'terminal_id','id' => 'searchSupportTerminal','divWidth' => '12','options' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($this->statuses['supportTerminal'])]); ?> <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginaled2cde6083938c436304f332ba96bb7c)): ?>
+<?php $attributes = $__attributesOriginaled2cde6083938c436304f332ba96bb7c; ?>
+<?php unset($__attributesOriginaled2cde6083938c436304f332ba96bb7c); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginaled2cde6083938c436304f332ba96bb7c)): ?>
+<?php $component = $__componentOriginaled2cde6083938c436304f332ba96bb7c; ?>
+<?php unset($__componentOriginaled2cde6083938c436304f332ba96bb7c); ?>
+<?php endif; ?>
+        </div>
+
+
+
+     <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginalb2ca74f246e2dddefd3b44697e7b5be9)): ?>
+<?php $attributes = $__attributesOriginalb2ca74f246e2dddefd3b44697e7b5be9; ?>
+<?php unset($__attributesOriginalb2ca74f246e2dddefd3b44697e7b5be9); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalb2ca74f246e2dddefd3b44697e7b5be9)): ?>
+<?php $component = $__componentOriginalb2ca74f246e2dddefd3b44697e7b5be9; ?>
+<?php unset($__componentOriginalb2ca74f246e2dddefd3b44697e7b5be9); ?>
+<?php endif; ?>
+
+
 
     <div class="table-responsive">
         <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
             <table class="table text-md-nowrap dataTable no-footer dtr-inline collapsed sortable" id="example2"
-                role="grid" aria-describedby="example2_info" wire:loading.class.delay="opacity-50">
+                role="grid" aria-describedby="example2_info">
                 <thead>
                     <tr>
                         <th></th>
@@ -91,6 +217,26 @@
 <?php $component = $__componentOriginal215abb4c13efe247e49c1b629be1a8e4; ?>
 <?php unset($__componentOriginal215abb4c13efe247e49c1b629be1a8e4); ?>
 <?php endif; ?>
+                        <?php if (isset($component)) { $__componentOriginal215abb4c13efe247e49c1b629be1a8e4 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal215abb4c13efe247e49c1b629be1a8e4 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.table-th','data' => ['wire:click' => 'setSortBy(\'created_at\')','name' => 'created_at','sortBy' => $sortBy,'sortdir' => $sortdir]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('table-th'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['wire:click' => 'setSortBy(\'created_at\')','name' => 'created_at','sortBy' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($sortBy),'sortdir' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($sortdir)]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal215abb4c13efe247e49c1b629be1a8e4)): ?>
+<?php $attributes = $__attributesOriginal215abb4c13efe247e49c1b629be1a8e4; ?>
+<?php unset($__attributesOriginal215abb4c13efe247e49c1b629be1a8e4); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal215abb4c13efe247e49c1b629be1a8e4)): ?>
+<?php $component = $__componentOriginal215abb4c13efe247e49c1b629be1a8e4; ?>
+<?php unset($__componentOriginal215abb4c13efe247e49c1b629be1a8e4); ?>
+<?php endif; ?>
 
                         <th class="text-center"><?php echo e(__('customTrans.actions')); ?></th>
                     </tr>
@@ -98,10 +244,9 @@
 
                 <tbody>
                     <!--[if BLOCK]><![endif]--><?php $__empty_1 = true; $__currentLoopData = $this->allData; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                    
-                    <?php echo e($data->status_id); ?>
+                        
 
-                        <tr class="<?php echo \Illuminate\Support\Arr::toCssClasses(['main-row', 'bg-light-danger' => $data->status_id==62]); ?>" wire:key="data-<?php echo e($data->id); ?>"  >
+                        <tr class="<?php echo \Illuminate\Support\Arr::toCssClasses(['main-row', 'bg-light-danger' => $data->status_id == 62]); ?>" wire:key="data-<?php echo e($data->id); ?>">
 
                             <td class="p-0 w-lg-1px">
                                 <a href="#" class="btn btn-icon pulse pulse-success mr-5"
@@ -123,6 +268,8 @@
                             <td><?php echo e($data->statusTerminalName->status_name ?? '-'); ?></td>
 
                             <td><?php echo e($data->statusIdName->status_name ?? '-'); ?></td>
+
+                            <td><?php echo e(myDateStyle1($data->created_at)); ?></td>
 
                             <td class="text-center">
                                 <?php if (isset($component)) { $__componentOriginal52984d0dc87f31be3fd7055890be5eb4 = $component; } ?>
@@ -181,14 +328,14 @@
 
                                     <?php if (isset($component)) { $__componentOriginaled2cde6083938c436304f332ba96bb7c = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginaled2cde6083938c436304f332ba96bb7c = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.select','data' => ['wire:model' => 'status_id','name' => 'status_id','label' => true,'id' => 'status_id','options' => $this->statuses->pluck('status_name', 'id')]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.select','data' => ['wire:model' => 'status_id','name' => 'status_id','label' => true,'id' => 'status_id','options' => $this->statuses['sendrecieveSupportstatus']]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('select'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['wire:model' => 'status_id','name' => 'status_id','label' => true,'id' => 'status_id','options' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($this->statuses->pluck('status_name', 'id'))]); ?> <?php echo $__env->renderComponent(); ?>
+<?php $component->withAttributes(['wire:model' => 'status_id','name' => 'status_id','label' => true,'id' => 'status_id','options' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($this->statuses['sendrecieveSupportstatus'])]); ?> <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginaled2cde6083938c436304f332ba96bb7c)): ?>
 <?php $attributes = $__attributesOriginaled2cde6083938c436304f332ba96bb7c; ?>
@@ -253,6 +400,19 @@
                                         </td>
                                     </tr>
 
+                                    <tr >
+                                        <td ><?php echo e(__('customTrans.attchments')); ?></td>
+                                        <td>
+                                            <!--[if BLOCK]><![endif]--><?php if($data->uploaded_files): ?>
+                                                <!--[if BLOCK]><![endif]--><?php $__currentLoopData = $data->uploaded_files; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $file): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <a href="http://register-aid.local/storage/<?php echo e($file); ?>"
+                                                        target="_blank"> <img
+                                                            src="http://register-aid.local/storage/<?php echo e($file); ?>"
+                                                            alt="Thumbnail" style="height: 100px; width:100px;"></a>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><!--[if ENDBLOCK]><![endif]-->
+                                            <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                                        </td>
+                                    </tr>
                                 </table>
                             </td>
                         </tr>
@@ -277,12 +437,43 @@
 
 
     <?php $__env->startPush('js'); ?>
-
- 
- 
-              
         <script>
-            
+            $(document).ready(function() {
+                $(".js-example-basic-multiple").select2({
+
+                    placeholder: "البحث بالحالة",
+                    dir: "rtl" // 
+
+                });
+
+                $("#searchSubjectId").select2({
+
+                    placeholder: "البحث بالدعم المطلوب",
+                    dir: "rtl" // 
+
+                });
+
+
+
+
+                $('#searchStatusId').on('change', function(e) {
+                    var data = $('#searchStatusId').select2("val");
+                    window.Livewire.find('<?php echo e($_instance->getId()); ?>').set('searchStatusId', data);
+                });
+
+                $('#searchSubjectId').on('change', function(e) {
+                    var data = $('#searchSubjectId').select2("val");
+                    window.Livewire.find('<?php echo e($_instance->getId()); ?>').set('searchSubjectId', data);
+                });
+
+
+            });
+        </script>
+
+
+
+
+        <script>
             function toggleDetailsRow(trigger) {
                 const tr = trigger.closest('tr');
                 const nextRow = tr.nextElementSibling;
@@ -295,11 +486,6 @@
                 }
             }
         </script>
- 
- 
- 
-
-
     <?php $__env->stopPush(); ?>
 
 </div>

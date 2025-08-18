@@ -23,18 +23,13 @@ class ContactUs extends Component
 
     public function sendEmail(): void
     {
-
-        $usersToNotify = Setting::where('key', 'userRecieveNotifications')->value('value_array');
-
-
-
+ 
         $this->validate();
 
         $data = [
             'name' => $this->name,
             'phone' => $this->phone,
             'email' => $this->email,
-
             'message' => $this->message,
         ];
 

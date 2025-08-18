@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
     <?php echo $__env->make('partials.metronic7.head', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
-
+   
     <?php echo $__env->yieldPushContent('css'); ?>
   
     <?php echo \Livewire\Mechanisms\FrontendAssets\FrontendAssets::styles(); ?>
@@ -82,7 +82,7 @@
                 <!--begin::Header-->
                 <?php echo $__env->make('partials.metronic7.header-simple', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
-                
+
 
                 <div class="d-flex flex-column-fluid  ">
 
@@ -109,8 +109,6 @@
                                 </div>
 
                             </div>
-
-                            
 
 
                             <div class="card-body pt-1">

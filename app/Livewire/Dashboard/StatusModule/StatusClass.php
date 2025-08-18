@@ -45,7 +45,7 @@ class  StatusClass extends Component
     public int $editStatusId;
     public string $StatusName;
     public string $description;
-    public int|null $statusPid;
+    public int|null $statusPid=null;
     public mixed $usedInSystem;
 // @phpstan-ignore-next-line
     protected   $listeners = ['refresh-system' => '$refresh'];

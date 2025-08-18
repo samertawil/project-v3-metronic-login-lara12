@@ -70,6 +70,7 @@
 <!--end::Global Config-->
 
 <!--begin::Global Theme Bundle(used by all pages)-->
+ 
 <script src="<?php echo e(asset('template-assets/metronic7/plugins/global/plugins.bundle.js')); ?>"></script>
 <script src="<?php echo e(asset('template-assets/metronic7/plugins/custom/prismjs/prismjs.bundle.js')); ?>"></script>
 <script src="<?php echo e(asset('template-assets/metronic7/js/scripts.bundle.js')); ?>"></script>

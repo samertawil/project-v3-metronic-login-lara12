@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
     @include('partials.metronic7.head')
-
+   
     @stack('css')
   
     @livewireStyles
@@ -80,14 +80,7 @@
                 <!--begin::Header-->
                 @include('partials.metronic7.header-simple')
 
-                {{-- 
-                <div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
-                  
 
-                    @include('partials.metronic7.subheader-simple')
-
-             
-                </div> --}}
 
                 <div class="d-flex flex-column-fluid  ">
 
@@ -113,9 +106,6 @@
                                 </div>
 
                             </div>
-
-                            {{-- <p class="tx-12 tx-gray-500 m-3 ">{{ $pagedesc ?? '' }} <a
-                            href="{{ $pageUrl ?? '#' }}">{{ $pageHelp ?? '' }}</a> --}}
 
 
                             <div class="card-body pt-1">

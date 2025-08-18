@@ -508,4 +508,5 @@ return [
 'terminal_id'=>'بوابة تقديم الدعم',
 'subject_id'=>'الدعم المطلوب',
 'replay'=>'الرد',
+'attchments'=>'مرفقات',
 ];

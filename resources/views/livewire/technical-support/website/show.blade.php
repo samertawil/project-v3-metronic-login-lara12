@@ -1,45 +1,53 @@
 <div>
 
-    {{-- 
+
     <x-slot:crumb>
-        <x-breadcrumb button data-target="#UserCreateModel1" data-toggle="modal" :label="__('customTrans.create new account')">
-
-            <li class="breadcrumb-item"><a href="{{ route('dashboard.user.index') }}"
-                    class="text-muted">{{ __('customTrans.users') }} </a></li>
-            <li class="breadcrumb-item"><a href="{{ route('ability.index') }}"
-                    class="text-muted">{{ __('customTrans.abilities') }} </a></li>
-            <li class="breadcrumb-item"><a href="{{ route('role.index') }}"
-                    class="text-muted">{{ __('customTrans.role group') }} </a></li>
-
-        </x-breadcrumb>
+        <x-breadcrumb></x-breadcrumb>
 
     </x-slot:crumb>
 
 
-    <x-modal idName="UserCreateModel1" :title="__('customTrans.create new account')">
-
-
-        @livewire('dashboard.UserModule.register-form')
-
-    </x-modal>
 
 
 
 
 
-    <x-search-index-section>
+    <x-search-index-section place="البحث باسم الحساب او صاحب الحساب">
 
-        <div class="col-sm-12 col-md-2">
+        {{-- <div class="col-sm-12 col-md-2">
             <x-select :options="config('myConstants')['userType']" divWidth="12" :ChoseTitle="__('customTrans.user_type')" wire:model.live="searchUsertype"
                 ChoseTitle="all"></x-select>
+        </div> --}}
+
+
+        <div class="col-5" wire:ignore>
+            <x-select wire:model='searchStatusId' multiple="true" class="js-example-basic-multiple " id="searchStatusId"
+                wire:ignore divWidth="12" :options="$this->statuses['sendrecieveSupportstatus']"></x-select>
         </div>
 
-    </x-search-index-section> --}}
+
+
+        <div class="col-5 mt-7" wire:ignore>
+            <x-select wire:model='searchSubjectId' multiple="true" class="js-example-basic-multiple " id="searchSubjectId"
+                wire:ignore divWidth="12" :options="$this->statuses['supportForLogin']"></x-select>
+        </div>
+
+
+        <div class="col-4 mt-7">
+            <x-select wire:model.live='searchSupportTerminal' name="searchSupportTerminal" ChoseTitle="terminal_id"
+                id="searchSupportTerminal" divWidth="12" :options="$this->statuses['supportTerminal']"></x-select>
+        </div>
+
+
+
+    </x-search-index-section>
+
+
 
     <div class="table-responsive">
         <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
             <table class="table text-md-nowrap dataTable no-footer dtr-inline collapsed sortable" id="example2"
-                role="grid" aria-describedby="example2_info" wire:loading.class.delay="opacity-50">
+                role="grid" aria-describedby="example2_info">
                 <thead>
                     <tr>
                         <th></th>
@@ -53,6 +61,8 @@
                             :sortdir="$sortdir" />
                         <x-table-th wire:click="setSortBy('status_id')" name="status_id" :sortBy="$sortBy"
                             :sortdir="$sortdir" />
+                        <x-table-th wire:click="setSortBy('created_at')" name="created_at" :sortBy="$sortBy"
+                            :sortdir="$sortdir" />
 
                         <th class="text-center">{{ __('customTrans.actions') }}</th>
                     </tr>
@@ -61,7 +71,7 @@
                 <tbody>
                     @forelse ($this->allData as $key => $data)
                         {{-- "main-row --}}
-                        {{ $data->status_id }}
+
                         <tr @class(['main-row', 'bg-light-danger' => $data->status_id == 62]) wire:key="data-{{ $data->id }}">
 
                             <td class="p-0 w-lg-1px">
@@ -85,6 +95,8 @@
 
                             <td>{{ $data->statusIdName->status_name ?? '-' }}</td>
 
+                            <td>{{ myDateStyle1($data->created_at) }}</td>
+
                             <td class="text-center">
                                 <x-actions preview data-target="#Userpreview{{ $data->id }}"
                                     data-toggle="modal"></x-actions>
@@ -99,7 +111,7 @@
                                         id="replay{{ $data->id }}" name="replay"></x-textarea>
 
                                     <x-select wire:model='status_id' name='status_id' label id="status_id"
-                                        :options="$this->statuses->pluck('status_name', 'id')"></x-select>
+                                        :options="$this->statuses['sendrecieveSupportstatus']"></x-select>
 
                                     <x-saveClearbuttons wire:click="store({{ $data->id }})" close />
 
@@ -127,6 +139,19 @@
                                         </td>
                                     </tr>
 
+                                    <tr >
+                                        <td >{{ __('customTrans.attchments') }}</td>
+                                        <td>
+                                            @if ($data->uploaded_files)
+                                                @foreach ($data->uploaded_files as $file)
+                                                    <a href="http://register-aid.local/storage/{{ $file }}"
+                                                        target="_blank"> <img
+                                                            src="http://register-aid.local/storage/{{ $file }}"
+                                                            alt="Thumbnail" style="height: 100px; width:100px;"></a>
+                                                @endforeach
+                                            @endif
+                                        </td>
+                                    </tr>
                                 </table>
                             </td>
                         </tr>
@@ -149,6 +174,42 @@
 
 
     @push('js')
+        <script>
+            $(document).ready(function() {
+                $(".js-example-basic-multiple").select2({
+
+                    placeholder: "البحث بالحالة",
+                    dir: "rtl" // 
+
+                });
+
+                $("#searchSubjectId").select2({
+
+                    placeholder: "البحث بالدعم المطلوب",
+                    dir: "rtl" // 
+
+                });
+
+
+
+
+                $('#searchStatusId').on('change', function(e) {
+                    var data = $('#searchStatusId').select2("val");
+                    @this.set('searchStatusId', data);
+                });
+
+                $('#searchSubjectId').on('change', function(e) {
+                    var data = $('#searchSubjectId').select2("val");
+                    @this.set('searchSubjectId', data);
+                });
+
+
+            });
+        </script>
+
+
+
+
         <script>
             function toggleDetailsRow(trigger) {
                 const tr = trigger.closest('tr');

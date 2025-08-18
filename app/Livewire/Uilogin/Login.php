@@ -43,7 +43,7 @@ class Login extends Component
         }
 
         if ($user->need_to_change == 1) {
-
+           
             return redirect()->route('password.change', ['userId' => $user->user_name]);
         }
 
