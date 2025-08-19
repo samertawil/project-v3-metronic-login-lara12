@@ -14,8 +14,8 @@
   
     <?php echo \Livewire\Mechanisms\FrontendAssets\FrontendAssets::styles(); ?>
 
-        <link rel="stylesheet" type="text/css" href="http://project-v3.local/_filepond/styles?v=1.5.0">
-    <script type="module" src="http://project-v3.local/_filepond/scripts?v=1.5.0" data-navigate-once defer data-navigate-track></script>  
+        <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/_filepond/styles?v=1.5.0">
+    <script type="module" src="http://127.0.0.1:8000/_filepond/scripts?v=1.5.0" data-navigate-once defer data-navigate-track></script>  
     <?php echo app('Illuminate\Foundation\Vite')(['resources/js/app.js']); ?>   
 </head>
 
@@ -144,7 +144,7 @@
 $__split = function ($name, $params = []) {
     return [$name, $params];
 };
-[$__name, $__params] = $__split('Dashboard.UsersProfile.Resource', []);
+[$__name, $__params] = $__split('AppSetting.UsersProfile.Resource', []);
 
 $__html = app('livewire')->mount($__name, $__params, 'lw-3203725020-0', $__slots ?? [], get_defined_vars());
 

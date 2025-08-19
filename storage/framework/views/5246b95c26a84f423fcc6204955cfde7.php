@@ -45,7 +45,7 @@
 $__split = function ($name, $params = []) {
     return [$name, $params];
 };
-[$__name, $__params] = $__split('Dashboard.StatusModule.SystemClass', []);
+[$__name, $__params] = $__split('appsetting.statusModule.SystemClass', []);
 
 $__html = app('livewire')->mount($__name, $__params, 'lw-470281242-0', $__slots ?? [], get_defined_vars());
 
@@ -56,7 +56,7 @@ unset($__name);
 unset($__params);
 unset($__split);
 if (isset($__slots)) unset($__slots);
-?></livewire:Dashboard.StatusModule.SystemClass>
+?></livewire:appsetting.statusModule.SystemClass>
  
  
                         <form wire:submit="store">

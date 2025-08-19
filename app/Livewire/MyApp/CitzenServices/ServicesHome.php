@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Livewire\MyApp\CitzenServices;
+
+use Livewire\Component;
+use App\Models\CitzenServices;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\View\View;
+use Livewire\Attributes\Computed;
+
+class ServicesHome extends Component
+{
+    #[Computed()]
+    public function services(): Collection
+    {
+        return CitzenServices::
+         where('home_page_order','!=',0)
+        ->orderBy('home_page_order','asc')
+        ->get();
+    }
+    
+    public function render(): View
+    {
+        return view('livewire.my-app.citzen-services.services-home');
+    }
+}

@@ -59,12 +59,87 @@
                     <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
                 </li>
 
-
-                {{-- @can('dashboard.user.index') --}}
+    
                 <ul class="menu-nav py-0">
 
+                    <li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"><a
+                            href="javascript:;" class="menu-link menu-toggle"><span class="svg-icon menu-icon">
+                                <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Bucket.svg-->
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24"></rect>
+                                        <path
+                                            d="M7,3 L17,3 C19.209139,3 21,4.790861 21,7 C21,9.209139 19.209139,11 17,11 L7,11 C4.790861,11 3,9.209139 3,7 C3,4.790861 4.790861,3 7,3 Z M7,9 C8.1045695,9 9,8.1045695 9,7 C9,5.8954305 8.1045695,5 7,5 C5.8954305,5 5,5.8954305 5,7 C5,8.1045695 5.8954305,9 7,9 Z"
+                                            fill="#000000"></path>
+                                        <path
+                                            d="M7,13 L17,13 C19.209139,13 21,14.790861 21,17 C21,19.209139 19.209139,21 17,21 L7,21 C4.790861,21 3,19.209139 3,17 C3,14.790861 4.790861,13 7,13 Z M17,19 C18.1045695,19 19,18.1045695 19,17 C19,15.8954305 18.1045695,15 17,15 C15.8954305,15 15,15.8954305 15,17 C15,18.1045695 15.8954305,19 17,19 Z"
+                                            fill="#000000" opacity="0.3"></path>
+                                    </g>
+                                </svg>
+                            </span><span class="menu-text">البرنامج</span><i
+                                class="menu-arrow"></i></a>
+                        <div class="menu-submenu "><i class="menu-arrow"></i>
+
+                          
+ 
+ 
+ 
+
+                            <ul class="menu-subnav">
+
+                                <li class="menu-item mt-2 " aria-haspopup="true"><a
+                                        href="{{ route('app.card.resource') }}" class="menu-link "><i
+                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                            class="menu-text">{{ __('customTrans.website card managment') }}</span></a>
+                                </li>
+
+                            </ul>
 
 
+                            <ul class="menu-subnav">
+
+                                <li class="menu-item  menu-item-submenu" aria-haspopup="true"
+                                    data-menu-toggle="hover"><a href="javascript:;" class="menu-link menu-toggle"><i
+                                            class="menu-bullet menu-bullet-line menu-danger"><span></span></i><span
+                                            class="menu-text">{{ __('customTrans.services managment') }}</span><span
+                                            class="menu-label">
+                                        </span><i class="menu-arrow"></i></a>
+                                    <div class="menu-submenu "><i class="menu-arrow "></i>
+                                        <ul class="menu-subnav">
+
+                                            <li class="menu-item mt-2 " aria-haspopup="true"><a
+                                                    href="{{ route('app.citzen.services.home') }}" class="menu-link "><i
+                                                        class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                        class="menu-text">{{ __('customTrans.service home') }}</span></a>
+                                            </li>
+
+                                            <li class="menu-item mt-2 " aria-haspopup="true"><a
+                                                    href="{{ route('app.citzen.services.resouces') }}"
+                                                    class="menu-link "><i
+                                                        class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                        class="menu-text">{{ __('customTrans.services resource') }}</span></a>
+                                            </li>
+
+                                            <li class="menu-item mt-2 " aria-haspopup="true"><a
+                                                    href="{{ route('app.citzen.services.index') }}" class="menu-link "><i
+                                                        class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                        class="menu-text">{{ __('customTrans.services index') }}</span></a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </li>
+
+                            </ul>
+
+                        </div>
+                    </li>
+
+                </ul>
+              
+               
+                <ul class="menu-nav py-0">
 
                     <li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"><a
                             href="javascript:;" class="menu-link menu-toggle"><span class="svg-icon menu-icon">
@@ -106,7 +181,7 @@
                             @can('user.all.resource')
                             <ul class="menu-subnav">
                           
-                                    <li class="menu-item mt-2 " aria-haspopup="true"><a href="{{ route('dashboard.user.index') }}"
+                                    <li class="menu-item mt-2 " aria-haspopup="true"><a href="{{ route('appsetting.user.index') }}"
                                             class="menu-link "><i
                                                 class="menu-bullet menu-bullet-dot"><span></span></i><span
                                                 class="menu-text">{{ __('customTrans.users') }}</span></a></li>
@@ -116,7 +191,7 @@
                             @can('status_view')
                                 <ul class="menu-subnav">
 
-                                    <li class="menu-item mt-2 " aria-haspopup="true"><a href="{{ route('dashboard.status') }}"
+                                    <li class="menu-item mt-2 " aria-haspopup="true"><a href="{{ route('appsetting.status') }}"
                                             class="menu-link "><i
                                                 class="menu-bullet menu-bullet-dot"><span></span></i><span
                                                 class="menu-text">{{ __('customTrans.status system') }}</span></a></li>
@@ -126,7 +201,7 @@
                             <ul class="menu-subnav">
 
                                 <li class="menu-item mt-2 " aria-haspopup="true"><a
-                                        href="{{ route('dashboard.setting.index') }}" class="menu-link "><i
+                                        href="{{ route('appsetting.setting.index') }}" class="menu-link "><i
                                             class="menu-bullet menu-bullet-dot"><span></span></i><span
                                             class="menu-text">{{ __('customTrans.setting') }}</span></a></li>
 
@@ -135,7 +210,7 @@
                             <ul class="menu-subnav">
 
                                 <li class="menu-item mt-2 " aria-haspopup="true"><a
-                                        href="{{ route('contact.index') }}" class="menu-link "><i
+                                        href="{{ route('app.contact.index') }}" class="menu-link "><i
                                             class="menu-bullet menu-bullet-dot"><span></span></i><span
                                             class="menu-text">{{ __('customTrans.contact sides') }}</span></a></li>
 
@@ -144,61 +219,12 @@
                             <ul class="menu-subnav">
 
                                 <li class="menu-item mt-2 " aria-haspopup="true"><a
-                                        href="{{ route('contact.addresses.index') }}" class="menu-link "><i
+                                        href="{{ route('appsetting.addresses.index') }}" class="menu-link "><i
                                             class="menu-bullet menu-bullet-dot"><span></span></i><span
                                             class="menu-text">ادارة العناوين </span></a></li>
 
                             </ul>
-
-
-                            <ul class="menu-subnav">
-
-                                <li class="menu-item mt-2 " aria-haspopup="true"><a
-                                        href="{{ route('dashboard.card.resource') }}" class="menu-link "><i
-                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                            class="menu-text">{{ __('customTrans.website card managment') }}</span></a>
-                                </li>
-
-                            </ul>
-
-
-                            <ul class="menu-subnav">
-
-                                <li class="menu-item  menu-item-submenu" aria-haspopup="true"
-                                    data-menu-toggle="hover"><a href="javascript:;" class="menu-link menu-toggle"><i
-                                            class="menu-bullet menu-bullet-line menu-danger"><span></span></i><span
-                                            class="menu-text">{{ __('customTrans.services managment') }}</span><span
-                                            class="menu-label">
-                                        </span><i class="menu-arrow"></i></a>
-                                    <div class="menu-submenu "><i class="menu-arrow "></i>
-                                        <ul class="menu-subnav">
-
-                                            <li class="menu-item mt-2 " aria-haspopup="true"><a
-                                                    href="{{ route('citzen.services.home') }}" class="menu-link "><i
-                                                        class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                        class="menu-text">{{ __('customTrans.service home') }}</span></a>
-                                            </li>
-
-                                            <li class="menu-item mt-2 " aria-haspopup="true"><a
-                                                    href="{{ route('citzen.services.resouces') }}"
-                                                    class="menu-link "><i
-                                                        class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                        class="menu-text">{{ __('customTrans.services resource') }}</span></a>
-                                            </li>
-
-                                            <li class="menu-item mt-2 " aria-haspopup="true"><a
-                                                    href="{{ route('citzen.services.index') }}" class="menu-link "><i
-                                                        class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                        class="menu-text">{{ __('customTrans.services index') }}</span></a>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-                                </li>
-
-                            </ul>
-
-                            
+ 
                             <ul class="menu-subnav">
 
                                 <li class="menu-item  menu-item-submenu" aria-haspopup="true"
@@ -217,7 +243,7 @@
                                             </li>
 
                                             <li class="menu-item mt-2 " aria-haspopup="true"><a
-                                                    href="{{ route('citzen.services.resouces') }}"
+                                                    href="{{ route('app.citzen.services.resouces') }}"
                                                     class="menu-link "><i
                                                         class="menu-bullet menu-bullet-dot"><span></span></i><span
                                                         class="menu-text">طلبات لوحة التحكم</span></a>
@@ -239,77 +265,11 @@
 
 
                 </ul>
-                {{-- @endcan --}}
+              
 
+ 
 
-                {{-- 
-                <li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"><a
-                        href="javascript:;" class="menu-link menu-toggle"><span
-                            class="svg-icon menu-icon"><!--begin::Svg Icon | path:assets/media/svg/icons/Layout/Layout-4-blocks.svg--><svg
-                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                    <rect x="0" y="0" width="24" height="24" />
-                                    <rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5" />
-                                    <path
-                                        d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
-                                        fill="#000000" opacity="0.3" />
-                                </g>
-                            </svg><!--end::Svg Icon--></span><span class="menu-text">Applications</span><i
-                            class="menu-arrow"></i></a>
-                    <div class="menu-submenu "><i class="menu-arrow"></i>
-                        <ul class="menu-subnav">
-                            <li class="menu-item  menu-item-parent" aria-haspopup="true"><span
-                                    class="menu-link"><span class="menu-text">Applications</span></span>
-                            </li>
-                            <li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"><a
-                                    href="javascript:;" class="menu-link menu-toggle"><i
-                                        class="menu-bullet menu-bullet-line"><span></span></i><span
-                                        class="menu-text">Users</span><span class="menu-label"><span
-                                            class="label label-rounded label-primary">6</span></span><i
-                                        class="menu-arrow"></i></a>
-                                <div class="menu-submenu "><i class="menu-arrow"></i>
-                                    <ul class="menu-subnav">
-                                        <li class="menu-item " aria-haspopup="true"><a
-                                                href="custom/apps/user/list-default.html" class="menu-link "><i
-                                                    class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                    class="menu-text">List - Default</span></a></li>
-
-                                    </ul>
-                                </div>
-                            </li>
-
-
-                            <li class="menu-item " aria-haspopup="true"><a href="custom/apps/inbox.html"
-                                    class="menu-link "><i class="menu-bullet menu-bullet-line"><span></span></i><span
-                                        class="menu-text">Inbox</span><span class="menu-label"><span
-                                            class="label label-danger label-inline">new</span></span></a>
-                            </li>
-                        </ul>
-                    </div>
-                </li> --}}
-
-
-                {{-- 
-                <li class="menu-item " aria-haspopup="true"><a target="_blank"
-                        href="https://preview.keenthemes.com/metronic/preview/demo1/builder.html"
-                        class="menu-link "><span
-                            class="svg-icon menu-icon"><!--begin::Svg Icon | path:assets/media/svg/icons/Home/Library.svg--><svg
-                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                    <rect x="0" y="0" width="24" height="24" />
-                                    <path
-                                        d="M5,3 L6,3 C6.55228475,3 7,3.44771525 7,4 L7,20 C7,20.5522847 6.55228475,21 6,21 L5,21 C4.44771525,21 4,20.5522847 4,20 L4,4 C4,3.44771525 4.44771525,3 5,3 Z M10,3 L11,3 C11.5522847,3 12,3.44771525 12,4 L12,20 C12,20.5522847 11.5522847,21 11,21 L10,21 C9.44771525,21 9,20.5522847 9,20 L9,4 C9,3.44771525 9.44771525,3 10,3 Z"
-                                        fill="#000000" />
-                                    <rect fill="#000000" opacity="0.3"
-                                        transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519) "
-                                        x="16.3255682" y="2.94551858" width="3" height="18" rx="1" />
-                                </g>
-                            </svg><!--end::Svg Icon--></span><span class="menu-text">Builder</span></a>
-                </li> --}}
-
-
+ 
 
 
 

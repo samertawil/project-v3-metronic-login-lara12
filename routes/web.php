@@ -30,13 +30,11 @@ Route::group(
         
 
 
-        include __DIR__ . '/uiauth.php';
+        include __DIR__ . '/login.php';
 
-        include __DIR__ . '/dashboard.php';
+        include __DIR__ . '/appsetting.php';
 
-        include __DIR__ . '/citzenServices.php';
-
-        include __DIR__ . '/contact.php';
+        include __DIR__ . '/myapp.php';
     }
 );
 

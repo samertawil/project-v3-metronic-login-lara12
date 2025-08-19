@@ -3,8 +3,8 @@
 use Livewire\Livewire;
 use App\Livewire\Website\Index;
 use Illuminate\Support\Facades\Route;
-use App\Livewire\Dashboard\Cards\Create;
-use App\Livewire\Dashboard\Cards\Resource;
+use App\Livewire\AppSetting\Cards\Create;
+use App\Livewire\AppSetting\Cards\Resource;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
  

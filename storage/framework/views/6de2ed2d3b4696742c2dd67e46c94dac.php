@@ -88,7 +88,7 @@ unset($__errorArgs, $__bag); ?>"
                                 <span class="sr-only">Loading...</span>
                             </div>
                             <div class="mt-5">
-                                <a href="<?php echo e(route('dashboard.support.create')); ?>"  
+                                <a href="<?php echo e(route('appsetting.support.create')); ?>"  
                                     class="text-muted text-hover-primary"><?php echo e(__('customTrans.technical support')); ?></a>
                             </div>
 

@@ -1,0 +1,59 @@
+<?php
+
+namespace App\Livewire\AppSetting\RoleModuleName;
+
+use Livewire\Component;
+use App\Enums\activeType;
+use App\Models\ModuleName;
+use App\Traits\FlashMsgTraits;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\View\View;
+
+class Create extends Component
+{
+
+
+    public string $name;
+    public string $description;
+    public mixed $active="1" ;
+ 
+    public function rules(): mixed {
+        return [
+            'name'=>['required','unique:module_names,name','string'],
+            'active'=>['required', Rule::enum(activeType::class)],
+        ];
+    }
+
+    public function store(): void {
+       
+        $this->validate();
+       
+        ModuleName::create([
+            'name'=>$this->name,
+            'description'=>$this->description,
+            'active'=>$this->active,
+        ]);
+ 
+        FlashMsgTraits::created();
+        $this->dispatch('reload-module');
+        $this->reset();
+
+    }
+
+    
+    public function render(): View
+    {
+
+        
+        if(Gate::denies('ability.all.resource')) {
+            abort(403,'ليس لديك الصلاحية اللازمة');
+         }
+
+
+         
+        $title=__('customTrans.module_id');
+        
+        return view('livewire.app-setting.role-module-name.create')->layoutData(['title'=>$title,'pageTitle'=>$title]);
+    }
+}

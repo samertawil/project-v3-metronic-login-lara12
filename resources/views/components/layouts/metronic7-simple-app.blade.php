@@ -136,7 +136,7 @@
 
 
  
-    <livewire:Dashboard.UsersProfile.Resource>
+    <livewire:AppSetting.UsersProfile.Resource>
  
 
 
