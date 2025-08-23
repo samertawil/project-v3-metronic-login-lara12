@@ -2,7 +2,7 @@
 
    
     <x-slot:crumb>
-      <x-breadcrumb button :label="__('customTrans.add new')" :route="route('contact.create')" >
+      <x-breadcrumb button :label="__('customTrans.add new')" :route="route('app.contact.create')" >
 
         <li class="breadcrumb-item"><a href="" class="text-muted">{{__('customTrans.contacts list')}}</a></li>
 

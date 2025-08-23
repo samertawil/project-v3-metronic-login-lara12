@@ -1,4 +1,4 @@
-<div>
+<div wire:cloak>
 
 
     <x-slot:crumb>
@@ -6,10 +6,39 @@
 
     </x-slot:crumb>
 
+  
 
+    <!-- Notification Icon -->
+    <div wire:poll.keep-alive.10s="refreshNotifications">
+        <div>
+            <button class="btn btn-primary" data-toggle="collapse" data-target="#demo">
+                {{__('customTrans.Notifications')}} <span class="badge bg-danger">{{ $notifications->count() }}</span>
+            </button>
 
+            <!-- notification content here -->
 
+            <div id="demo" class="collapse">
+                <ul class="list-group mt-2 ">
 
+                    @forelse ($notifications as $notification)
+                        <li class="list-group-item d-flex  justify-content-between align-items-center">
+
+                            <a href="{{ $notification->data['url'] ?? '#' }}"
+                                wire:click.prevent="markAsRead('{{ $notification->id }}')">
+                                {{ $notification->data['content'] ?? 'No content' }}
+                            </a>
+                            <button wire:click="markAsRead('{{ $notification->id }}')"
+                                class="btn btn-sm btn-outline-secondary">Mark read</button>
+                        </li>
+
+                    @empty
+                        <li class="list-group-item">No new notifications</li>
+                    @endforelse
+                </ul>
+
+            </div>
+        </div>
+    </div>
 
 
     <x-search-index-section place="البحث باسم الحساب او صاحب الحساب">
@@ -28,8 +57,8 @@
 
 
         <div class="col-5 mt-7" wire:ignore>
-            <x-select wire:model='searchSubjectId' multiple="true" class="js-example-basic-multiple " id="searchSubjectId"
-                wire:ignore divWidth="12" :options="$this->statuses['supportForLogin']"></x-select>
+            <x-select wire:model='searchSubjectId' multiple="true" class="js-example-basic-multiple "
+                id="searchSubjectId" wire:ignore divWidth="12" :options="$this->statuses['supportForLogin']"></x-select>
         </div>
 
 
@@ -139,8 +168,8 @@
                                         </td>
                                     </tr>
 
-                                    <tr >
-                                        <td >{{ __('customTrans.attchments') }}</td>
+                                    <tr>
+                                        <td>{{ __('customTrans.attchments') }}</td>
                                         <td>
                                             @if ($data->uploaded_files)
                                                 @foreach ($data->uploaded_files as $file)

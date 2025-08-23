@@ -6,24 +6,21 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Notifications\Messages\VonageMessage;
-use Illuminate\Notifications\Messages\BroadcastMessage;
 
-
-
-class CustomNotification extends Notification
+class TechnicalSupportNotification extends Notification
 {
     use Queueable;
     protected $content;
     protected $url;
     protected $user_name;
+
     /**
      * Create a new notification instance.
      */
     public function __construct($content, $url, $user_name)
     {
         $this->onConnection('database'); // استخدام اتصال 'database'
-        $this->content = $content;
+         $this->content = $content;
         $this->url = $url;
         $this->user_name = $user_name;
     }
@@ -35,27 +32,9 @@ class CustomNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['broadcast'];
+        return ['database','broadcast'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     */
-    // public function toMail(object $notifiable): MailMessage
-    // {
-    //     return (new MailMessage)
-    //         ->line('The introduction to the notification.')
-    //         ->action('Notification Action', url('/'))
-    //         ->line('Thank you for using our application!');
-    // }
-
-    // إرسال SMS عبر Vonage
-    // public function toVonage(object $notifiable): VonageMessage
-    // {
-    //     return (new VonageMessage)
-    //         ->content('لديك إشعار جديد في التطبيق.')
-    //         ->unicode();
-    // }
 
     public function toBroadcast(object $notifiable): mixed
     {
@@ -67,6 +46,24 @@ class CustomNotification extends Notification
         ];
     }
 
+    public function toDatabase(object $notifiable): mixed {
+        return [
+            'data'=>'new',
+            'url'=>url('/'),
+        ];
+    }
+
+    /**
+     * Get the mail representation of the notification.
+     */
+    public function toMail(object $notifiable): MailMessage
+    {
+        return (new MailMessage)
+            ->line('The introduction to the notification.')
+            ->action('Notification Action', url('/'))
+            ->line('Thank you for using our application!');
+    }
+
     /**
      * Get the array representation of the notification.
      *
@@ -75,7 +72,11 @@ class CustomNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            //
+          
+            'content' =>  $this->content,
+            'url' => $this->url,
+            'user_name' => $this->user_name,
+        
         ];
     }
 }

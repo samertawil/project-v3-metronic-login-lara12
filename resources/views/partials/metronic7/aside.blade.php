@@ -83,7 +83,14 @@
 
                           
  
- 
+                            <ul class="menu-subnav">
+
+                                <li class="menu-item mt-2 " aria-haspopup="true"><a
+                                        href="{{ route('app.contact.index') }}" class="menu-link "><i
+                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                            class="menu-text">{{ __('customTrans.contact sides') }}</span></a></li>
+
+                            </ul>
  
 
                             <ul class="menu-subnav">
@@ -207,14 +214,7 @@
 
                             </ul>
 
-                            <ul class="menu-subnav">
-
-                                <li class="menu-item mt-2 " aria-haspopup="true"><a
-                                        href="{{ route('app.contact.index') }}" class="menu-link "><i
-                                            class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                            class="menu-text">{{ __('customTrans.contact sides') }}</span></a></li>
-
-                            </ul>
+                          
 
                             <ul class="menu-subnav">
 
@@ -237,18 +237,12 @@
                                         <ul class="menu-subnav">
 
                                             <li class="menu-item mt-2 " aria-haspopup="true"><a
-                                                    href="{{ route('website.support.show') }}" class="menu-link "><i
+                                                    href="{{ route('appsetting.support.show') }}" class="menu-link "><i
                                                         class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                        class="menu-text">طلبات الموقع</span></a>
+                                                        class="menu-text">طلبات الدعم الفني</span></a>
                                             </li>
 
-                                            <li class="menu-item mt-2 " aria-haspopup="true"><a
-                                                    href="{{ route('app.citzen.services.resouces') }}"
-                                                    class="menu-link "><i
-                                                        class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                        class="menu-text">طلبات لوحة التحكم</span></a>
-                                            </li>
-
+                                         
                                            
 
                                         </ul>

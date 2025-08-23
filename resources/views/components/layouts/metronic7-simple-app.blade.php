@@ -13,7 +13,7 @@
     @stack('css')
   
     @livewireStyles
-    @filepondScripts  
+    {{-- @filepondScripts   --}}
     @vite(['resources/js/app.js'])   
 </head>
 

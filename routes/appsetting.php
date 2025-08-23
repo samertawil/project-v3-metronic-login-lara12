@@ -6,8 +6,8 @@ use App\Livewire\AppSetting\UserModule\UserIndex;
 use App\Livewire\AppSetting\Setting\SettingCreate;
 use App\Livewire\AppSetting\UserModule\UserCreate;
 use App\Livewire\AppSetting\StatusModule\StatusClass;
-use App\Livewire\TechnicalSupport\Dashboard\Create as DashboardTechSupportCreate;
-use App\Livewire\TechnicalSupport\Website\Show as WebsiteTechSupportShow;
+use App\Livewire\AppSetting\TechnicalSupport\Create as DashboardTechSupportCreate;
+use App\Livewire\AppSetting\TechnicalSupport\Show as WebsiteTechSupportShow;
 use App\Livewire\Appsetting\AddressesModule\AddressesIndex;
 
 Route::prefix('app-setting/')->name('appsetting.')->middleware(['auth','web'])->group(function() {
@@ -30,6 +30,7 @@ Route::get('setting/create',SettingCreate::class)->name('setting.create');
 // Dashboard user technicalSupport
  
 Route::get('support/create', DashboardTechSupportCreate::class)->name('support.create')->withoutMiddleware('auth');
+Route::get('support/show', WebsiteTechSupportShow::class)->name('support.show');
 
 // addresses setting
 Route::get('addresses-index',AddressesIndex::class)->name('addresses.index');
@@ -37,7 +38,6 @@ Route::get('addresses-index',AddressesIndex::class)->name('addresses.index');
 });
 
 
-Route::get('website/support/show', WebsiteTechSupportShow::class)->name('website.support.show');
 
 include __DIR__.'/permission.php';
 

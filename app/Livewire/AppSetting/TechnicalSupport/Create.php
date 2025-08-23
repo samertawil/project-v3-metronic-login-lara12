@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\TechnicalSupport\Dashboard;
+namespace App\Livewire\AppSetting\TechnicalSupport;
 
 
 use Livewire\Component;
@@ -72,6 +72,6 @@ class Create extends Component
     {
  
         (string) $title = __('customTrans.technical support');
-        return view('livewire.technical-support.dashboard.create')->layoutData(['title' => $title, 'pagetitle' => $title]);
+        return view('livewire.app.setting.technical-support.create')->layoutData(['title' => $title, 'pagetitle' => $title]);
     }
 }

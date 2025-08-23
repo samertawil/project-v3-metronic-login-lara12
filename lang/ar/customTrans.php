@@ -509,4 +509,5 @@ return [
 'subject_id'=>'الدعم المطلوب',
 'replay'=>'الرد',
 'attchments'=>'مرفقات',
+'Notifications'=>'الاشعارات',
 ];
