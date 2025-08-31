@@ -14,13 +14,13 @@ use Illuminate\Notifications\Messages\BroadcastMessage;
 class CustomNotification extends Notification
 {
     use Queueable;
-    protected $content;
-    protected $url;
-    protected $user_name;
+    protected string $content;
+    protected string $url;
+    protected string $user_name;
     /**
      * Create a new notification instance.
      */
-    public function __construct($content, $url, $user_name)
+    public function __construct(string $content,string $url,string $user_name)
     {
         $this->onConnection('database'); // استخدام اتصال 'database'
         $this->content = $content;

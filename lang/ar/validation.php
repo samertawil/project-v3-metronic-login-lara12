@@ -375,7 +375,12 @@ return [
 'card_img'=>'الصورة',
 'card_use_in'=>'مكان استخدام البطاقة',
 'publish_date'=>'تاريح النشر',
-
+'url_active_to_date'=>'تفعيل الرابط الي تاريخ',
+'active_to_date'=>'نهاية المشروع',
+'route_name'=>'اسم الرابط',
+'services_images'=>'ًصور للخدمة',
+'card_header'=>'الصورة العلوية لبطاقة الخدمة',
+	 
 
 
         ],

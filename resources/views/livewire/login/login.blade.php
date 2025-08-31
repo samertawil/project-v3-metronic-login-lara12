@@ -30,13 +30,14 @@
                                         autofocus />
                                     @include('layouts._show-error', ['field_name' => 'user_name'])
                                 </div>
-                                <div class="form-group mb-5" style="position: relative; max-width: 600px; margin: auto;">
-                                    <input wire:model="password" name="password" dir="ltr"
-                                        id="password"
+                                <div class="form-group mb-5"
+                                    style="position: relative; max-width: 600px; margin: auto;">
+                                    <input wire:model.live="password" name="password" dir="ltr" id="password"
                                         class="form-control h-auto form-control-solid py-4 w-75 w-lg-100 text-center @error('password') is-invalid @enderror"
-                                        type="password" placeholder="{{ __('customTrans.password') }}" autocomplete="new-password" />
-                                 
-                                        <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"
+                                        type="password" placeholder="{{ __('customTrans.password') }}"
+                                        autocomplete="new-password" />
+
+                                    <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"
                                         style="position: absolute; top: 50%; right: 15px; transform: translateY(-50%); cursor: pointer;"></span>
                                     @include('layouts._show-error', ['field_name' => 'password'])
                                 </div>
@@ -49,13 +50,15 @@
                                             {{ __('customTrans.remember') }}
                                         </label>
                                     </div>
-                                    <a href="{{ route('login.forgetpassword') }}" 
+                                    <a href="{{ route('login.forgetpassword') }}"
                                         class="text-muted text-hover-primary">{{ __('customTrans.Forgot Your Password') }}</a>
                                 </div>
-                                
 
-                                <button
-                                    class="btn btn-primary font-weight-bold  my-5  w-75" wire:loading.remove>{{ __('customTrans.Login') }}</button>
+
+                                <button class="btn btn-primary font-weight-bold  my-5  w-75"
+                                    @disabled($password == '') wire:loading.remove
+                                    wire:target='authenticate'>{{ __('customTrans.Login') }}</button>
+
 
 
                             </form>
@@ -63,16 +66,18 @@
                                 <span class="opacity-70 mr-4">
                                     {{ __('customTrans.dont have account') }}
                                 </span>
-                                <a href="{{ route('register') }}"   id="kt_login_signup"
+                                <a href="{{ route('register') }}" id="kt_login_signup"
                                     class="text-muted text-hover-primary font-weight-bold">{{ __('customTrans.register_new_account') }}</a>
                             </div>
-                            <div wire:loading>
+
+                            <div wire:loading wire:target='authenticate'>
 
                                 <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
                                 <span class="sr-only">Loading...</span>
                             </div>
+
                             <div class="mt-5">
-                                <a href="{{ route('appsetting.support.create') }}"  
+                                <a href="{{ route('appsetting.support.create') }}"
                                     class="text-muted text-hover-primary">{{ __('customTrans.technical support') }}</a>
                             </div>
 
@@ -80,7 +85,7 @@
                         <div class="mt-20">
                             @include('partials.general._lang')
                         </div>
-                      
+
                     </div>
 
                 </div>

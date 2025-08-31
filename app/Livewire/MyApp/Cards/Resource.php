@@ -34,7 +34,7 @@ class Resource extends Component
     public string $card_title;
     public string $card_text;
     public string $card_url;
-    public object $card_img;
+    public object|null $card_img=null;
     public mixed $card_img_show='';
     public mixed $active;
     public int $card_use_in;
@@ -91,7 +91,7 @@ class Resource extends Component
 
 
     
-    public function update():void
+    public function update(): void
     {
 
      
@@ -99,7 +99,9 @@ class Resource extends Component
       
 // @phpstan-ignore-next-line
         if ($this->card_img) {
+       
             $image =  UploadingFilesTrait::uploadSingleFile($this->card_img, 'cards', 'public');
+            
         } else {
             $image = $this->data['card_img'];
         }

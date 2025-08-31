@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class CitzenServices extends Model
 {
    protected $casts=[
-      'logo1'=>'json',
-      'logo2'=>'json',
+      'services_images'=>'json',
       'properties'=>'json',
    ];
    protected $fillable=[
@@ -26,8 +25,7 @@ class CitzenServices extends Model
      'note',
      'conditions',
      'route_name',
-     'logo1',
-     'logo2',
+     'services_images',
      'home_page_order',
      'teal',
      'deactive_note',

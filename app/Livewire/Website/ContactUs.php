@@ -46,7 +46,7 @@ class ContactUs extends Component
             $users = User::whereIn('user_name', $usersToNotify)->get();
 
             foreach ($users as $user) {
-                $user->notify(new CustomNotification());
+                $user->notify(new CustomNotification('you have notification',url('/'),$user));
             }
         } else {
             return;

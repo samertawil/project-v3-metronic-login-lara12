@@ -6,7 +6,6 @@ use App\Models\City;
 use App\Models\Region;
 use App\Models\Status;
 use App\Models\Ability;
-use CacheAbilitiesServices;
 use App\Models\Neighbourhood;
 use App\Models\SettingSystem;
 use App\Observers\CityObserver;
@@ -50,7 +49,7 @@ class AppServiceProvider extends ServiceProvider
             return in_array($user->user_type, $userTypesWithFullAccess) ? true : null;
         });
 
-
+        /** @var \Illuminate\Database\Eloquent\Collection|\App\Models\Ability[] $abilities */
         $abilities = Cache::rememberForever('abilities_list', function () {
             return Ability::all();
         });

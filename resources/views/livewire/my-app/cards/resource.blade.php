@@ -56,7 +56,8 @@
                         {{-- Main Row --}}
                         <tr class="main-row" wire:key="card-{{ $card->id }}">
                             <td class="p-0">
-                                <a href="#" class="btn btn-icon pulse pulse-success mr-5" onclick="toggleDetailsRow(this); return false;">
+                                <a href="#" class="btn btn-icon pulse pulse-success mr-5"
+                                    onclick="toggleDetailsRow(this); return false;">
                                     <i class="fa fa-caret-right text-success"></i> <span class="pulse-ring"></span>
                                 </a>
                             </td>
@@ -112,17 +113,17 @@
 
 
                                     <div class="my-5">
-                                        <a href="{{ asset('storage/' . $this->card_img_show) }}" target="_blank"> 
-                                            <img  src="{{ asset('storage/' . $this->card_img_show) }}"
-                                            style="width: 150px; height: 60px; font-size:13px;">
-                                              </a>
+                                        <a href="{{ asset('storage/' . $this->card_img_show) }}" target="_blank">
+                                            <img src="{{ asset('storage/' . $this->card_img_show) }}"
+                                                style="width: 150px; height: 60px; font-size:13px;">
+                                        </a>
 
                                     </div>
 
-                                    <x-filepond::upload wire:model="file" name="file" required='true'
-                                        wire:model='card_img' allowFileSizeValidation maxFileSize='1024KB'
-                                        class="@error('file') is-invalid   @enderror" />
-                                    @include('partials.general._show-error', ['field_name' => 'file'])
+                                    <x-filepond::upload name="card_img" required='true' wire:model='card_img'
+                                        allowFileSizeValidation maxFileSize='1024KB'
+                                        class="@error('card_img') is-invalid   @enderror" />
+                                    @include('partials.general._show-error', ['field_name' => 'card_img'])
 
 
                                     <x-saveClearbuttons close wire:click.prevent='update'></x-saveClearbuttons>
@@ -172,32 +173,32 @@
 
 
 
- 
-@push('js')
-    {{-- <script src="{{ asset('template-assets/metronic7/js/pages/crud/ktdatatable/advanced/row-details.min.js') }}"></script> --}}
-    
 
-    <script>
-        function toggleDetailsRow(trigger) {
-            const tr = trigger.closest('tr');
-            const nextRow = tr.nextElementSibling;
-            const icon = trigger.querySelector('i');
+    @push('js')
+        {{-- <script src="{{ asset('template-assets/metronic7/js/pages/crud/ktdatatable/advanced/row-details.min.js') }}"></script> --}}
 
-            if (nextRow && nextRow.classList.contains('details-row')) {
-                nextRow.style.display = nextRow.style.display === 'none' ? 'table-row' : 'none';
-                icon.classList.toggle('fa-caret-right');
-                icon.classList.toggle('fa-caret-down');
+
+        <script>
+            function toggleDetailsRow(trigger) {
+                const tr = trigger.closest('tr');
+                const nextRow = tr.nextElementSibling;
+                const icon = trigger.querySelector('i');
+
+                if (nextRow && nextRow.classList.contains('details-row')) {
+                    nextRow.style.display = nextRow.style.display === 'none' ? 'table-row' : 'none';
+                    icon.classList.toggle('fa-caret-right');
+                    icon.classList.toggle('fa-caret-down');
+                }
             }
-        }
-    </script>
+        </script>
+      
 
-
-    <script>
-        window.addEventListener('closeModel', event => {
-            $('#CardEditPreview').modal('hide');
-        })
-    </script>
-@endpush
+        <script>
+            window.addEventListener('closeModel', event => {
+                $('#CardEditPreview').modal('hide');
+            })
+        </script>
+    @endpush
 
 
 </div>

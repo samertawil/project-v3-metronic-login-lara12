@@ -5,7 +5,7 @@
 
             <li class="breadcrumb-item"><a href="{{ route('app.citzen.services.index') }}"
                     class="text-muted">{{ __('customTrans.services index') }} </a></li>
-            <li class="breadcrumb-item"><a href="{{ route('app.citzen.services.resouces') }}"
+            <li class="breadcrumb-item"><a href="{{ route('app.citzen.services.create') }}"
                     class="text-muted">{{ __('customTrans.services resource') }} </a></li>
 
         </x-breadcrumb>
@@ -17,15 +17,13 @@
 
         <div class="col-6">
             <x-input type='number' min='1' wire:model='num' name='num' label :labelname="__('customTrans.service num')"
-                divWidth='8'></x-input>
+                divWidth='8' placeholder="{{$this->maxNum}}" req description_field="لا يمكن تكرار رقم الخدمة"></x-input>
 
-            <x-input wire:model='name' name='name' label :labelname="__('customTrans.service name')" divWidth='8'></x-input>
+            <x-input wire:model='name' name='name' label :labelname="__('customTrans.service name')" divWidth='8' req   description_field="مثال: خدمة تسجيل المواطنين"></x-input>
 
-            <x-input wire:model='url' name='url' label divWidth='8'></x-input>
+            <x-input wire:model='url' name='url' label divWidth='8' description_field="رابط مباشر للوصول للخدمة مثال : https:://www.***/register.net"></x-input>
 
-            <x-input wire:model='status_id' name='status_id' label divWidth='8'></x-input>
-
-            <x-input wire:model='Responsible' name='Responsible' :labelname="__('customTrans.services Responsible')" label divWidth='8'></x-input>
+            <x-input wire:model='responsible' name='responsible' :labelname="__('customTrans.services Responsible')" label divWidth='8'></x-input>
         </div>
 
         <div class="col-6">
@@ -36,20 +34,16 @@
             <x-input type='date' wire:model='url_active_to_date' name='url_active_to_date' label
                 divWidth='8'></x-input>
 
-            <x-input type='date' wire:model='active_from_date' name='active_from_date' label
-                divWidth='8'></x-input>
-
-            <x-input type='date' wire:model='active_to_date' name='active_to_date' label divWidth='8'></x-input>
-
-            <div class="d-md-flex">
+           
+          
 
                 <x-radio wire:model='active' name='active' :value1='1' :value2='0' label :labelname="__('customTrans.activation')"
-                    :value_title1="__('customTrans.active')" :value_title2="__('customTrans.not active')" divclass="mt-5"></x-radio>
+                    value_title1="active" value_title2="not active" divclass="mt-5"></x-radio>
 
 
                 <x-input wire:model='route_name' name='route_name' divlclass="mt-4" label divWidth='5'></x-input>
 
-            </div>
+            
 
         </div>
     </div>
@@ -101,27 +95,25 @@
     </div>
 
 
-    @if ($Card_header)
-    {{ __('customTrans.preview') }}
-  
-        <img src="{{ $Card_header->temporaryUrl() }}" class="w-50 w-lg-25 h-50 h-lg-25 p-4">
+    <label for="">{{ __('customTrans.logo1') }}</label>
+{{-- 
+    <x-filepond::upload wire:model="logo1" name="logo1[]"   allowFileSizeValidation multiple
+        maxFileSize='7024KB' class="@error('logo1') is-invalid   @enderror" />
+    @include('partials.general._show-error', ['field_name' => 'logo1']) --}}
 
+
+    @if ($card_header)
+        {{ __('customTrans.preview') }}
+
+        <img src="{{ $card_header->temporaryUrl() }}" class="w-50 w-lg-25 h-50 h-lg-25 p-4">
     @endif
 
-<div class="form-group">
-    <label for="card_img">Card_header1</label>
-    <input type="file" wire:model='Card_header' name="Card_header" @class ([
-        ' custom-file',
-        'form-control',
-        'is-invalid' => $errors->has('Card_header'),
-    ]) accept="image/*"  >
 
-    @error('Card_header')
-        <li class="invalid-feedback"> {{ $message }} </li>
-    @enderror
-</div>
+    <label for="">{{ __('customTrans.card_header') }}</label>
 
-
+    <x-filepond::upload wire:model="card_header" name="card_header" required='true' allowFileSizeValidation
+        maxFileSize='7024KB' class="@error('card_header') is-invalid   @enderror" />
+    @include('partials.general._show-error', ['field_name' => 'card_header'])
 
     <div class="row">
 
@@ -129,7 +121,7 @@
 
 
 
-{{-- 
+    {{-- 
     <x-modal idName="PropartiesModal" :title="__('customTrans.add more proparty')">
 
 
@@ -147,12 +139,13 @@
 
         <x-button default_class="btn ripple btn-light-primary" style="width: 100px;"
             wire:click.prevent='store'></x-button>
+          
     </div>
-
+    @include('layouts._show_errors_all')
 
     {{-- ////////////////////////////// --}}
-  
- 
+
+
 
     {{-- <div>
         
@@ -189,6 +182,6 @@
     </div>   --}}
 
 
-    
+
 
 </div>

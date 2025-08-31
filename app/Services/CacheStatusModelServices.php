@@ -9,12 +9,15 @@ use Illuminate\Database\Eloquent\Collection;
 class CacheStatusModelServices
 {
 
-    public static function getData(): mixed
+    public static function getData(): Collection
     {
-
-        return Cache::rememberForever('statusData', function () {
+        $data = Cache::rememberForever('statusData', function () {
             return Status::get();
         });
+    
+
+        /** @var Collection $data */
+        return $data;
     }
 
 

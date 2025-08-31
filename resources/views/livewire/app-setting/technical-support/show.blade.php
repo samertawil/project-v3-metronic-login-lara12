@@ -9,7 +9,7 @@
   
 
     <!-- Notification Icon -->
-    <div wire:poll.keep-alive.10s="refreshNotifications">
+    <div wire:poll.60s="refreshNotifications">
         <div>
             <button class="btn btn-primary" data-toggle="collapse" data-target="#demo">
                 {{__('customTrans.Notifications')}} <span class="badge bg-danger">{{ $notifications->count() }}</span>

@@ -117,7 +117,7 @@ return [
     'p_id_sub'=>'ثابت فرعي',
     'page_name'=>'اسم الصفحة',
     'route_system_name'=>'اسم الرابط الرئيسي',
-    'route_name'=>'اسم رابط الصفحة',
+    'route_name'=>'اسم الرابط ',
     'delete'=>'مسح',
     'used_in_system_id'=>'اسم المديول التابع له',
     'choose one'=>'اختر',
@@ -325,7 +325,7 @@ return [
       'p_id_sub'=>'ثابت فرعي',
       'page_name'=>'اسم الصفحة',
       'route_system_name'=>'اسم الرابط الرئيسي',
-      'route_name'=>'رابط الصفحة',
+ 
       'delete'=>'مسح',
       'used_in_system_id'=>'اسم المديول التابع له',
       'choose one'=>'اختر',
@@ -510,4 +510,7 @@ return [
 'replay'=>'الرد',
 'attchments'=>'مرفقات',
 'Notifications'=>'الاشعارات',
+'services_images'=>'ًصور للخدمة',
+'back to main'=>'رجوع للقائمة',
+ 
 ];

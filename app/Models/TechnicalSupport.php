@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class TechnicalSupport extends Model
@@ -44,26 +44,27 @@ class TechnicalSupport extends Model
       return $this->belongsTo(Status::class, 'status_id', 'id');
    }
 
-   public function scopeSearchName($query, $value): mixed
+   public function scopeSearchName(Builder  $query,string $value): mixed
    {
-
+     
       return $query->where('name', 'like', "%{$value}%")->orWhere('user_name', 'like', "%{$value}%");
    }
 
-   public function scopeSearchSubjectId($query, $value): mixed
+   // @phpstan-ignore missingType.iterableValue
+   public function scopeSearchSubjectId(Builder  $query,array $value): mixed
    {
-
+      
       return $query->whereIn('subject_id', $value);
    }
-
-   public function scopeSearchStatusId($query, $value): mixed
+// @phpstan-ignore missingType.iterableValue
+   public function scopeSearchStatusId(Builder  $query, array $value): mixed
    {
-
+  
       return $query->whereIn('status_id', $value);
    }
 
 
-   public function scopeSearchSupportTerminal($query, $value): mixed
+   public function scopeSearchSupportTerminal(Builder $query,string $value): mixed
    {
    
       return $query->where('terminal_id', $value);

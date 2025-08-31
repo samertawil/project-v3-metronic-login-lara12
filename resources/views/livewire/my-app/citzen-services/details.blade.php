@@ -191,7 +191,7 @@
                         <div style="height: 100px; width: 50vw; margin-top:10px; "
                             class="d-flex  justify-content-start ">
 
-                            <x-actions del wire:click.prevent='deleteCard_header'></x-actions>
+                            <x-actions del wire:click.prevent='deletecard_header'></x-actions>
 
                             <a href="{{ asset('storage/' . $card_header) }}" target="_blank">
                                 <img src="{{ asset('storage/' . $card_header) }}"
@@ -212,15 +212,15 @@
                 @endif
 
                 <div class="form-group">
-                    <label for="card_header_1">Card_header1</label>
-                    <input type="file" wire:model='card_header_1' name="Card_header" @class ([
+                    <label for="card_header_1">card_header1</label>
+                    <input type="file" wire:model='card_header_1' name="card_header" @class ([
                         ' custom-file',
                         'form-control',
-                        'is-invalid' => $errors->has('Card_header'),
+                        'is-invalid' => $errors->has('card_header'),
                     ])
                         accept="image/*">
 
-                    @error('Card_header')
+                    @error('card_header')
                         <li class="invalid-feedback"> {{ $message }} </li>
                     @enderror
                 </div>

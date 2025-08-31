@@ -8,6 +8,7 @@ use Livewire\Component;
 use Illuminate\View\View;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Layout;
+use Illuminate\Http\UploadedFile;
 use App\Traits\UploadingFilesTrait;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,7 +20,7 @@ class Resource extends Component
     /**
      * @property object $profile_image
      */
-    public mixed $profile_image = '';
+    public UploadedFile|null $profile_image =null;
 
 
     public function mount(): void

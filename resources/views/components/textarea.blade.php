@@ -27,9 +27,10 @@
   <label for="{{ $id }}" @class(["col-form-label  $labelclass   "])>{{$labelname?$labelname: __("customTrans.$name") }}
       @if($req)
       <span class="text-danger">*</span>
+      @endif
       @if ($span)
       <small class="text-muted">{{$description_field1}}</small>
-      @endif
+     
       @endif
   </label>
   @endif

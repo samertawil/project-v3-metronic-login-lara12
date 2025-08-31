@@ -6,16 +6,15 @@ namespace App\Livewire\MyApp\contact;
 
 use App\Models\Contact;
 use Livewire\Component;
+use Illuminate\View\View;
 use Livewire\WithFileUploads;
 use App\Traits\FlashMsgTraits;
-use Livewire\Attributes\Computed;
+use Illuminate\Http\UploadedFile;
 use App\Traits\UploadingFilesTrait;
 use App\Services\CacheModelServices;
 use Spatie\LivewireFilepond\WithFilePond;
 use App\Services\CacheStatusModelServices;
 use App\Services\CacheSettingModelServices;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\View\View;
 
 class ContactCreate extends Component
 {
@@ -25,24 +24,24 @@ class ContactCreate extends Component
     use WithFileUploads;
     use WithFilePond;
 
-    public mixed $profile_image ="";
+    public UploadedFile|null $profile_image=null;
     public int $contact_type=17;
-    public string $full_name;
+    public string|null $full_name=null;
     public int $identity_number;
-    public string $fname;
-    public string $sname;
-    public string $tname;
-    public string $lname;
-    public string $phone_primary;
-    public string $phone_secondary;
-    public string $email;
-    public string $website;
+    public string $fname='';
+    public string|null $sname=null;
+    public string|null $tname=null;
+    public string $lname='';
+    public string $phone_primary='';
+    public string|null $phone_secondary=null;
+    public string|null $email=null;
+    public string|null $website=null;
     public mixed $connect_ways =[] ;
-    public int $address_type;
-    public int $region_id;
-    public int $city_id;
-    public int $neighbourhood_id;
-    public int $location_id;
+    public int|null $address_type=null;
+    public int|null $region_id=null;
+    public int|null $city_id=null;
+    public int|null $neighbourhood_id=null;
+    public int|null $location_id=null;
     public mixed $contactImage;
 
     public bool $personalSide=true;
@@ -82,8 +81,7 @@ class ContactCreate extends Component
     public function store(): void
     {
         
-        // dd($this->all());
-
+     
         $this->validate([
            
             'fname' => ['required'],

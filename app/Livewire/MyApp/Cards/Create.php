@@ -4,12 +4,14 @@ namespace App\Livewire\MyApp\Cards;
 
 use App\Models\Card;
 use Livewire\Component;
+use Illuminate\View\View;
 use App\Traits\FlashMsgTraits;
+use Illuminate\Http\UploadedFile;
 use Livewire\Attributes\Computed;
 use App\Traits\UploadingFilesTrait;
 use Spatie\LivewireFilepond\WithFilePond;
 use App\Services\CacheStatusModelServices;
-use Illuminate\View\View;
+use Illuminate\Database\Eloquent\Collection;
 
 class Create extends Component
 {
@@ -17,7 +19,7 @@ class Create extends Component
 
 
     public string $card_title;
-    public mixed $card_img;
+    public UploadedFile|null $card_img = null;
     public string $card_text;
     public mixed $active = true;
     public int $card_use_in;
@@ -45,15 +47,20 @@ class Create extends Component
     public function store(): void
     {
 
-
         $this->validate();
 
-        $image =  UploadingFilesTrait::uploadSingleFile($this->card_img, 'cards', 'public');
+        $image = "";
+
+        if ($this->card_img) {
+            $image =  UploadingFilesTrait::uploadSingleFile($this->card_img, 'cards', 'public');
+        }
+
+
 
         Card::create([
             'card_title' => $this->card_title,
             'card_text' => $this->card_text,
-            'card_img' => $image,
+            'card_img' => $image ?? "",
             'active' => $this->active,
             'card_use_in' => $this->card_use_in,
             'card_url' => $this->card_url,
@@ -69,11 +76,15 @@ class Create extends Component
 
 
     #[Computed()]
-    public  function statuses(): mixed
+    public  function statuses(): Collection
     {
-        $data = CacheStatusModelServices::getData();
-        $data = $data->select('status_name', 'id', 'p_id_sub')->Where('p_id_sub', config('myConstants.galarySystem'));
-        return $data;
+
+        $data = new CacheStatusModelServices();
+        
+        /** @var int $galarySystem */
+          $galarySystem = config('myConstants.galarySystem');
+
+        return $data->statusesPSubId($galarySystem);
     }
 
     public function render(): View

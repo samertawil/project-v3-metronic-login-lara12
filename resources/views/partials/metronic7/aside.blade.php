@@ -122,7 +122,7 @@
                                             </li>
 
                                             <li class="menu-item mt-2 " aria-haspopup="true"><a
-                                                    href="{{ route('app.citzen.services.resouces') }}"
+                                                    href="{{ route('app.citzen.services.create') }}"
                                                     class="menu-link "><i
                                                         class="menu-bullet menu-bullet-dot"><span></span></i><span
                                                         class="menu-text">{{ __('customTrans.services resource') }}</span></a>

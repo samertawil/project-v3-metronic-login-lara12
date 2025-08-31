@@ -17,7 +17,8 @@ class SupportMail extends Mailable
     public array $data;
 
  
-    public function __construct(mixed  $data)
+    // @phpstan-ignore missingType.iterableValue
+    public function __construct(array  $data)
     {
         $this->data = $data;
       

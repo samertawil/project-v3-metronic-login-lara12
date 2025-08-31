@@ -355,7 +355,7 @@ return [
     'services managment'=>'Services managment',
     'edit'=>'Edit',
     'services collection images'=>'Services collection images',
-    'card_header'=>'ًCard_header',
+    'card_header'=>'ًcard_header',
     'services managment'=>'خدمات المواطنين',
     'website card managment'=>'Website card managment',
     'all system'=>'All systems',

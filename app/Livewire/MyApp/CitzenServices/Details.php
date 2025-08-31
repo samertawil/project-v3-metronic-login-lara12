@@ -39,7 +39,7 @@ class Details extends Component
     public int $home_page_order;
     public string $deactive_note;
     public mixed $properties = [];
-   
+
 
 
 
@@ -49,7 +49,10 @@ class Details extends Component
 
         $this->editServicesId = $id;
 
-        $data = ServicesIndex::services($this->editServicesId);
+        $getIndex=new ServicesIndex();
+        $data= $getIndex->services($this->editServicesId);
+
+        // $data = ServicesIndex::services($this->editServicesId);
 
         $this->dataToEdit = $data;
 
@@ -166,44 +169,43 @@ class Details extends Component
 
         $data = CitzenServices::Where('id', $this->editServicesId)->first();
 
-        if($data) {
+        if ($data) {
 
-        $array =  $data->logo1;
+            $array =  $data->logo1;
 
-        $deleteFromDisk = $array[$key]??[];
+            $deleteFromDisk = $array[$key] ?? [];
 
-        unset($array[$key]);
+            unset($array[$key]);
 
-        $data->update([
-            'logo1' => $array,
-        ]);
+            $data->update([
+                'logo1' => $array,
+            ]);
 
-        Storage::disk('public')->delete($deleteFromDisk);
+            Storage::disk('public')->delete($deleteFromDisk);
 
-        $this->cancelEdit();
+            $this->cancelEdit();
+        }
     }
 
-    }
 
-
-    public function deleteCard_header(): void
+    public function deletecard_header(): void
     {
 
         $data = CitzenServices::Where('id', $this->editServicesId)->first();
 
-        if($data) {
+        if ($data) {
 
-        
-          $deleteFromDisk = $data->card_header??[];
 
-        $data->update([
-            'card_header' => null,
-        ]);
+            $deleteFromDisk = $data->card_header ?? [];
 
-        Storage::disk('public')->delete($deleteFromDisk);
+            $data->update([
+                'card_header' => null,
+            ]);
 
-        $this->cancelEdit();
-    }
+            Storage::disk('public')->delete($deleteFromDisk);
+
+            $this->cancelEdit();
+        }
     }
 
 

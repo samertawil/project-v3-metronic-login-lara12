@@ -8,6 +8,7 @@ use Livewire\Attributes\Url;
 use Livewire\WithPagination;
 use App\Models\CitzenServices;
 use App\Traits\FlashMsgTraits;
+use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Storage;
@@ -38,21 +39,21 @@ class ServicesIndex extends Component
     public mixed $active = '';
     #[Validate(['date_format:Y-m-d'])]
     public mixed $active_from_date;
-    #[Validate(['after_or_equal:now','date_format:Y-m-d'])]
+    #[Validate(['after_or_equal:now', 'date_format:Y-m-d'])]
     public mixed $active_to_date;
 
 
- 
+
     public function edit(int $id): void
     {
 
 
         $this->editServicesId = $id;
 
-        $data =  $this->services($id);
+        $data =  self::services($id);
 
-        $this->name = $data['name'];
 
+        $this->name = $data->name;
         $this->home_page_order = $data->home_page_order;
         $this->active = $data->active;
         $this->active_from_date = $data->active_from_date;
@@ -70,7 +71,7 @@ class ServicesIndex extends Component
     {
         $this->validate();
 
-        $data =  $this->services($this->editServicesId);
+        $data =  self::services($this->editServicesId);
 
         $data->update([
             'name' => $this->name,
@@ -88,7 +89,7 @@ class ServicesIndex extends Component
     }
 
     #[Computed()]
-    public static function services(int|null $id = null): mixed
+    public  function services(int|null $id = null)
     {
         if ($id) {
             $data = CitzenServices::find($id);
@@ -101,19 +102,19 @@ class ServicesIndex extends Component
 
     public function destroy(int $id): void
     {
-         
-        $data = $this->services($id);
+
+        $data = self::services($id);
         if ($data->logo1) {
             foreach ($data->logo1 as $file) {
                 Storage::disk('public')->delete($file);
             }
         }
-         
-          $data->delete();  
+
+        $data->delete();
     }
 
 
-    
+
     public function render(): View
     {
         

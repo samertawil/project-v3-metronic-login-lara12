@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use Livewire\WithFileUploads;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Laravel\Facades\Image;
 
@@ -15,21 +16,21 @@ trait UploadingFilesTrait
 
 
 
-    public static function uploadSingleFile(mixed $uploadedFile, string $folderName, string $disk): mixed
+    public static function uploadSingleFile(UploadedFile  $uploadedFile, string $folderName, string $disk): mixed
     {
 
-
+        
         $ex = $uploadedFile->getClientOriginalExtension();
         $filename = $folderName . time() . '_' . rand(00000, 99999) . '.' . $ex;
         $path = $uploadedFile->storeAs($folderName, $filename, $disk);
-        $attchments = $path;
+         
 
-        return   $attchments;
+        return  $path;
     }
 
 
 
-    public static function uploadSingleFileResize(mixed $uploadedFile, string $folderName, string $disk, int $hight, int $width): object|string
+    public static function uploadSingleFileResize(UploadedFile $uploadedFile, string $folderName, string $disk, int $hight, int $width): object|string
     {
 
         $extension = strtolower($uploadedFile->getClientOriginalExtension()); // الحصول على الامتداد الأصلي (مثل jpg، png..)
@@ -45,16 +46,18 @@ trait UploadingFilesTrait
 
 
 
-
-        if (str_starts_with($mimeType, 'image/')) {
-            $type = 'صورة';
-        } elseif (str_starts_with($mimeType, 'video/')) {
-            $type = 'فيديو';
-        } elseif (str_starts_with($mimeType, 'application/pdf')) {
-            $type = 'PDF';
-        } else {
-            $type = 'ملف آخر';
+        if($mimeType) {
+            if (str_starts_with($mimeType, 'image/')) {
+                $type = 'صورة';
+            } elseif (str_starts_with($mimeType, 'video/')) {
+                $type = 'فيديو';
+            } elseif (str_starts_with($mimeType, 'application/pdf')) {
+                $type = 'PDF';
+            } else {
+                $type = 'ملف آخر';
+            }
         }
+       
 
 
         $fileName = time() . '_' . rand(10000, 99999) . '.' . $extension; // توليد اسم عشوائي للملف مع الاحتفاظ بالامتداد الأصلي
@@ -87,7 +90,7 @@ trait UploadingFilesTrait
 
 
 
-    public static function uploadAndCompress(mixed $uploadedFile, string $folderName, string $disk, int $requiredSizeInMega): object|string
+    public static function uploadAndCompress(UploadedFile $uploadedFile, string $folderName, string $disk, int $requiredSizeInMega): object|string
     {
 
         $image = Image::read($uploadedFile);   // قراءة الصورة
@@ -140,23 +143,26 @@ trait UploadingFilesTrait
 
 
 
+/**
+ * @param UploadedFile[] $uploadedFiles
+ * @return string[]
+ */
+public static function uploadsFiles(array $uploadedFiles, string $dbColumName, string $disk): array
+{
+    $attachments_file = [];
 
-    public  static function  uploadsFiles(mixed $uploadedFiles, string $dbColumName, string $disk): mixed
-    {
+    foreach ($uploadedFiles as $file) {
+        if ( $file->isValid()) {
+            $ex = $file->getClientOriginalExtension();
+            $filename = $disk . time() . '_' . rand(00000, 99999) . '.' . $ex;
+            $path = $file->storeAs('/', $filename, $disk);
 
-        $attchments_file = [];
-
-        foreach ($uploadedFiles as $file) {
-            if ($file->isValid()) {
-
-                $ex = $file->getClientOriginalExtension();
-                $filename = $disk . time() . '_' . rand(00000, 99999) . '.' . $ex;
-                $path = $file->storeAs('/', $filename, $disk);
-
-                $attchments_file[] = $path;
-            }
+            $attachments_file[] = $path;
         }
-
-        return  $attchments_file;
     }
+
+   
+    // @phpstan-ignore return.type
+    return $attachments_file;
+}
 }
