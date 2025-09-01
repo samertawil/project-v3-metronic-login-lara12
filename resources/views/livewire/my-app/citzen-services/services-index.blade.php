@@ -1,4 +1,4 @@
-<div>
+<div wire:cloak>
 
 
     <x-slot:crumb>

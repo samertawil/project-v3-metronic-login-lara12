@@ -147,15 +147,15 @@ trait UploadingFilesTrait
  * @param UploadedFile[] $uploadedFiles
  * @return string[]
  */
-public static function uploadsFiles(array $uploadedFiles, string $dbColumName, string $disk): array
+public static function uploadsFiles(array $uploadedFiles, string $folderName, string $disk): array
 {
     $attachments_file = [];
 
     foreach ($uploadedFiles as $file) {
         if ( $file->isValid()) {
             $ex = $file->getClientOriginalExtension();
-            $filename = $disk . time() . '_' . rand(00000, 99999) . '.' . $ex;
-            $path = $file->storeAs('/', $filename, $disk);
+            $filename = $folderName . time() . '_' . rand(00000, 99999) . '.' . $ex;
+            $path = $file->storeAs($folderName, $filename, $disk);
 
             $attachments_file[] = $path;
         }

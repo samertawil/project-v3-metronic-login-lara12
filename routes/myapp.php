@@ -3,11 +3,12 @@
 use App\Livewire\MyApp\Contact\Index;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\MyApp\contact\ContactCreate;
+use App\Livewire\MyApp\CitzenServices\ServicesEdit;
 use App\Livewire\Myapp\CitzenServices\ServicesHome;
 use App\Livewire\MyApp\CitzenServices\ServicesShow;
+use App\Livewire\Myapp\Cards\Create as  CardsCreate;
 use App\Livewire\Myapp\CitzenServices\ServicesIndex;
 use App\Livewire\Myapp\CitzenServices\ServicesCreate;
-use App\Livewire\Myapp\Cards\Create as  CardsCreate;
 use App\Livewire\Myapp\Cards\Resource as CardsResource;
 
  
@@ -20,6 +21,7 @@ Route::get('citzen-services-create',ServicesCreate::class)->name('citzen.service
 Route::get('citzen-services-index',ServicesIndex::class)->name('citzen.services.index');
 Route::get('citzen-services-home',ServicesHome::class)->name('citzen.services.home');
 Route::get('citzen-services-show/{id}',ServicesShow::class)->name('citzen.services.show');
+Route::get('citzen-services-edit/{id}',ServicesEdit::class)->name('citzen.services.edit');
 
 Route::get('cards/create', CardsCreate::class)->name('card.create');
 Route::get('cards/resource', CardsResource::class)->name('card.resource');

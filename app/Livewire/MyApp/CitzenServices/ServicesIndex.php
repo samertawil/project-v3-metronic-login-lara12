@@ -8,7 +8,6 @@ use Livewire\Attributes\Url;
 use Livewire\WithPagination;
 use App\Models\CitzenServices;
 use App\Traits\FlashMsgTraits;
-use Illuminate\Database\Eloquent\Collection;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Storage;
@@ -42,51 +41,8 @@ class ServicesIndex extends Component
     #[Validate(['after_or_equal:now', 'date_format:Y-m-d'])]
     public mixed $active_to_date;
 
-
-
-    public function edit(int $id): void
-    {
-
-
-        $this->editServicesId = $id;
-
-        $data =  self::services($id);
-
-
-        $this->name = $data->name;
-        $this->home_page_order = $data->home_page_order;
-        $this->active = $data->active;
-        $this->active_from_date = $data->active_from_date;
-        $this->active_to_date = $data->active_to_date;
-    }
-
-
-    public function cancelEdit(): void
-    {
-
-        $this->reset('editServicesId');
-    }
-
-    public function update(): void
-    {
-        $this->validate();
-
-        $data =  self::services($this->editServicesId);
-
-        $data->update([
-            'name' => $this->name,
-            'active' => $this->active,
-            'home_page_order' => $this->home_page_order,
-            'active_from_date' => $this->active_from_date,
-            'active_to_date' => $this->active_to_date,
-        ]);
-
-
-
-        $this->cancelEdit();
-
-        $this->resetPage();
-    }
+ 
+ 
 
     #[Computed()]
     public  function services(int|null $id = null)

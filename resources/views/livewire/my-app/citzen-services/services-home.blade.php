@@ -1,4 +1,4 @@
-<div>
+<div wire:cloak>
 
     @push('css')
         <style>

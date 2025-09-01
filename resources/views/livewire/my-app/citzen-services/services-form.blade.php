@@ -1,4 +1,4 @@
-<div>
+<div wire:cloak>
 
     <x-slot:crumb>
         <x-breadcrumb>
@@ -81,13 +81,10 @@
 
     <div class="row align-items-center">
 
-        {{-- <x-textarea wire:model='conditions' name='conditions' data-provide="markdown" label :labelname="__('customTrans.conditions')"
-            divWidth='6' rows='10'></x-textarea> --}}
-
         <div class="col-6">
             <div wire:ignore>
-                <x-textarea wire:model='conditions' name='summernote' divWidth="12" label labelname="شروط الخدمة ">
-                </x-textarea>
+                <label class="mt-5">شروط الخدمة</label>
+                <textarea wire:model='conditions' name="conditions" class="summernote" divWidth="12">{!! $this->conditions !!}</textarea>
             </div>
         </div>
 
@@ -98,7 +95,7 @@
 
 
             <x-input type="number" min="0" wire:model='home_page_order' name='home_page_order' label
-                divWidth='12' placeholder="{{$this->maxPageOrder}}"></x-input>
+                divWidth='12' placeholder="{{ $this->maxPageOrder }}"></x-input>
 
             <x-input wire:model='teal' name='teal' label divWidth='12' span
                 description_field1="مثال: جديد  نشط"></x-input>
@@ -108,27 +105,34 @@
 
 
     </div>
-    {{-- @if ($services_images)
-        {{ __('customTrans.preview') }}
-        @foreach ($services_images as $image)
-            <img src="{{ $image->temporaryUrl() }}" class="w-50 w-lg-25 h-50 h-lg-25 p-4">
-        @endforeach
 
-    @endif --}}
- 
+    <label class="mt-9">{{ __('customTrans.services_images') }}</label>
 
-    <label class="mt-9" >{{ __('customTrans.services_images') }}</label>
- 
     <x-filepond::upload wire:model="services_images" name="services_images[]" multiple required='false'
         allowFileSizeValidation maxFileSize='1024KB' class="  @error('services_images') is-invalid   @enderror" />
-    @include('partials.general._show-error', ['field_name' => 'services_images']) 
+    @include('partials.general._show-error', ['field_name' => 'services_images'])
 
 
-    {{-- @if ($card_header)
-        {{ __('customTrans.preview') }}
+    <div class="row pt-10">
 
-        <img src="{{ $card_header->temporaryUrl() }}" class="w-50 w-lg-25 h-50 h-lg-25 p-4">
-    @endif --}}
+        <div class="col-12 d-flex flex-column flex-root">
+
+            @if ($this->services_images_path && $type == 'update')
+
+                <span class="font-weight-bolder mb-2">* {{ __('customTrans.services_images') }} </span>
+
+                <div class="d-flex align-items-center">
+                    @foreach ($this->services_images_path as $key => $image)
+                        <div class=" my-5">
+                            <img src="{{ asset('storage/' . $image) }}" style="height: 100px; width:100px;">
+                        </div>
+                        <x-actions del wire:click.prevent='deleteServicesImages({{ $key }})'></x-actions>
+                    @endforeach
+                </div>
+
+            @endif
+        </div>
+    </div>
 
 
     <label>{{ __('customTrans.card_header') }}</label>
@@ -137,21 +141,42 @@
         maxFileSize='1024KB' class="@error('card_header') is-invalid   @enderror" />
     @include('partials.general._show-error', ['field_name' => 'card_header'])
 
-    <div class="row">
 
+
+    <div class="row pt-10">
+
+        <div class="col-12 d-flex flex-column flex-root">
+
+            @if ($this->card_header_path)
+                <div class="d-flex align-items-center">
+                    <div class="my-5">
+                        <img src="{{ asset('storage/' . $this->card_header_path) }}"
+                            style="height: 100px; width:100px;">
+                    </div>
+                    <x-actions del wire:click.prevent='deleteCardHeader'></x-actions>
+
+                </div>
+            @endif
+        </div>
     </div>
-
-
 
 
     <div class="d-flex justify-content-end">
 
+        <x-button default_class="btn ripple btn-light-primary" style="width: 100px;" wire:loading.remove
+            wire:click.prevent='{{ $type }}' label="{{ $type }}"></x-button>
 
-
-        <x-button default_class="btn ripple btn-light-primary" style="width: 100px;"
-            wire:click.prevent='store'></x-button>
-
+        <div wire:loading wire:target='{{ $type }}'>
+            <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+            <span class="sr-only">Loading...</span>
+        </div>
     </div>
+
+
+
+
+
+
     @include('layouts._show_errors_all')
 
 
@@ -161,7 +186,7 @@
 
     @push('js')
         <script>
-            $('#summernote').summernote({
+            $('.summernote').summernote({
                 placeholder: 'ضع شروط الخدمة مع وجود امكانية التنسيق',
                 tabsize: 2,
                 height: 300,

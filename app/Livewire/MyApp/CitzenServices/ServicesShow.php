@@ -3,7 +3,6 @@
 namespace App\Livewire\MyApp\CitzenServices;
 
 use Livewire\Component;
-use App\Models\CitzenServices;
 use Illuminate\View\View;
 use Livewire\Attributes\Computed;
 
@@ -13,14 +12,16 @@ class ServicesShow extends Component
 
     public function mount($id)
     {
-
         $this->servicesId = $id;
     }
 
     #[Computed()]
     public function services()
     {
-        return CitzenServices::findOrfail($this->servicesId);
+      
+        $getIndex=new ServicesIndex();
+        $data= $getIndex->services($this->servicesId);
+        return $data;
     }
 
     public function render(): View
