@@ -81,13 +81,12 @@
                         @if ($service->active == 1)
                             <div class="card-footer d-flex justify-content-between py-5 px-0" style="border-top: none;">
 
-                                <x-tag-a :route="route($service->route_name)" :name="__('customTrans.sign in')"
+                                <x-tag-a :route="$service->url" :name="__('customTrans.access')"
                                     default_class="btn btn-light-primary font-weight-bold"></x-tag-a>
 
                                 <x-tag-a data-target="#conditionsModal{{ $service->id }}" data-toggle="modal"
-                                    :route="route($service->route_name)" :name="__('customTrans.sign in')"
-                                    default_class="btn btn-outline-secondary font-weight-bold"
-                                    :name="__('customTrans.conditions')"></x-tag-a>
+                                    :route="$service->url" :name="__('customTrans.conditions')"
+                                    default_class="btn btn-outline-secondary font-weight-bold"></x-tag-a>
                             </div>
                         @endif
 

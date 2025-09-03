@@ -8,6 +8,7 @@ use App\Models\Status;
 use App\Models\Ability;
 use App\Models\Neighbourhood;
 use App\Models\SettingSystem;
+use App\Models\CitzenServices;
 use App\Observers\CityObserver;
 use App\Observers\RegionObserver;
 use App\Observers\StatusObserver;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\ServiceProvider;
 use App\Observers\NeighbourhoodObserver;
 use App\Observers\SystemSettingObserver;
+use App\Observers\CitzenServicesObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -36,6 +38,7 @@ class AppServiceProvider extends ServiceProvider
         City::observe(CityObserver::class);
         Neighbourhood::observe(NeighbourhoodObserver::class);
         Ability::observe(AbilityObserver::class);
+        CitzenServices::observe(CitzenServicesObserver::class);
 
 
         date_default_timezone_set('Asia/Gaza');

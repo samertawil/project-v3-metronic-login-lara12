@@ -59,7 +59,7 @@
                 </thead>
                 <tbody>
                     @forelse ($this->Contacts as $key => $Contact)
-                        <tr>
+                        <tr wire:key="contact-{{ $Contact->id }}">
 
                             <td>{{ ($this->Contacts->currentPage() - 1) * $this->Contacts->perPage() + $key + 1 }}</td>
 

@@ -61,7 +61,7 @@
 
 
     @if ($preview)
-        <a href="#" class="btn btn-lg text-primary "{{ $attributes }} title="{{__('customTrans.preview')}}">
+        <a href={{ $route }} class="btn btn-lg text-primary "{{ $attributes }} title="{{__('customTrans.preview')}}">
 
             <i class="ti-eye text-primary"></i>
 

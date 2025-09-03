@@ -17,7 +17,7 @@
 
 
         <x-input type='number' min='1' wire:model='num' name='num' label :labelname="__('customTrans.service num')" divWidth='6'
-            placeholder="{{ $this->maxNum }}" req description_field="لا يمكن تكرار رقم الخدمة"></x-input>
+            placeholder="{{ $this->maxNum }}" req description_field="لا يمكن تكرار رقم الخدمة" ></x-input>
 
         <x-input wire:model='name' name='name' label :labelname="__('customTrans.service name')" divWidth='6' req
             description_field="مثال: خدمة تسجيل المواطنين"></x-input>
@@ -68,7 +68,7 @@
             divWidth='6'></x-input>
 
 
-        <x-textarea wire:model='description' name='description' label divWidth='6' rows='4'></x-textarea>
+        <x-textarea wire:model='description' name='description' label divWidth='6' rows='4' req></x-textarea>
 
         <x-textarea wire:model='note' name='note' label :labelname="__('customTrans.note')" divWidth='6' rows='4'></x-textarea>
 
@@ -95,7 +95,7 @@
 
 
             <x-input type="number" min="0" wire:model='home_page_order' name='home_page_order' label
-                divWidth='12' placeholder="{{ $this->maxPageOrder }}"></x-input>
+                divWidth='12' placeholder="{{ $this->maxPageOrder }}" req></x-input>
 
             <x-input wire:model='teal' name='teal' label divWidth='12' span
                 description_field1="مثال: جديد  نشط"></x-input>

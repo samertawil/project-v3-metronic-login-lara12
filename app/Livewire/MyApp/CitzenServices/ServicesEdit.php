@@ -3,20 +3,23 @@
 namespace App\Livewire\MyApp\CitzenServices;
 
 use Livewire\Component;
+use Illuminate\View\View;
 use Livewire\WithFileUploads;
 use App\Models\CitzenServices;
-use App\Traits\MyApp\CitzenServicesTrait;
+use App\Traits\FlashMsgTraits;
 use App\Traits\UploadingFilesTrait;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\View\View;
+use App\Traits\MyApp\CitzenServicesTrait;
 use Spatie\LivewireFilepond\WithFilePond;
+use App\Services\MyApp\CitizenServicesRepository;
 
 class ServicesEdit extends Component
 {
     use WithFileUploads;
     use CitzenServicesTrait;
     use WithFilePond;
-
+    use FlashMsgTraits;
+    
     public $dataToupdate;
  
     public function mount(int $id): void
@@ -25,8 +28,13 @@ class ServicesEdit extends Component
 
         $this->editServicesId = $id;
 
-         $getData=new ServicesIndex();
-         $data= $getData->services($this->editServicesId);
+        $getRepository= new CitizenServicesRepository();
+
+        $x= $getRepository->getCachedCitizenServicesData();
+    
+        $data= $x->where('id',$this->editServicesId)->first();
+
+
          $this->dataToupdate=$data;
         
         $this->num = $data->num;
@@ -45,19 +53,20 @@ class ServicesEdit extends Component
         $this->teal = $data->teal;
         $this->home_page_order = $data->home_page_order;
         $this->deactive_note = $data->deactive_note;
+
+
         
     }
+        
+       
 
- 
 
-
-    public function update(): void
+    public function update(): mixed
     {
        
           $this->validate();
         
          
-
         if (is_array($this->services_images) && !empty($this->services_images)) {
 
             $services_images =  UploadingFilesTrait::uploadsFiles($this->services_images, 'services_images', 'public');
@@ -77,8 +86,9 @@ class ServicesEdit extends Component
             $card_header = $this->card_header_path;
         }
 
-
-        $this->dataToupdate->update([
+        
+        $dataColumn=[
+            'id'=>$this->editServicesId,
             'name'=>$this->name,
             'num'=>$this->num,
             'active'=>$this->active,
@@ -96,7 +106,16 @@ class ServicesEdit extends Component
             'services_images' => $services_images,
             'card_header' =>  $card_header,
 
-        ]);
+        ];
+
+         $getRepository = new CitizenServicesRepository();
+
+         $getRepository->saveData($dataColumn);
+        
+         FlashMsgTraits::created('success','update');
+
+       
+         return to_route('app.citzen.services.index');
         
     }
 

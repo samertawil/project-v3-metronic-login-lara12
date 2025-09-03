@@ -49,7 +49,8 @@
                     </tr>
 
                 </thead>
-                <tbody>
+                
+                  <tbody>
                     @foreach ($this->services as $key => $service)
 
                         <tr class="main-row" wire:key="card-{{ $service->id }}">
@@ -83,22 +84,25 @@
                           
 
                             <td class="d-flex  justify-content-center">
-                              
-                                    <x-actions preview data-target="#Servicepreview{{ $service->id }}"
-                                        data-toggle="modal"></x-actions>
 
+                                <x-actions preview  :route="route('app.citzen.services.show',$service->id)" target="_blank"
+                                    ></x-actions>
 
-                                    <x-modal width='lg' idName="Servicepreview{{ $service->id }}" title="بيانات الخدمة" >
+                                    {{-- <x-actions preview data-target="#Servicepreview{{ $service->id }}"
+                                        data-toggle="modal"></x-actions> --}}
+                                 
+
+                                    {{-- <x-modal width='lg' idName="Servicepreview{{ $service->id }}" title="بيانات الخدمة" >
 
 
                                       <livewire:MyApp.CitzenServices.ServicesShow :id="$service->id">
                                         </livewire:MyApp.CitzenServices.ServicesShow> 
 
-                                    </x-modal>
+                                    </x-modal> --}}
 
 
                                     <x-actions edit wire:loading.attr='disabled'
-                                        wire:click.prevent='edit({{ $service->id }})'></x-actions>
+                                        :route="route('app.citzen.services.edit',$service->id)"></x-actions>
                                     
                                     <a wire:loading.attr='disabled' class="btn btn-lg text-danger "
                                         wire:confirm.prompt="{{ __('customTrans.please insert num of services for del') }}\n|{{ $service->num }}"
@@ -112,7 +116,7 @@
 
                        
                     @endforeach
-                </tbody>
+                </tbody> 
 
             </table>
             {{-- {{ $this->services->links() }} --}}

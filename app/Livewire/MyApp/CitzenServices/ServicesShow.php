@@ -5,6 +5,7 @@ namespace App\Livewire\MyApp\CitzenServices;
 use Livewire\Component;
 use Illuminate\View\View;
 use Livewire\Attributes\Computed;
+use App\Services\MyApp\CitizenServicesRepository;
 
 class ServicesShow extends Component
 {
@@ -18,10 +19,13 @@ class ServicesShow extends Component
     #[Computed()]
     public function services()
     {
-      
-        $getIndex=new ServicesIndex();
-        $data= $getIndex->services($this->servicesId);
-        return $data;
+        $getRepository= new CitizenServicesRepository();
+
+        $data= $getRepository->getCachedCitizenServicesData();
+
+       return $data->findOrfail($this->servicesId);
+
+       
     }
 
     public function render(): View

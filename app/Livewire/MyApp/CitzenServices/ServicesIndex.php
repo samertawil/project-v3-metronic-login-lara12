@@ -4,25 +4,25 @@ namespace App\Livewire\MyApp\CitzenServices;
 
 use Livewire\Component;
 use App\Traits\SortTrait;
+use Illuminate\View\View;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
-use App\Models\CitzenServices;
 use App\Traits\FlashMsgTraits;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\View\View;
+use App\Services\MyApp\CitizenServicesRepository;
 
 class ServicesIndex extends Component
 {
 
     use SortTrait;
     use FlashMsgTraits;
-
+    use WithPagination;
 
     #[Url()]
     public string $sortBy = 'created_at';
-    use WithPagination;
+    
     protected string $paginationTheme = 'bootstrap';
 
     #[Url()]
@@ -40,30 +40,39 @@ class ServicesIndex extends Component
     public mixed $active_from_date;
     #[Validate(['after_or_equal:now', 'date_format:Y-m-d'])]
     public mixed $active_to_date;
-
- 
  
 
     #[Computed()]
-    public  function services(int|null $id = null)
+    public  function services(): mixed
     {
-        if ($id) {
-            $data = CitzenServices::find($id);
-            return $data;
-        }
-        $data = CitzenServices::get();
+        $getRepository= new CitizenServicesRepository();
+
+        $data = $getRepository->getCachedCitizenServicesData() ;
+
         return $data;
+ 
     }
 
 
     public function destroy(int $id): void
     {
 
-        $data = self::services($id);
-        if ($data->logo1) {
-            foreach ($data->logo1 as $file) {
+        $getRepository=new CitizenServicesRepository();
+
+        $data=$getRepository->getCitizenServicesData($id);
+
+        
+        if ( ! empty($data->services_images)) {
+            foreach ($data->services_images as $file) {
                 Storage::disk('public')->delete($file);
             }
+        }
+
+         
+        if ( $data->card_header) {
+            
+                Storage::disk('public')->delete($data->card_header);
+           
         }
 
         $data->delete();
@@ -73,7 +82,7 @@ class ServicesIndex extends Component
 
     public function render(): View
     {
-        
+
         $title = __('customTrans.services managment');
         return view('livewire.my-app.citzen-services.services-index')->layoutData(['title' => $title, 'pageTitle' => $title]);
     }

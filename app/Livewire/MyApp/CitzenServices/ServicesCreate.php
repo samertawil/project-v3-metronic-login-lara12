@@ -8,14 +8,16 @@ use Livewire\Component;
 use Illuminate\View\View;
 use App\Models\CitzenServices;
 use App\Traits\FlashMsgTraits;
-use App\Traits\MyApp\CitzenServicesTrait;
 use App\Traits\UploadingFilesTrait;
+use App\Traits\MyApp\CitzenServicesTrait;
 use Spatie\LivewireFilepond\WithFilePond;
+use App\Services\MyApp\CitizenServicesRepository;
 
 class ServicesCreate extends Component
 {
     use CitzenServicesTrait;
     use WithFilePond;
+    use FlashMsgTraits;
 
     public function mount(): void
     {
@@ -30,9 +32,7 @@ class ServicesCreate extends Component
 
 
 
-
-
-    public function store(): void
+    public function store(): mixed
     {
         $this->validate();
 
@@ -41,7 +41,7 @@ class ServicesCreate extends Component
         if ($this->services_images) {
             $services_images =  UploadingFilesTrait::uploadsFiles($this->services_images, 'services_images', 'public');
         }
-
+        
         $card_header = null;
 
         if ($this->card_header) {
@@ -49,7 +49,7 @@ class ServicesCreate extends Component
         }
 
 
-        CitzenServices::create([
+        $dataColumn=[
             'num' => $this->num,
             'name' => $this->name,
             'url' => $this->url,
@@ -66,13 +66,16 @@ class ServicesCreate extends Component
             'deactive_note' => $this->deactive_note,
             'services_images' => $services_images,
             'card_header' => $card_header,
+        ];
 
+        $getRepository = new CitizenServicesRepository();
 
-        ]);
+         $getRepository->saveData($dataColumn);
 
-        FlashMsgTraits::created();
-
-        $this->dispatch('reload');
+         FlashMsgTraits::created();
+     
+         return to_route('app.citzen.services.index');
+       
     }
 
 
@@ -89,3 +92,5 @@ class ServicesCreate extends Component
         return view('livewire.my-app.citzen-services.services-create')->layoutData(['title' => $title, 'pageTitle' => $title]);
     }
 }
+
+
