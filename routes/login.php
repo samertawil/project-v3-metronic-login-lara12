@@ -1,8 +1,9 @@
 <?php
-use Illuminate\Support\Facades\Route;
 use App\Livewire\Login\Login;
+use App\Livewire\SocialLogin;
 use App\Livewire\Login\Register;
 use App\Livewire\Login\ResetPassword;
+use Illuminate\Support\Facades\Route;
 use App\Livewire\Login\ChangePassword;
 use App\Livewire\Login\ForgetPassword;
 use App\Livewire\Login\LogoutController;
@@ -30,6 +31,8 @@ Route::middleware(['web'])->group(function () {
     })->name('login.home');
 });
 
+Route::get('{provider}/social-redirect', [SocialLogin::class, 'socialRedirect'])->name('social.redirect');
+Route::get('{provider}/social-callback', [SocialLogin::class, 'socialCallback'])->name('social.callback');
 
 
 

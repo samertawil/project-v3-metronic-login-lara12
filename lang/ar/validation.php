@@ -170,6 +170,9 @@ return [
                 'attribute-name' => [
                         'rule-name' => 'custom-message',
                 ],
+                'user_name' => [
+                        'exists' => 'اسم المستخدم غير موجود.',
+                ],
         ],
 
         /*
@@ -380,6 +383,7 @@ return [
 'route_name'=>'اسم الرابط',
 'services_images'=>'ًصور للخدمة',
 'card_header'=>'الصورة العلوية لبطاقة الخدمة',
+'user_name_does_not_exist'=>'اسم المستخدم غير موجود',
 	 
 
 

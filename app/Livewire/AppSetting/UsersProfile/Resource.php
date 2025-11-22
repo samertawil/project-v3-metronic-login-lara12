@@ -37,7 +37,7 @@ class Resource extends Component
         $image = '';
 
         $this->validate([
-            'profile_image' => 'image|mimes:jpg,jpeg,png|max:1024',
+            'profile_image' => 'image|mimes:jpg,jpeg,png|max:512000',
         ]);
 
 

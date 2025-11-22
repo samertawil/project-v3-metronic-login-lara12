@@ -25,82 +25,92 @@
                          </div>
 
                          <div>
+
                              @if ($this->user)
                                  <div class="mb-10">
                                      <span style=" font-weight: bold;">{{ __('customTrans.mr/s') }} :
                                      </span><span
                                          style=" font-weight: bold;">{{ ' ' . $this->user['user']->name }}</span>
                                  </div>
-
-                                 <div>
-                                     <x-radio label wire:model.live='check_type' name="resetType" value1="questions"
-                                         style1="margin-right:20px;" class="text-cente" value2="email"
-                                         value_title1="login questions" value_title2="email" divWidth='12'></x-radio>
-                                 </div>
-
-                                 @if ($typeValue == 'email')
-
-                                     <strong @class([
-                                         'text-danger' => $this->data['emailData'] == 'noRecoveryEmail',
-                                     ])>{{ __($this->data['emailData']) }}</strong>
-
-                                     @if ($this->data['emailData'] != 'noRecoveryEmail')
-                                         <div>
-                                             <button wire:click='sendResetLink' wire:loading.remove id="sendBtn"
-                                                 class="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-2">{{ __('customTrans.send') }}
-                                             </button>
-                                         </div>
-                                     @endif
-                                 @elseif ($typeValue == 'questions')
-                                     @if (gettype($this->data['questionsData']) != 'array')
-                                         <strong @class([
-                                             'text-danger' => $this->data['questionsData'] == 'noQuestions',
-                                         ])>
-                                             {{ __($this->data['questionsData']) }} </strong>
-                                     @else
-                                         @php
-                                             $question = 'question_' . app()->getLocale();
-                                         @endphp
-
-                                         <p>{{ $this->data['questionsData'][0]->questions->$question ??''}}</p>
-                                         <x-input wire:model='answer1' name="answer1" label="yes"
-                                             divlclass='col-lg-12' req></x-input>
-                                         <p>{{ $this->data['questionsData'][1]->questions->$question??'' }}</p>
-                                         <x-input wire:model='answer2' name="answer2" label="yes"
-                                             divlclass='col-lg-12' req></x-input>
-                                         <p>{{ $this->data['questionsData'][2]->questions->$question ??''}}</p>
-                                         <x-input wire:model='answer3' name="answer3" label="yes"
-                                             divlclass='col-lg-12' req></x-input>
-
-                                         <div wire:loading>
-                                             <img src="{{ asset('template-assets/valex/img/loader.svg') }}"
-                                                 alt="Loader">
-                                         </div>
-
-
-                                         <x-input wire:model='password' type="password" name="password" class='mr-4'
-                                             label="yes" autocomplete="new-password" divlclass='col-lg-12' req
-                                             dir="ltr"></x-input>
-
-                                         <x-input wire:model='passwordConfirmation' name="passwordConfirmation"
-                                             id="password_confirmation" type="password" label="yes" dir="ltr"
-                                             autocomplete="new-password" divlclass='col-lg-12' req></x-input>
-
-                                         <div>
-                                             <button wire:click.prevent='changePassword' wire:loading.remove
-                                                 class="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-2">{{ __('customTrans.Change_Password') }}
-                                             </button>
-                                         </div>
-
-                                         @error('wrongAnswer')
-                                             <div class="w-100 bg-danger text-white text-center">
-                                                 <p>{{ __('customTrans.wrongAnswer') }}</p>
-                                             </div>
-                                         @enderror
-                                     @endif
-                                 @endif
-
+                                
+                                
                              @endif
+
+                             <div>
+                                 <x-radio label wire:model.live='typeValue' name="resetType" value1="questions" 
+                                     style1="margin-right:20px;" class="text-cente" value2="email"
+                                     value_title1="login questions" value_title2="email" divWidth='12'></x-radio>
+                             </div>
+                             
+                             @if ($typeValue == 'email' && $this->user)
+
+                                 <strong @class([
+                                     'text-danger' => $this->user['emailData'] == 'noRecoveryEmail',
+                                 ])>{{ __($this->user['emailData']) }}</strong>
+
+                                 @if ($this->user['emailData'] != 'noRecoveryEmail')
+                                     <div>
+                                         <button wire:click='sendResetLink' wire:loading.remove id="sendBtn"
+                                             class="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-2">{{ __('customTrans.send') }}
+                                         </button>
+                                     </div>
+                                 @endif
+                             @elseif ($typeValue == 'questions' && $this->user)
+                                 @if (gettype($this->user['questionsText']) != 'array')
+                                     <strong @class([
+                                         'text-danger' => $this->user['questionsText'] == 'noQuestions',
+                                     ])>
+                                         {{ __($this->user['questionsText']) }} </strong>
+                                 @else
+                                     @php
+                                         $question = 'question_' . app()->getLocale();
+                                        //  $answerModels = ['answer1', 'answer2', 'answer3'];
+                                     @endphp
+
+                                     {{-- input to answer questions --}}
+                                      
+                                     @foreach($this->user['questionsText'] as $index => $question)
+                                     
+                                    
+                                     <div class="mb-4">
+                                         <p class="text-primary" style="font-weight: bold;">{{ $question }}</p>
+                                         <x-input wire:model="answerModels.{{$index}}" name="answerModels.{{$index}}" divlclass='col-lg-12' req></x-input>  
+
+
+                                        
+                                
+                                     </div>
+                                  @endforeach
+
+                                     <div wire:loading>
+                                         <img src="{{ asset('template-assets/valex/img/loader.svg') }}" alt="Loader">
+                                     </div>
+
+
+                                     <x-input wire:model='password' type="password" name="password" class='mr-4'
+                                         label="yes" autocomplete="new-password" divlclass='col-lg-12' req
+                                         dir="ltr"></x-input>
+
+                                     <x-input wire:model='passwordConfirmation' name="passwordConfirmation"
+                                         id="password_confirmation" type="password" label="yes" dir="ltr"
+                                         autocomplete="new-password" divlclass='col-lg-12' req></x-input>
+
+                                     <div>
+                                         <button wire:click.prevent='changePassword' wire:loading.remove
+                                             class="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-2">{{ __('customTrans.Change_Password') }}
+                                         </button>
+                                     </div>
+
+                                     @error('wrongAnswer')
+                                       
+                                         <div class="w-100 bg-danger rounded  text-white d-flex align-items-center justify-content-center"  style="height: 40px;" >
+                                            <p class="mb-0">{{ __('customTrans.wrongAnswer') }}</p>
+                                        </div>
+                                     @enderror
+                                 @endif
+                             @endif
+
+
 
                          </div>
 
@@ -144,11 +154,11 @@
                  if ($(this).val() === "email") {
                      $("#sendBtn").show();
                      $("#emailP").show();
-                     $("#questionsDataP").hide();
+                     $("#questionsAnswersDataP").hide();
                  } else {
                      $("#sendBtn").hide();
                      $("#emailP").hide();
-                     $("#questionsDataP").show();
+                     $("#questionsAnswersDataP").show();
                  }
              });
          }

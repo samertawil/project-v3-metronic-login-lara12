@@ -50,9 +50,9 @@ class User extends Authenticatable
         ];
     }
    
-    public static function user(string $user_name): ?User {
-       return  $user = User::where('user_name', $user_name)->first();
-    }
+    // public static function user(string $user_name): ?User {
+    //    return   self::firstWhere('user_name', $user_name);
+    // }
 
  /**
  * @param  \Illuminate\Database\Eloquent\Builder<User>  $query

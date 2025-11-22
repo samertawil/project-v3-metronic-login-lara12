@@ -59,10 +59,6 @@ class SettingCreate extends Component
         }
 
       
-
-
-
-
         FlashMsgTraits::created();
         $this->reset();
     }

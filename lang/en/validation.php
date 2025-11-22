@@ -9,10 +9,12 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'user_name' => [
+            'exists' => 'This user name does not exist.',
+        ],
     ],
 
  
-
     'attributes' => [
 
 

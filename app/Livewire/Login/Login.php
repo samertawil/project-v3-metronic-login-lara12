@@ -3,18 +3,17 @@
 
 namespace App\Livewire\Login;
 
-use App\Models\User;
 use Livewire\Component;
+use Illuminate\View\View;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\View\View;
+
 
 class Login extends Component
 {
 
-    public string $email;
     #[Validate(['required'])]
-    public string $password='';
+    public string $password = '';
     public bool $remember = false;
     #[Validate(['required'])]
     public string $user_name;
@@ -26,32 +25,25 @@ class Login extends Component
 
         $this->validate();
 
-        $user = User::user($this->user_name);
+        $credentials = ['user_name' => $this->user_name, 'password' => $this->password];
 
-        if (!$user) {
-
-            $this->addError('user_name',  __('auth.failed'));
-
-            return '';
+        if (!Auth::guard('web')->attempt($credentials, $this->remember)) {
+            $this->addError('user_name', trans('auth.failed'));
+            return null;
         }
 
+        /** @var \App\Models\User $user */
+        $user = Auth::guard('web')->user();
+
         if ($user->user_activation != 1) {
-
+            Auth::guard('web')->logout();
             $this->addError('user_name',  __('customTrans.deactivated account'));
-
-            return '';
+            return null;
         }
 
         if ($user->need_to_change == 1) {
-           
+
             return redirect()->route('password.change', ['userId' => $user->user_name]);
-        }
-
-        if (!Auth::guard('web')->attempt(['user_name' => $this->user_name, 'password' => $this->password], $this->remember)) {
-
-            $this->addError('user_name', trans('auth.failed'));
-
-            return '';
         }
 
         return redirect()->intended(route(config('uilogin.redirectToAdmin')));

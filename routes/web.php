@@ -2,10 +2,11 @@
 
 use Livewire\Livewire;
 use App\Livewire\Dashboard;
+use App\Livewire\SocialLogin;
 use App\Livewire\Website\Index;
+use App\Livewire\Website\ContactUs;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SendNotificationController;
-use App\Livewire\Website\ContactUs;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
@@ -42,3 +43,5 @@ Route::group(
 Route::get('send-notification', [SendNotificationController::class, 'index']);
 
 Route::get('contact-us', ContactUs::class)->name('contact.us');
+
+Route::get('soicial-login',SocialLogin::class)->name('social.login');
