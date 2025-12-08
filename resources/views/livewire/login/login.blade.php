@@ -1,3 +1,37 @@
+        @push('css')
+            <style>
+                .google-btn {
+                    display: inline-flex;
+                    align-items: center;
+                    border: none;
+                    padding: 8px 12px;
+                    border-radius: 4px;
+                    background: #fff;
+                }
+
+                .google-circle {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 50%;
+                    background: #fff;
+                    border: 1px solid #dadce0;
+                }
+
+                .google-circle i {
+                    color: #4285F4;
+                }
+
+                .google-text {
+                    margin-left: 8px;
+                    color: #3c4043;
+                    font-weight: 500;
+                    font-size: 14px;
+                }
+            </style>
+        @endpush
         <div class="d-flex flex-column flex-root">
 
             <div class="login login-4 login-signin-on d-flex flex-row-fluid" id="kt_login">
@@ -52,6 +86,8 @@
                                     </div>
                                     <a href="{{ route('login.forgetpassword') }}"
                                         class="text-muted text-hover-primary">{{ __('customTrans.Forgot Your Password') }}</a>
+
+
                                 </div>
 
 
@@ -60,15 +96,34 @@
                                     wire:target='authenticate'>{{ __('customTrans.Login') }}</button>
 
 
+                                <div x-data="{ isLoading: false }">
+                                    <template x-if="!isLoading">
+                                        <a href="{{ route('social.redirect', 'google') }}" @click="isLoading = true"
+                                            class="btn btn-primary font-weight-bold mb-5 w-75">
+                                         
+                                            الدخول باستخدام حساب جوجل
+                                        </a>
+                                    </template>
+                                    <template x-if="isLoading">
+                                        <button class="btn btn-primary font-weight-bold mb-5 w-75" disabled>
+                                            <span class="spinner-border spinner-border-sm"></span>
+                                            جاري التحميل...
+                                        </button>
+                                    </template>
+                                </div>
 
+                                <div class="mt-3">
+                                    <span class="opacity-70 mr-4">
+                                        {{ __('customTrans.dont have account') }}
+                                    </span>
+                                    <a href="{{ route('register') }}" id="kt_login_signup"
+                                        class="text-muted text-hover-primary font-weight-bold">{{ __('customTrans.register_new_account') }}</a>
+                                </div>
+                                {{-- 
+                                <a href="#" class="btn btn-light border">
+                                    <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" alt="Login with Google" style="height:40px">
+                                </a> --}}
                             </form>
-                            <div class="mt-3">
-                                <span class="opacity-70 mr-4">
-                                    {{ __('customTrans.dont have account') }}
-                                </span>
-                                <a href="{{ route('register') }}" id="kt_login_signup"
-                                    class="text-muted text-hover-primary font-weight-bold">{{ __('customTrans.register_new_account') }}</a>
-                            </div>
 
                             <div wire:loading wire:target='authenticate'>
 

@@ -30,6 +30,7 @@ class User extends Authenticatable
         'status_id',
         'need_to_change',
         'profile_image',
+        'google_ID',
  
  
     ];

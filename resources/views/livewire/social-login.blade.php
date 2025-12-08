@@ -43,6 +43,7 @@
             <i class="fab fa-google"></i>
           </a>
 
+          <button class="btn btn-danger" wire:click.prevent='test'>here</button>
    
       
           <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1">

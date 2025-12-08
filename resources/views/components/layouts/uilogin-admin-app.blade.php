@@ -79,6 +79,7 @@
 
  
     </style>
+    @stack('css')
     {{-- @include('layouts.head') --}}
 
     @livewireStyles
